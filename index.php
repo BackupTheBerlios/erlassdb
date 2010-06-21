@@ -3,6 +3,12 @@
 require_once 'classes/ErlassDB.php';
 require_once 'classes/Template.php';
 
+// Administration
+
+// TODO: if (isset)
+
+// Erlassdatenbank
+
 $erlassDb = new ErlassDB();
 
 if (isset($_GET['search'])) {
