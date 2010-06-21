@@ -1,0 +1,67 @@
+body {
+    text-align:center;
+    background-color: #600;
+    color: #fff;
+}
+
+div.menu {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+h1 a {
+	color: #fff;
+	text-decoration: none;
+}
+
+div.box {
+    text-align:left;
+    color: #000;
+    background-color: #fff;
+    border: .2em solid black;
+    padding: .5em;
+    width: 35em;
+    margin: 1em auto;
+}
+
+div#newest {
+    border-color: #f00;
+}
+
+div#search {
+    border-color: #0f0;
+}
+
+div#description {
+    border-color: #00f;
+}
+
+fieldset {
+    width: 40em;
+    margin: 0 auto;
+    background-color: #800;
+}
+
+fieldset label {
+    display: block;
+    margin-top: .5em;
+}
+
+fieldset input[type="text"] {
+    width: 100%;
+}
+
+fieldset label[for="nfd"] {
+    display: inline;
+}
+
+fieldset label[for="nfd"]:after {
+    content: ":";
+}
+
+fieldset textarea {
+    width: 100%;
+}
+
+

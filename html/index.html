@@ -1,0 +1,115 @@
+<!DOCTYPE
+    html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="content-language" content="de" />
+        <meta name="description" content="Datenbank von Erlassen in Nordrhein-Westfalen" />
+        <meta name="keywords" content="Erlass, Datenbank, Asyl, Asylrecht, AK-Asyl" />
+        <meta name="robots" content="index,follow" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <title>ErlassDB NRW</title>
+    </head>
+    <body>
+        <div class="menu"><a href="./admin.php">Administration</a></div>
+        <h1><a href="./">ErlassDB<span> NRW</span></a></h1>
+        <!-- begin newest -->
+        <div class="box" id="newest"><h2>Die neuesten Erlasse</h2>
+            <ol>
+                <!-- begin erlassItem -->
+                <li><a href="?show='id'">'Aktenzeichen'</a></li>
+                <!-- end erlassItem -->
+            </ol>
+        </div>
+        <!-- end newest -->
+        <!-- begin search -->
+        <div class="box" id="search"><h2>Suche</h2>
+            <form action="./" method="get">
+                <input type="text" name="search" value="'search'"/>
+                <input type="submit" value="Suchen"/>
+            </form>
+        </div>
+        <!-- end search -->
+        <!-- begin description -->
+        <div class="box" id="description"><h2>Wo bin ich hier?</h2>
+            <p>
+                Diese Webseite ermöglicht den Zugriff auf die Erlass-Datenbank des
+                <a href="http://www.ak-asyl.info/" target="_blank">AK-Asyl</a>.
+            </p>
+        </div>
+        <!-- end description -->
+        <!-- begin empty -->
+        <div class="box" id="empty"><h2>Im Aufbau</h2>
+            <p>
+		Zur Zeit wurden noch keine Erlasse eingetragen. Die Datenbank befindet sich noch im Aufbau.
+            </p>
+        </div>
+        <!-- end empty -->
+        <!-- begin noResults -->
+        <div class="box"><h2>Keine Suchergebnisse</h2>
+            <p>
+                Leider wurden keine Erlasse gefunden, in denen die Suchworte vorkommen.
+            </p>
+        </div>
+        <!-- end noResults -->
+        <!-- begin results -->
+        <div class="box"><h2>Suchergebnisse</h2>
+            <ol>
+                <!-- begin erlassItem -->
+                <li>'Aktenzeichen'</li>
+                <!-- end erlassItem -->
+            </ol>
+        </div>
+        <!-- end results -->
+		<!-- begin erlass -->
+		<div class="box"><h2>Erlass: 'aktenzeichen'</h2>
+			<p>'datum', 'verfasser', 'institution'</p>
+			<p>'text'</p>
+		</div>
+		<!-- end erlass -->
+        <!-- begin adminMenu -->
+        <div class="box"><h2>Neuer Erlass</h2>
+            <p>Füge einen <a href="admin.php?new=1">neuen Erlass</a> hinzu.</p>
+        </div>
+        <!-- end adminMenu -->
+        <!-- begin erlassAdded -->
+        <div class="box"><h2>Hinzugefügt</h2>
+            <p>
+                Der Erlass wurde hinzugefügt.
+            </p>
+        </div>
+        <!-- end erlassAdded -->
+        <!-- begin erlassNotAdded -->
+        <div class="box"><h2>Hinzugefügt</h2>
+            <p>
+                Der Erlass wurde hinzugefügt.
+            </p>
+        </div>
+        <!-- end erlassNotAdded -->
+        <!-- begin newForm -->
+        <form action="admin.php" method="post">
+            <fieldset><legend>Neuer Erlass</legend>
+                <label for="aktenzeichen">Aktenzeichen</label>
+                <input type="text" id="aktenzeichen" name="aktenzeichen" value=""/>
+                <label for="datum">Datum</label>
+                <input type="text" id="datum" name="datum" value="'datum'"/>
+                <label for="institution">Institution</label>
+                <input type="text" id="institution" name="institution" value=""/>
+                <label for="verfasser">Verfasser</label>
+                <input type="text" id="verfasser" name="verfasser" value=""/>
+                <label for="nfd">Nur für den Dienstgebrauch</label>
+                <input type="checkbox" id="nfd" name="nfd" value="1"/>
+                <label for="text">Text</label>
+                <textarea rows="34" cols="70" id="text" name="text"></textarea>
+                <input type="submit" id="new" name="new" value="Eintragen"/>
+            </fieldset>
+        </form>
+        <!-- end newForm -->
+        <div style="margin-top:2em; text-align:right;">
+            <a href="http://developer.berlios.de" title="BerliOS Developer"> <img src="http://developer.berlios.de/bslogo.php?group_id=11808" width="124px" height="32px" border="0" alt="BerliOS Developer Logo" /></a>
+        </div>
+
+    </body>
+</html>

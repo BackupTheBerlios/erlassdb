@@ -1,0 +1,111 @@
+<?php
+
+require_once 'MyDatabase.php';
+
+class ErlassDB {
+
+    private $template;
+    private $size = 0;
+
+    public function __construct() {
+        MyDatabase::connect();
+        $this->querySize();
+        $this->template = Template::fromFile('html/index.html');
+    }
+
+    public function start() {
+        if ($this->size > 0) {
+            $this->showNewest();
+            $this->searchForm();
+        } else {
+            $this->template->addSubtemplate('empty');
+        }
+        $this->template->addSubtemplate('description');
+    }
+
+    public function resultsFor($search) {
+        $this->searchForm($search);
+        $query = 'select id, aktenzeichen from erlass'
+                . ' where match(text) against ("' . $search . '")'
+                . ' and nfd=0'
+                . ' order by datum;';
+        $result = mysql_query($query);
+        if (mysql_num_rows($result) == 0) {
+            $this->template->addSubtemplate('noResults');
+            return;
+        }
+    }
+
+	public function show($id) {
+        $query = 'select id, aktenzeichen, datum, institution, verfasser, text from erlass'
+                . ' where id="' . $id . '" and nfd=0;';
+        $result = mysql_query($query);
+		if (mysql_num_rows($result) != 1) {
+			// TODO
+			exit;
+		}
+		$array = mysql_fetch_array($result);
+		$erlassTmpl = $this->template->addSubtemplate('erlass');
+		foreach ($array as $key => $value) {
+			$erlassTmpl->assign($key, $value);
+			// TODO: quoting
+		}
+	}
+
+    public function admin() {
+        $this->template->addSubtemplate('adminMenu');
+    }
+
+	public function newForm() {
+		$form = $this->template->addSubtemplate('newForm');
+		$form->assign('datum', date('Y-m-d'));
+	}
+
+	public function add($input) {
+		$query = 'insert into erlass (aktenzeichen, datum, institution, verfasser, nfd, text)'
+		. ' values ('
+		. '"' . $input['aktenzeichen'] . '",'
+		. '"' . $input['datum'] . '",'
+		. '"' . $input['institution'] . '",'
+		. '"' . $input['verfasser'] . '",'
+		. '"' . $input['nfd'] . '",'
+		. '"' . $input['text'] . '")'
+		. ';';
+		$result = mysql_query($query);
+		if ($result && mysql_affected_rows($result)) {
+			$this->template->addSubtemplate('erlassAdded');
+		} else {
+			$this->template->addSubtemplate('erlassNotAdded');
+		}
+	}
+
+    public function showPage() {
+        echo $this->template->result();
+    }
+
+    private function querySize() {
+        $query = 'select count(*) from erlass;';
+        $result = mysql_query($query);
+        $row = mysql_fetch_row($result);
+        $this->size = $row[0];
+    }
+
+    private function showNewest() {
+        $query = 'select id, aktenzeichen from erlass order by datum desc;'; // TODO: nfd?
+        $result = mysql_query($query);
+        if (mysql_num_rows($result) == 0) return;
+        $newest = $this->template->addSubtemplate('newest');
+        while ($erlassArray = mysql_fetch_array($result)) {
+            $item = $newest->addSubtemplate('erlassItem');
+            $item->assign('Aktenzeichen', $erlassArray['aktenzeichen']);
+            $item->assign('id', $erlassArray['id']);
+            // TODO: htmlquote
+        }
+    }
+
+    private function searchForm($search = '') {
+        $form = $this->template->addSubtemplate('search');
+        $form->assign('search', $search);
+    }
+}
+?>
