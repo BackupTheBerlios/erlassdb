@@ -13,7 +13,16 @@
         <title>ErlassDB NRW</title>
     </head>
     <body>
-        <div class="menu"><a href="./admin.php">Administration</a></div>
+        <div id="topbar">
+            <div id="userbox">Status 'status'
+                <!--begin loggedIn-->für Benutzer 'user'<!--end loggedIn-->
+                <form action="./?'request'" method="post">
+                    <input type="hidden" name="oldUser" value="'user'"/>
+                    <input type="submit" value="wechseln"/>
+                </form>
+            </div>
+            <div id="adminMenu"><a href="./admin.php">Administration</a></div>
+        </div>
         <h1><a href="./">ErlassDB<span> NRW</span></a></h1>
         <!-- begin newest -->
         <div class="box" id="newest"><h2>Die neuesten Erlasse</h2>
@@ -108,7 +117,7 @@
         </form>
         <!-- end newForm -->
         <div style="margin-top:2em; text-align:right;">
-            <a href="http://developer.berlios.de" title="BerliOS Developer"> <img src="http://developer.berlios.de/bslogo.php?group_id=11808" width="124px" height="32px" border="0" alt="BerliOS Developer Logo" /></a>
+            <a href="http://developer.berlios.de" title="BerliOS Developer" target="_blank"> <img src="http://developer.berlios.de/bslogo.php?group_id=11808" width="124px" height="32px" border="0" alt="BerliOS Developer Logo" /></a>
         </div>
 
     </body>

@@ -1,16 +1,21 @@
 <?php
 
 require_once 'MyDatabase.php';
+require_once 'HtmlTemplate.php';
+require_once 'User.php';
 
 class ErlassDB {
 
     private $template;
     private $size = 0;
+    private $user;
 
     public function __construct() {
         MyDatabase::connect();
         $this->querySize();
-        $this->template = Template::fromFile('html/index.html');
+        $this->template = HtmlTemplate::fromFile('index.html');
+        $this->user = new User();
+        $this->user->assignToTemplate($this->template);
     }
 
     public function start() {
@@ -36,55 +41,56 @@ class ErlassDB {
         }
     }
 
-	public function show($id) {
+    public function show($id) {
         $query = 'select id, aktenzeichen, datum, institution, verfasser, text from erlass'
                 . ' where id="' . $id . '" and nfd=0;';
         $result = mysql_query($query);
-		if (mysql_num_rows($result) != 1) {
-			// TODO
-			exit;
-		}
-		$array = mysql_fetch_array($result);
-		$erlassTmpl = $this->template->addSubtemplate('erlass');
-		foreach ($array as $key => $value) {
-			$erlassTmpl->assign($key, $value);
-			// TODO: quoting
-		}
-	}
+        if (mysql_num_rows($result) != 1) {
+            // TODO
+            exit;
+        }
+        $array = mysql_fetch_array($result);
+        $erlassTmpl = $this->template->addSubtemplate('erlass');
+        foreach ($array as $key => $value) {
+            $erlassTmpl->assign($key, $value);
+            // TODO: quoting
+        }
+    }
 
     public function admin() {
         $this->template->addSubtemplate('adminMenu');
     }
 
-	public function newForm() {
-		$form = $this->template->addSubtemplate('newForm');
-		$form->assign('datum', date('Y-m-d'));
-	}
+    public function newForm() {
+        $form = $this->template->addSubtemplate('newForm');
+        $form->assign('datum', date('Y-m-d'));
+    }
 
-	public function add($input) {
-		$query = 'insert into erlass (aktenzeichen, datum, institution, verfasser, nfd, text)'
-		. ' values ('
-		. '"' . $input['aktenzeichen'] . '",'
-		. '"' . $input['datum'] . '",'
-		. '"' . $input['institution'] . '",'
-		. '"' . $input['verfasser'] . '",'
-		. '"' . $input['nfd'] . '",'
-		. '"' . $input['text'] . '")'
-		. ';';
-		$result = mysql_query($query);
-		if ($result && mysql_affected_rows($result)) {
-			$this->template->addSubtemplate('erlassAdded');
-		} else {
-			$this->template->addSubtemplate('erlassNotAdded');
-		}
-	}
+    public function add($input) {
+        // TODO: update
+        $query = 'insert into erlass (aktenzeichen, datum, institution, verfasser, nfd, text)'
+                . ' values ('
+                . '"' . $input['aktenzeichen'] . '",'
+                . '"' . $input['datum'] . '",'
+                . '"' . $input['institution'] . '",'
+                . '"' . $input['verfasser'] . '",'
+                . '"' . $input['nfd'] . '",'
+                . '"' . $input['text'] . '")'
+                . ';';
+        $result = mysql_query($query);
+        if ($result && mysql_affected_rows($result)) {
+            $this->template->addSubtemplate('erlassAdded');
+        } else {
+            $this->template->addSubtemplate('erlassNotAdded');
+        }
+    }
 
     public function showPage() {
         echo $this->template->result();
     }
 
     private function querySize() {
-        $query = 'select count(*) from erlass;';
+        $query = 'select count(*) from Erlass;';
         $result = mysql_query($query);
         $row = mysql_fetch_row($result);
         $this->size = $row[0];
@@ -93,7 +99,8 @@ class ErlassDB {
     private function showNewest() {
         $query = 'select id, aktenzeichen from erlass order by datum desc;'; // TODO: nfd?
         $result = mysql_query($query);
-        if (mysql_num_rows($result) == 0) return;
+        if (mysql_num_rows($result) == 0)
+            return;
         $newest = $this->template->addSubtemplate('newest');
         while ($erlassArray = mysql_fetch_array($result)) {
             $item = $newest->addSubtemplate('erlassItem');
@@ -107,5 +114,7 @@ class ErlassDB {
         $form = $this->template->addSubtemplate('search');
         $form->assign('search', $search);
     }
+
 }
+
 ?>

@@ -2,6 +2,29 @@ body {
     text-align:center;
     background-color: #600;
     color: #fff;
+    margin: 0em;
+}
+
+div#topbar {
+    width: 100%;
+    color: #000;
+    background-color: #fff;
+    border-bottom: 0.3em solid #000;
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+
+div#userbox {
+    float: left;
+    overflow: hidden;
+}
+
+div#userbox input {
+    margin-left: 1em;
+}
+
+div#adminMenu {
+    float: right;
 }
 
 div.menu {
@@ -35,6 +58,10 @@ div#search {
 
 div#description {
     border-color: #00f;
+}
+
+form {
+    display: inline;
 }
 
 fieldset {
