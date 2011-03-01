@@ -1,0 +1,22 @@
+RewriteEngine on
+RewriteRule ^(.*)/$ $1/index.php
+RewriteRule ^(.*)/\?search=([^/]*)/$ $1/index.php?search=$2
+RewriteRule ^(.*)/([0-9]+)/$ $1/index.php?show=$2
+RewriteRule ^(.*)/([0-9]+)/edit/$ $1/index.php?edit=$2
+RewriteRule ^(.*)/new/$ $1/index.php?new=1
+RewriteRule ^(.*)/admin/$ $1/index.php?admin=1
+
+AuthType Basic
+AuthName "Administrationszugang"
+
+# Type the correct absolute path to a htusers file  
+AuthUserFile /var/www/.htusers
+
+# Type the user you want to access to admin scripts
+<Files admin*>
+  Require user admin
+</Files>
+
+#Options +ExecCGI
+#DirectoryIndex index.php
+
