@@ -16,6 +16,7 @@ class User {
 
     public function assignToTemplate(HtmlTemplate $tmpl) {
         $tmpl->assign('user', $this->id);
+        $tmpl->assign('level', $this->level);
         $tmpl->assign('status', self::labelOfLevel($this->level));
         $tmpl->assign('request', self::userRequest());
         if ($this->level >= 0) {
@@ -29,10 +30,9 @@ class User {
             $passwd = $_SERVER['PHP_AUTH_PW'];
             $this->id = $user;
             $this->level = self::levelFor($user, $passwd);
-            if ($passwd == '' && self::newAuth()) {
+            if (self::newAuth($this->level)) {
                 self::authenticate();
-            }
-            if ($passwd != '' && $this->level < 1) {
+            } elseif ($passwd != '' && $this->level < 1) {
                 self::authenticate();
             }
         } else {
@@ -56,9 +56,11 @@ class User {
         return $_SERVER['QUERY_STRING'];
     }
 
-    private static function newAuth() {
-        if (isset($_POST['oldUser'])) {
-            return $_POST['oldUser'] == $_SERVER['PHP_AUTH_USER'];
+    private static function newAuth($newLevel) {
+        if (isset($_POST['oldUser']) && isset($_POST['oldLevel'])) {
+            $nothingChanged = $_POST['oldUser'] == $_SERVER['PHP_AUTH_USER'];
+            $nothingChanged &= $_POST['oldLevel'] == $newLevel;
+            return $nothingChanged;
         } else {
             return false;
         }
@@ -66,8 +68,8 @@ class User {
 
     private static function levelFor($user, $passwd) {
         if ($passwd) {
-            $query = 'select Stufe from Kunde where id="' . $user
-                    . '" and Passwort=sha1("' . $passwd . '");';
+            $query = 'select Stufe from Kunde where binary id="' . $user
+                    . '" and binary Passwort=sha1("' . $passwd . '");';
             $result = mysql_query($query);
             $row = mysql_fetch_row($result);
             if ($row) {

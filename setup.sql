@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `Thema` (
 
 
 CREATE TABLE IF NOT EXISTS `Kunde` (
-  `id` varchar(128) NOT NULL default '',
-  `Passwort` varchar(40) NOT NULL default '',
+  `id` varchar(128) NOT NULL,
+  `Passwort` binary(40) NOT NULL,
   `Stufe` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM;
