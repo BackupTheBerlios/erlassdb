@@ -247,7 +247,7 @@ class Template {
             $substring = $matches[2][$i];
             if (isset($this->subTemplates[$name])) {
                 throw new Exception('This template contains more than one'
-                        . ' subtemplate with one name: ' + $name);
+                        . ' subtemplate with one name: ' . $name);
             }
             $this->subTemplateKeys[$name] = $key;
             $this->subTemplateSources[$name] = $substring;

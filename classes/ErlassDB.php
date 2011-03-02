@@ -28,6 +28,10 @@ class ErlassDB {
         $this->template->addSubtemplate('description');
     }
 
+    public function register() {
+        $this->template->addSubtemplate('registerForm');
+    }
+
     public function resultsFor($search) {
         $this->searchForm($search);
         $query = 'select id, aktenzeichen from erlass'

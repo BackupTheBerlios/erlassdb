@@ -79,6 +79,13 @@ fieldset input[type="text"] {
     width: 100%;
 }
 
+fieldset input[type="checkbox"] {
+}
+
+fieldset input[type="checkbox"] + label {
+    display: inline;
+}
+
 fieldset label[for="nfd"] {
     display: inline;
 }

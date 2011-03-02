@@ -15,12 +15,16 @@ class User {
     }
 
     public function assignToTemplate(HtmlTemplate $tmpl) {
+        // TODO: farbe für status
         $tmpl->assign('user', $this->id);
         $tmpl->assign('level', $this->level);
         $tmpl->assign('status', self::labelOfLevel($this->level));
         $tmpl->assign('request', self::userRequest());
         if ($this->level >= 0) {
             $tmpl->addSubtemplate('loggedIn');
+        }
+        if ($this->level < 1) {
+            $tmpl->addSubtemplate('registerLink');
         }
     }
 
@@ -68,7 +72,7 @@ class User {
 
     private static function levelFor($user, $passwd) {
         if ($passwd) {
-            $query = 'select Stufe from Kunde where binary id="' . $user
+            $query = 'select Stufe from Kunde where id="' . $user
                     . '" and binary Passwort=sha1("' . $passwd . '");';
             $result = mysql_query($query);
             $row = mysql_fetch_row($result);

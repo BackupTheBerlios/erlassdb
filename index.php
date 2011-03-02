@@ -11,7 +11,10 @@ require_once 'classes/Template.php';
 
 $erlassDb = new ErlassDB();
 
-if (isset($_GET['search'])) {
+if (isset($_GET['register'])) {
+    $erlassDb->register();
+}
+elseif (isset($_GET['search'])) {
     $erlassDb->resultsFor($_GET['search']);
 }
 elseif (isset($_GET['show'])) {

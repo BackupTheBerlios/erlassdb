@@ -21,10 +21,49 @@
                     <input type="hidden" name="oldLevel" value="'level'"/>
                     <input type="submit" value="wechseln"/>
                 </form>
+                <!-- begin registerLink -->
+                <a href="./?register">registrieren</a>
+                <!-- end registerLink -->
             </div>
             <div id="adminMenu"><a href="./admin.php">Administration</a></div>
         </div>
         <h1><a href="./">ErlassDB<span> NRW</span></a></h1>
+        <!-- begin registerForm -->
+        <div class="box"><h2>Namentlich registrieren</h2>
+            Durch die Registrierung kann geprüft werden, ob Ihnen mehr Dokumente
+            zur Verfügung gestellt werden dürfen.
+        </div>
+        <form action="?register" method="post">
+            <fieldset><legend>Neuer Erlass</legend>
+                <label for="nachname">Nachname</label>
+                <input type="text" id="nachname" name="nachname" value=""/>
+                <label for="vorname">Datum</label>
+                <input type="text" id="vorname" name="vorname" value=""/>
+                <label for="institution">Institution</label>
+                <input type="text" id="institution" name="institution" value=""/>
+                <label for="adresse">Adresse</label>
+                <textarea rows="3" cols="70" id="adresse" name="adresse"></textarea>
+                <p>
+                    <input type="checkbox" id="nutzungStaatlich" name="nutzung[]" value="staatlich"/>
+                    <label for="nutzungStaatlich">Behördliche / staatliche Zwecke</label>
+                    <input type="checkbox" id="nutzungAnwalt" name="nutzung[]" value="anwalt"/>
+                    <label for="nutzungAnwalt">Anwaltskanzlei</label>
+                    <input type="checkbox" id="nutzungBeratung" name="nutzung[]" value="beratung"/>
+                    <label for=nutzungBeratung"">Beratung in einer Flüchtlingsberatungsstelle</label>
+                    <input type="checkbox" id="nutzungSonstiges" name="nutzung[]" value="sonstiges"/>
+                    <label for="nutzungSonstiges">Sonstige Zwecke</label>
+                </p>
+                <label for="verfasser">Verfasser</label>
+                <input type="text" id="verfasser" name="verfasser" value=""/>
+                <label for="nfd">Nur für den Dienstgebrauch</label>
+                <input type="checkbox" id="nfd" name="nfd" value="1"/>
+                <label for="text">Text</label>
+                <textarea rows="34" cols="70" id="text" name="text"></textarea>
+                <input type="submit" id="new" name="new" value="Eintragen"/>
+                <input type="submit" value="Registrieren" />
+            </fieldset>
+        </form>
+        <!-- end registerForm -->
         <!-- begin newest -->
         <div class="box" id="newest"><h2>Die neuesten Erlasse</h2>
             <ol>
@@ -73,12 +112,12 @@
             </ol>
         </div>
         <!-- end results -->
-		<!-- begin erlass -->
-		<div class="box"><h2>Erlass: 'aktenzeichen'</h2>
-			<p>'datum', 'verfasser', 'institution'</p>
-			<p>'text'</p>
-		</div>
-		<!-- end erlass -->
+        <!-- begin erlass -->
+        <div class="box"><h2>Erlass: 'aktenzeichen'</h2>
+            <p>'datum', 'verfasser', 'institution'</p>
+            <p>'text'</p>
+        </div>
+        <!-- end erlass -->
         <!-- begin adminMenu -->
         <div class="box"><h2>Neuer Erlass</h2>
             <p>Füge einen <a href="admin.php?new=1">neuen Erlass</a> hinzu.</p>
