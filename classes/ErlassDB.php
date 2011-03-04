@@ -29,7 +29,19 @@ class ErlassDB {
     }
 
     public function register() {
-        $this->template->addSubtemplate('registerForm');
+        if (isset($_POST['mail'])) {
+            $this->registerData();
+        } else {
+            $this->template->addSubtemplate('registerForm');
+        }
+    }
+
+    public function registerData() {
+        $missingField = $this->user->registration();
+        if ($missingField) {
+            $formTmpl = $this->template->addSubtemplate('registerForm');
+            $formTmpl->addSubtemplate('missing_' . $missingField);
+        }
     }
 
     public function resultsFor($search) {

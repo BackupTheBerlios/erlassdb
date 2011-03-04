@@ -33,11 +33,48 @@
             Durch die Registrierung kann geprüft werden, ob Ihnen mehr Dokumente
             zur Verfügung gestellt werden dürfen.
         </div>
+        <!-- begin missing_nachname -->
+        <div class="errorbox"><h2>Nachname fehlt!</h2>
+            Sie müssen Ihren vollständigen Namen angeben, damit Ihre Identität
+            geprüft werden kann.
+        </div>
+        <!-- end missing_nachname -->
+        <!-- begin missing_vorname -->
+        <div class="errorbox"><h2>Vorname fehlt!</h2>
+            Sie müssen Ihren vollständigen Namen angeben, damit Ihre Identität
+            geprüft werden kann.
+        </div>
+        <!-- end missing_vorname -->
+         <!-- begin missing_adresse -->
+        <div class="errorbox"><h2>Adresse fehlt!</h2>
+            Sie müssen Ihren vollständige Adresse angeben, damit Ihre Identität
+            geprüft werden kann.
+        </div>
+        <!-- end missing_adresse -->
+        <!-- begin missing_mail -->
+        <div class="errorbox"><h2>E-Mailadresse fehlt!</h2>
+            Mit der E-Mailadresse und dem Passwort können Sie sich in Zukunft
+            hier anmelden.
+        </div>
+        <!-- end missing_mail -->
+        <!-- begin missing_passwort -->
+        <div class="errorbox"><h2>Passwort fehlt!</h2>
+            Das Passwort wird benötigt um unerlaubten Zugriff auf die Datenbank
+            zu verhindern. Merken Sie es sich oder schreiben es auf. Es wird
+            Ihnen nicht nochmal mitgeteilt.
+        </div>
+        <!-- end missing_passwort -->
+        <!-- begin missing_passwort2 -->
+        <div class="errorbox"><h2> fehlt!</h2>
+            Die Passwortbestätigung stellt sicher, dass Sie sich beim Passwort
+            nicht vertippt haben.
+        </div>
+        <!-- end missing_passwort2 -->
         <form action="?register" method="post">
             <fieldset><legend>Neuer Erlass</legend>
                 <label for="nachname">Nachname</label>
                 <input type="text" id="nachname" name="nachname" value=""/>
-                <label for="vorname">Datum</label>
+                <label for="vorname">Vorname</label>
                 <input type="text" id="vorname" name="vorname" value=""/>
                 <label for="institution">Institution</label>
                 <input type="text" id="institution" name="institution" value=""/>

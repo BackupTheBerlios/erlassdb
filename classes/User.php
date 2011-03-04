@@ -7,6 +7,42 @@ require_once 'HtmlTemplate.php';
  */
 class User {
 
+    /**
+     * Tries to start the registration process.
+     *
+     * @return string name of the first missing but required field in $_POST
+     */
+    public static function registration() {
+        $neededFields = array(
+            'nachname',
+            'vorname',
+            'adresse',
+            'mail',
+            'passwort',
+            'passwort2'
+        );
+        $optionalFields = array(
+            'institution',
+            'nutzung',
+            'sonstigerZweck',
+            'newsletter'
+        );
+        $data = array();
+        foreach ($neededFields as $field) {
+            if (!(isset($_POST[$field]) && $_POST[$field])) {
+                return $field;
+            }
+            $data[$field] = $_POST[$field];
+        }
+        foreach ($optionalFields as $field) {
+            if (isset($_POST[$field])) {
+                $data[$field] = $_POST[$field];
+            } else {
+                $data[$field] = '';
+            }
+        }
+    }
+
     private $id = null;
     private $level = -1;
 

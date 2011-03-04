@@ -52,7 +52,7 @@ p {
     visibility: hidden;
 }
 
-div.box {
+div.box, div.errorbox {
     text-align:left;
     color: #000;
     background-color: #fff;
@@ -60,6 +60,11 @@ div.box {
     padding: .5em;
     width: 35em;
     margin: 1em auto;
+}
+
+div.errorbox {
+    border-color: #f00;
+    background-color: #fee;
 }
 
 div#newest {
