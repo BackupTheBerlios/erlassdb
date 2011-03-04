@@ -44,6 +44,14 @@ p {
     margin: 1em auto;
 }
 
+.nowrap {
+    white-space: nowrap;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
 div.box {
     text-align:left;
     color: #000;
