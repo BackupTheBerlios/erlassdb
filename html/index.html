@@ -43,23 +43,31 @@
                 <input type="text" id="institution" name="institution" value=""/>
                 <label for="adresse">Adresse</label>
                 <textarea rows="3" cols="70" id="adresse" name="adresse"></textarea>
-                <p>
+                <p style="white-space: nowrap">
                     <input type="checkbox" id="nutzungStaatlich" name="nutzung[]" value="staatlich"/>
                     <label for="nutzungStaatlich">Behördliche / staatliche Zwecke</label>
+                    <br/>
                     <input type="checkbox" id="nutzungAnwalt" name="nutzung[]" value="anwalt"/>
                     <label for="nutzungAnwalt">Anwaltskanzlei</label>
+                    <br/>
                     <input type="checkbox" id="nutzungBeratung" name="nutzung[]" value="beratung"/>
-                    <label for=nutzungBeratung"">Beratung in einer Flüchtlingsberatungsstelle</label>
+                    <label for="nutzungBeratung">Beratung in einer Flüchtlingsberatungsstelle</label>
+                    <br/>
                     <input type="checkbox" id="nutzungSonstiges" name="nutzung[]" value="sonstiges"/>
-                    <label for="nutzungSonstiges">Sonstige Zwecke</label>
+                    <label for="nutzungSonstiges">Sonstige</label>
+                    <label for="sonstigerZweck">Zwecke:</label>
+                    <br/>
+                    <input type="checkbox" style="visibility: hidden;"/>
+                    <input type="text" id="sonstigerZweck" name="sonstigerZweck" value=""/>
                 </p>
-                <label for="verfasser">Verfasser</label>
-                <input type="text" id="verfasser" name="verfasser" value=""/>
-                <label for="nfd">Nur für den Dienstgebrauch</label>
-                <input type="checkbox" id="nfd" name="nfd" value="1"/>
-                <label for="text">Text</label>
-                <textarea rows="34" cols="70" id="text" name="text"></textarea>
-                <input type="submit" id="new" name="new" value="Eintragen"/>
+                <p>
+                    <input type="checkbox" id="newsletter" name="newsletter" value="1"/>
+                    <label for="newletter">Über Neuigkeiten informiert werden</label>
+                </p>
+                <label for="">E-Mailadresse</label>
+                <input type="text" id="mail" name="mail" value=""/>
+                <label for="passwort">Passwort</label>
+                <input type="password" id="passwort" name="passwort" value=""/>
                 <input type="submit" value="Registrieren" />
             </fieldset>
         </form>

@@ -38,6 +38,12 @@ h1 a {
 	text-decoration: none;
 }
 
+p {
+    text-align:left;
+    width: 35em;
+    margin: 1em auto;
+}
+
 div.box {
     text-align:left;
     color: #000;
@@ -70,20 +76,17 @@ fieldset {
     background-color: #800;
 }
 
-fieldset label {
+fieldset > label {
     display: block;
     margin-top: .5em;
 }
 
-fieldset input[type="text"] {
+fieldset input[type="text"], fieldset input[type="password"] {
     width: 100%;
 }
 
-fieldset input[type="checkbox"] {
-}
-
-fieldset input[type="checkbox"] + label {
-    display: inline;
+fieldset input[type="submit"] {
+    margin-top: 0.5em;
 }
 
 fieldset label[for="nfd"] {
