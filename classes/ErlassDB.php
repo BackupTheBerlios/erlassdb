@@ -81,6 +81,8 @@ class ErlassDB {
             $this->template->addSubtemplate('noResults');
             return;
         }
+        $list = $this->template->addSubtemplate('results');
+        $this->fillItemsInto($list, $result);
     }
 
     public function show($id) {
@@ -154,8 +156,12 @@ class ErlassDB {
         if (mysql_num_rows($result) == 0)
             return;
         $newest = $this->template->addSubtemplate('newest');
+        $this->fillItemsInto($newest, $result);
+    }
+
+    private function fillItemsInto(HtmlTemplate $tmpl, $result) {
         while ($erlassArray = mysql_fetch_array($result)) {
-            $item = $newest->addSubtemplate('erlassItem');
+            $item = $tmpl->addSubtemplate('erlassItem');
             $item->assign('id', $erlassArray['id']);
             $item->assign('Betreff', $erlassArray['Betreff']);
         }
@@ -163,7 +169,7 @@ class ErlassDB {
 
     private function searchForm($search = '') {
         $form = $this->template->addSubtemplate('search');
-        $form->assign('search', $search);
+        $form->assign('search', stripslashes($search));
     }
 
 }
