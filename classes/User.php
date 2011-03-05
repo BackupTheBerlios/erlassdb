@@ -17,7 +17,6 @@ class User {
         'nutzungSonstiges',
         'newsletter'
     );
-
     private $id = null;
     private $level = -1;
     private $adminMail;
@@ -132,14 +131,14 @@ class User {
                 . "Institution: " . $data['inst'] . "\n"
                 . "Adresse:\n" . $data['adresse'] . "\n"
                 . "Folgende Optionen wurden angegeben:\n";
-            var_dump($data);
+        var_dump($data);
         foreach (self::$checkboxFields as $field) {
             if (isset($data[$field]) && $data[$field])
-            $content .= ' - ' . $field . "\n";
+                $content .= ' - ' . $field . "\n";
         }
         $content .= "\n\n"
-        . "Status ändern:\n"
-        . WEBDIR . "admin.php?setLevel=" . urlencode($data['mail']) . "\n";
+                . "Status ändern:\n"
+                . WEBDIR . "admin.php?setLevel=" . urlencode($data['mail']) . "\n";
         Mailer::mail($this->adminMail->getAddress(), $subject, $content, $data['mail']);
     }
 
@@ -196,6 +195,17 @@ class User {
             }
         }
         return 0;
+    }
+
+    public static function levelOf($user) {
+        $query = 'select Stufe from Kunde where id="' . $user . '";';
+        $result = mysql_query($query);
+        $row = mysql_fetch_row($result);
+        if ($row) {
+            return $row[0];
+        } else {
+            return 0;
+        }
     }
 
     private static function labelOfLevel($level) {

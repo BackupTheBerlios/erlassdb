@@ -37,7 +37,7 @@ class ErlassDB {
         }
     }
 
-    public function registerData() {
+    private function registerData() {
         $missingField = $this->user->registration();
         if ($missingField) {
             $formTmpl = $this->template->addSubtemplate('registerForm');
@@ -46,6 +46,27 @@ class ErlassDB {
         } else {
             $this->template->addSubtemplate('registered');
             $this->start();
+        }
+    }
+
+    public function setLevelForm($mail) {
+        $sub = $this->template->addSubtemplate('setLevelForm');
+        $sub->assign('mail', $mail);
+        $sub->assign('stufe', User::levelOf($mail));
+    }
+
+    public function setLevel() {
+        if (isset($_POST['setLevel']) && isset($_POST['stufe'])) {
+            $stufe = (int) $_POST['stufe'];
+            if ($stufe < 1) {
+                return;
+            }
+            $query = 'update Kunde set Stufe="' . $stufe . '"'
+                    . ' where id="' . $_POST['setLevel'] . '";';
+            mysql_query($query);
+            if (mysql_affected_rows ()) {
+                $this->template->addSubtemplate('levelSet');
+            }
         }
     }
 
