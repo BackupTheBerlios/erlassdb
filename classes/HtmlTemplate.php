@@ -2,25 +2,19 @@
 
 require_once 'Template.php';
 
-class HtmlTemplate extends Template {
+class HtmlTemplate {
 
     /**
-     * Loads the content of a HTML template file relative the html directory.
-     * @param string $filename path to the template file
+     * Loads the content of an HTML template file.
+     *
+     * @param string $filename path to the template file relativ to the html
+     *  directory
      * @return HtmlTemplate instance with the content of the template file
-     * @throws Exception if $filename doesn't point to a file or reading fails
-     * (plus Exception from the constructor)
+     * @throws Exception see Template
      */
     public static function fromFile($filename) {
-        $filename = 'html/' . $filename;
-        if (!is_file($filename)) {
-            throw new Exception("That's no file: " + $filename);
-        }
-        $content = file_get_contents($filename);
-        if ($content === false) {
-            throw new Exception("Could not read template file: " + $filename);
-        }
-        return new self($content);
+        $tmpl = Template::fromFile('html/' . $filename);
+        return new self($tmpl);
     }
 
     public static function text2html($text) {
@@ -29,13 +23,24 @@ class HtmlTemplate extends Template {
         return htmlentities($text, $quoteStyle, $charset);
     }
 
+    private $template;
+
+    /**
+     * Stores $tmpl to wrap around.
+     * @param Template to wrap around
+     * @throws Exception see Template class
+     */
+    public function  __construct(Template $tmpl) {
+        $this->template = $tmpl;
+    }
+
     /**
      * Replaces a template tag with the given value.
      * @param string $name tag identifier in the template
      * @param string $value new value in the document
      */
     public function assign($name, $value = '') {
-        parent::assign($name, self::text2html($value));
+        $this->template->assign($name, self::text2html($value));
     }
 
     /**
@@ -59,17 +64,24 @@ class HtmlTemplate extends Template {
      * @param string $value HTML to interprete by the browser
      */
     public function assignHtml($name, $value) {
-        parent::assign('html:' . $name, $value);
+        $this->template->assign('html:' . $name, $value);
+    }
+    
+    /**
+     * See Template.
+     * @param string $name see Template
+     * @return HtmlTemplate see Template
+     */
+    public function addSubtemplate($name) {
+        return new self($this->template->addSubtemplate($name));
     }
 
     /**
-     * Assigns all values of the given array to the keys of the array.
-     * @param array $associativeArray of the form array( 'tag_name' => 'value' )
+     * See Template.
+     * @return string see Template
      */
-    public function assignArray($associativeArray) {
-        foreach ($associativeArray as $name => $value) {
-            $this->assign($name, $value);
-        }
+    public function result() {
+        return $this->template->result();
     }
 
 }
