@@ -18,9 +18,9 @@
                 <!--begin loggedIn-->für Benutzer 'user'<!--end loggedIn-->
                 <form action="./?'request'" method="post">
                     <div class="inline">
-                    <input type="hidden" name="oldUser" value="'user'"/>
-                    <input type="hidden" name="oldLevel" value="'level'"/>
-                    <input type="submit" value="wechseln"/>
+                        <input type="hidden" name="oldUser" value="'user'"/>
+                        <input type="hidden" name="oldLevel" value="'level'"/>
+                        <input type="submit" value="wechseln"/>
                     </div>
                 </form>
                 <!-- begin registerLink -->
@@ -47,7 +47,7 @@
             geprüft werden kann.
         </div>
         <!-- end missing_vorname -->
-         <!-- begin missing_adresse -->
+        <!-- begin missing_adresse -->
         <div class="errorbox"><h2>Adresse fehlt!</h2>
             Sie müssen Ihren vollständige Adresse angeben, damit Ihre Identität
             geprüft werden kann.
@@ -125,12 +125,12 @@
         </div>
         <!-- end newest -->
         <!-- begin search -->
-            <form action="./" method="get">
-        <div class="box" id="search"><h2>Suche</h2>
+        <form action="./" method="get">
+            <div class="box" id="search"><h2>Suche</h2>
                 <input type="text" name="search" value="'search'"/>
                 <input type="submit" value="Suchen"/>
-        </div>
-            </form>
+            </div>
+        </form>
         <!-- end search -->
         <!-- begin description -->
         <div class="box" id="description"><h2>Wo bin ich hier?</h2>
@@ -169,6 +169,37 @@
             <p>'text'</p>
         </div>
         <!-- end erlass -->
+        <!-- begin adminMailInfo -->
+        <div class="box"><h2>Administration</h2>
+            <p>
+                Die aktuelle E-Mailadresse für Administrations-E-Mails lautet:
+            </p>
+            <address>'adminMail'</address>
+        </div>
+        <!-- end adminMailInfo -->
+        <!-- begin adminMailWrite -->
+        <div class="box"><h2>Schreibrecht geben</h2>
+            <p>
+                Für das Webverzeichnis 'pwd' braucht dieses Skript kurz
+                Schreibrechte um die E-Mailadresse für die Administration
+                festzulegen.
+            </p>
+            <form action="admin.php" method="post">
+                <p>
+                    <input type="submit" value="Weiter"/>
+                </p>
+            </form>
+        </div>
+        <!-- end adminMailWrite -->
+        <!-- begin adminMailForm -->
+        <form action="admin.php" method="post">
+            <fieldset><legend>Admin-Adresse festlegen</legend>
+                <label for="aktenzeichen">Admin-Adresse</label>
+                <input type="text" id="adminMail" name="adminMail" value=""/>
+                <input type="submit" value="Festlegen"/>
+            </fieldset>
+        </form>
+        <!-- end adminMailForm -->
         <!-- begin adminMenu -->
         <div class="box"><h2>Neuer Erlass</h2>
             <p>Füge einen <a href="admin.php?new=1">neuen Erlass</a> hinzu.</p>
@@ -188,15 +219,6 @@
             </p>
         </div>
         <!-- end erlassNotAdded -->
-        <!-- begin adminMailForm -->
-        <form action="admin.php" method="post">
-            <fieldset><legend>Admin-Adresse festlegen</legend>
-                <label for="aktenzeichen">Admin-Adresse</label>
-                <input type="text" id="adminMail" name="adminMail" value=""/>
-                <input type="submit" value="Festlegen"/>
-            </fieldset>
-        </form>
-        <!-- end adminMailForm -->
         <!-- begin newForm -->
         <form action="admin.php" method="post">
             <fieldset><legend>Neuer Erlass</legend>

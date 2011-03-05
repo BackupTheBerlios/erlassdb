@@ -74,7 +74,12 @@ class ErlassDB {
     }
 
     public function admin() {
+        $this->user->assignAdminToTemplate($this->template);
         $this->template->addSubtemplate('adminMenu');
+    }
+
+    public function saveAdminMail($adminMail) {
+        $this->user->newAdminMail($adminMail);
     }
 
     public function newForm() {

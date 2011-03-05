@@ -5,16 +5,17 @@ require_once 'classes/Template.php';
 
 $erlassDb = new ErlassDB();
 
-if (isset($_GET['new'])) {
-    $erlassDb->newForm();
+if (isset($_POST['adminMail'])) {
+    $erlassDb->saveAdminMail($_POST['adminMail']) ;
 }
-elseif (isset($_POST['new'])) {
-	$erlassDb->add($_POST);
-}
-else {
+
+if (isset($_POST['new'])) {
+    $erlassDb->add($_POST);
+} elseif (isset($_POST['new'])) {
+    $erlassDb->add($_POST);
+} else {
     $erlassDb->admin();
 }
 
 $erlassDb->showPage();
-
 ?>

@@ -67,6 +67,24 @@ class User {
         }
     }
 
+    public function assignAdminToTemplate(HtmlTemplate $tmpl) {
+        if ($this->adminMail->getAddress()) {
+            $sub = $tmpl->addSubtemplate('adminMailInfo');
+            $sub->assign('adminMail', $this->adminMail->getAddress());
+            return;
+        }
+        if (is_writable('.')) {
+            $tmpl->addSubtemplate('adminMailForm');
+        } else {
+            $sub = $tmpl->addSubtemplate('adminMailWrite');
+            $sub->assign('pwd', getcwd());
+        }
+    }
+
+    public function newAdminMail($adminMail) {
+        $this->adminMail->update($adminMail);
+    }
+
     private function checkUser() {
         if (self::userPresent()) {
             $user = $_SERVER['PHP_AUTH_USER']; // TODO: check input
