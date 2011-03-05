@@ -72,10 +72,10 @@ class ErlassDB {
 
     public function resultsFor($search) {
         $this->searchForm($search);
-        $query = 'select id, aktenzeichen from erlass'
-                . ' where match(text) against ("' . $search . '")'
-                . ' and nfd=0'
-                . ' order by datum;';
+        $query = 'select id, Betreff from Erlass'
+                . ' where match(Betreff, Dokument)'
+                . ' against ("' . $search . '" in boolean mode)'
+                . ' order by Datum;';
         $result = mysql_query($query);
         if (mysql_num_rows($result) == 0) {
             $this->template->addSubtemplate('noResults');
@@ -85,7 +85,7 @@ class ErlassDB {
 
     public function show($id) {
         $query = 'select id, Kategorie, Herkunft, Autor, Datum, Aktenzeichen,'
-                . ' Betreff, NfD, Dokument from erlass'
+                . ' Betreff, NfD, Dokument from Erlass'
                 . ' where id="' . $id . '" and NfD=0;';
         $result = mysql_query($query);
         if (mysql_num_rows($result) != 1) {

@@ -131,7 +131,6 @@ class User {
                 . "Institution: " . $data['inst'] . "\n"
                 . "Adresse:\n" . $data['adresse'] . "\n"
                 . "Folgende Optionen wurden angegeben:\n";
-        var_dump($data);
         foreach (self::$checkboxFields as $field) {
             if (isset($data[$field]) && $data[$field])
                 $content .= ' - ' . $field . "\n";
