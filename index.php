@@ -11,7 +11,7 @@ require_once 'classes/Template.php';
 
 $erlassDb = new ErlassDB();
 
-if (isset($_GET['register'])) {
+if (isset($_GET['register']) || isset($_POST['nachname'])) {
     $erlassDb->register();
 }
 elseif (isset($_GET['search'])) {

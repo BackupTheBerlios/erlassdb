@@ -67,54 +67,58 @@
         </div>
         <!-- end missing_passwort -->
         <!-- begin missing_passwortB -->
-        <div class="errorbox"><h2> fehlt!</h2>
+        <div class="errorbox"><h2>Passwort wurde nicht bestätigt!</h2>
             Die Passwortbestätigung stellt sicher, dass Sie sich beim Passwort
-            nicht vertippt haben.
+            nicht vertippt haben. Geben Sie das gleiche Passwort ein wie im
+            Passwortfeld.
         </div>
         <!-- end missing_passwortB -->
-        <form action="?register" method="post">
+        <form action="./" method="post">
             <fieldset><legend>Registrierung</legend>
                 <label for="nachname">Nachname</label>
-                <input type="text" id="nachname" name="nachname" value=""/>
+                <input type="text" id="nachname" name="nachname"value="'nachname'"/>
                 <label for="vorname">Vorname</label>
-                <input type="text" id="vorname" name="vorname" value=""/>
+                <input type="text" id="vorname" name="vorname"value="'vorname'"/>
                 <label for="inst">Institution</label>
-                <input type="text" id="inst" name="inst" value=""/>
+                <input type="text" id="inst" name="inst"value="'inst'"/>
                 <label for="adresse">Adresse</label>
-                <textarea rows="3" cols="70" id="adresse" name="adresse"></textarea>
+                <textarea rows="3" cols="70" id="adresse" name="adresse">'adresse'</textarea>
                 <p class="nowrap">
                     Nutzung der Datenbank:
                     <br/>
-                    <input type="checkbox" id="nutzungStaatlich" name="nutzung[]" value="staatlich"/>
+                    <input type="checkbox" id="nutzungStaatlich" name="nutzungStaatlich" value="'html:nutzungStaatlich'"/>
                     <label for="nutzungStaatlich">Behördliche / staatliche Zwecke</label>
                     <br/>
-                    <input type="checkbox" id="nutzungAnwalt" name="nutzung[]" value="anwalt"/>
+                    <input type="checkbox" id="nutzungAnwalt" name="nutzungAnwalt" value="'html:nutzungAnwalt'"/>
                     <label for="nutzungAnwalt">Anwaltskanzlei</label>
                     <br/>
-                    <input type="checkbox" id="nutzungBeratung" name="nutzung[]" value="beratung"/>
+                    <input type="checkbox" id="nutzungBeratung" name="nutzungBeratung" value="'html:nutzungBeratung'"/>
                     <label for="nutzungBeratung">Beratung in einer Flüchtlingsberatungsstelle</label>
                     <br/>
-                    <input type="checkbox" id="nutzungSonstiges" name="nutzung[]" value="sonstiges"/>
+                    <input type="checkbox" id="nutzungSonstiges" name="nutzungSonstiges" value="'html:nutzungSonstiges'"/>
                     <label for="nutzungSonstiges">Sonstige</label>
                     <label for="sonstigerZweck">Zwecke:</label>
                     <br/>
                     <input type="checkbox" class="hidden"/>
-                    <input type="text" id="sonstigerZweck" name="sonstigerZweck" value=""/>
+                    <input type="text" id="sonstigerZweck" name="sonstigerZweck"value="'sonstigerZweck'"/>
                 </p>
                 <p>
-                    <input type="checkbox" id="newsletter" name="newsletter" value="1"/>
+                    <input type="checkbox" id="newsletter" name="newsletter" value="'html:newsletter'"/>
                     <label for="newsletter">Über Neuigkeiten informiert werden</label>
                 </p>
                 <label for="mail">E-Mailadresse</label>
-                <input type="text" id="mail" name="mail" value=""/>
+                <input type="text" id="mail" name="mail"value="'mail'"/>
                 <label for="passwort">Passwort</label>
-                <input type="password" id="passwort" name="passwort" value=""/>
+                <input type="password" id="passwort" name="passwort"value="'passwort'"/>
                 <label for="passwortB">Passwort bestätigen</label>
-                <input type="password" id="passwortB" name="passwortB" value=""/>
+                <input type="password" id="passwortB" name="passwortB"value="'passwortB'"/>
                 <input type="submit" value="Registrieren" />
             </fieldset>
         </form>
         <!-- end registerForm -->
+        <!-- begin registered -->
+        <div class="box" id="registered"><h2>Registrierung erfolgreich</h2></div>
+        <!-- end registered -->
         <!-- begin newest -->
         <div class="box" id="newest"><h2>Die neuesten Erlasse</h2>
             <ol>

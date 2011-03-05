@@ -32,7 +32,8 @@ class ErlassDB {
         if (isset($_POST['mail'])) {
             $this->registerData();
         } else {
-            $this->template->addSubtemplate('registerForm');
+            $formTmpl = $this->template->addSubtemplate('registerForm');
+            $this->user->assignRegistrationToTemplate($formTmpl);
         }
     }
 
@@ -41,6 +42,10 @@ class ErlassDB {
         if ($missingField) {
             $formTmpl = $this->template->addSubtemplate('registerForm');
             $formTmpl->addSubtemplate('missing_' . $missingField);
+            $this->user->assignRegistrationToTemplate($formTmpl);
+        } else {
+            $this->template->addSubtemplate('registered');
+            $this->start();
         }
     }
 

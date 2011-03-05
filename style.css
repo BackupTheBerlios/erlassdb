@@ -71,12 +71,17 @@ div.errorbox {
     background-color: #fee;
 }
 
+div#registered {
+    border-color: #0f0;
+}
+
 div#newest {
     border-color: #f00;
 }
 
 div#search {
-    border-color: #0f0;
+    border-color: #000;
+    /* TODO: delete */
 }
 
 div#description {

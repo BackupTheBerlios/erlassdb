@@ -42,6 +42,19 @@ class User {
                 $data[$field] = '';
             }
         }
+        if (!strstr($data['mail'], '@')) {
+            return 'mail';
+        }
+        if ($data['passwort'] != $data['passwortB']) {
+            return 'passwortB';
+        }
+        $query = 'insert into Kunde (id, Passwort) values ('
+                . '"' . $data['mail'] . '", '
+                . 'sha1("' . $data['passwort'] . '"));';
+        // TODO: check, if id is used
+        mysql_query($query);
+        // TODO: mail
+        
     }
 
     private $id = null;
@@ -64,6 +77,36 @@ class User {
         }
         if ($this->level < 1 && $this->adminMail->getAddress()) {
             $tmpl->addSubtemplate('registerLink');
+        }
+    }
+
+    public function assignRegistrationToTemplate(HtmlTemplate $tmpl) {
+        $textFields = array(
+            'nachname',
+            'vorname',
+            'inst',
+            'adresse',
+            'sonstigerZweck',
+            'mail',
+            'passwort',
+            'passwortB'
+        );
+        $checkboxFields = array(
+            'nutzungStaatlich',
+            'nutzungAnwalt',
+            'nutzungBeratung',
+            'nutzungSonstiges',
+            'newsletter'
+        );
+        foreach ($textFields as $field) {
+            $tmpl->assign($field, stripslashes($_POST[$field]));
+        }
+        foreach ($checkboxFields as $field) {
+            $htmlValue = '1';
+            if (isset($_POST[$field]) && $_POST[$field]) {
+                $htmlValue .= '" checked="checked';
+            }
+            $tmpl->assignHtml($field, $htmlValue);
         }
     }
 
