@@ -84,8 +84,9 @@ class ErlassDB {
     }
 
     public function show($id) {
-        $query = 'select id, aktenzeichen, datum, institution, verfasser, text from erlass'
-                . ' where id="' . $id . '" and nfd=0;';
+        $query = 'select id, Kategorie, Herkunft, Autor, Datum, Aktenzeichen,'
+                . ' Betreff, NfD, Dokument from erlass'
+                . ' where id="' . $id . '" and NfD=0;';
         $result = mysql_query($query);
         if (mysql_num_rows($result) != 1) {
             // TODO
@@ -115,7 +116,7 @@ class ErlassDB {
 
     public function add($input) {
         // TODO: format date
-        $query = 'insert into erlass'
+        $query = 'insert into Erlass'
                 . ' (Kategorie, Herkunft, Autor, Datum, Aktenzeichen,'
                 . ' Betreff, NfD, Dokument)'
                 . ' values ('
@@ -129,7 +130,7 @@ class ErlassDB {
                 . '"' . $input['Dokument'] . '")'
                 . ';';
         $result = mysql_query($query);
-        if ($result && mysql_affected_rows($result)) {
+        if ($result && mysql_affected_rows()) {
             $this->template->addSubtemplate('erlassAdded');
         } else {
             $this->template->addSubtemplate('erlassNotAdded');
@@ -148,16 +149,15 @@ class ErlassDB {
     }
 
     private function showNewest() {
-        $query = 'select id, aktenzeichen from erlass order by datum desc;'; // TODO: nfd?
+        $query = 'select id, Betreff from Erlass order by Datum desc;'; // TODO: nfd?
         $result = mysql_query($query);
         if (mysql_num_rows($result) == 0)
             return;
         $newest = $this->template->addSubtemplate('newest');
         while ($erlassArray = mysql_fetch_array($result)) {
             $item = $newest->addSubtemplate('erlassItem');
-            $item->assign('Aktenzeichen', $erlassArray['aktenzeichen']);
             $item->assign('id', $erlassArray['id']);
-            // TODO: htmlquote
+            $item->assign('Betreff', $erlassArray['Betreff']);
         }
     }
 
