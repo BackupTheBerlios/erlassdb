@@ -109,20 +109,24 @@ class ErlassDB {
     }
 
     public function newForm() {
-        $form = $this->template->addSubtemplate('newForm');
-        $form->assign('datum', date('Y-m-d'));
+        $this->template->addSubtemplate('newForm');
+        // TODO: Themenfelder
     }
 
     public function add($input) {
-        // TODO: update
-        $query = 'insert into erlass (aktenzeichen, datum, institution, verfasser, nfd, text)'
+        // TODO: format date
+        $query = 'insert into erlass'
+                . ' (Kategorie, Herkunft, Autor, Datum, Aktenzeichen,'
+                . ' Betreff, NfD, Dokument)'
                 . ' values ('
-                . '"' . $input['aktenzeichen'] . '",'
-                . '"' . $input['datum'] . '",'
-                . '"' . $input['institution'] . '",'
-                . '"' . $input['verfasser'] . '",'
-                . '"' . $input['nfd'] . '",'
-                . '"' . $input['text'] . '")'
+                . '"' . $input['Kategorie'] . '",'
+                . '"' . $input['Herkunft'] . '",'
+                . '"' . $input['Autor'] . '",'
+                . '"' . $input['Datum'] . '",'
+                . '"' . $input['Aktenzeichen'] . '",'
+                . '"' . $input['Betreff'] . '",'
+                . '"' . $input['NfD'] . '",'
+                . '"' . $input['Dokument'] . '")'
                 . ';';
         $result = mysql_query($query);
         if ($result && mysql_affected_rows($result)) {

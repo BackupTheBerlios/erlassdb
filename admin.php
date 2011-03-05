@@ -15,8 +15,8 @@ if (isset($_POST['stufe'])) {
 
 if (isset($_GET['setLevel'])) {
     $erlassDb->setLevelForm($_GET['setLevel']);
-} elseif (isset($_POST['new'])) {
-    $erlassDb->add($_POST);
+} elseif (isset($_GET['new'])) {
+    $erlassDb->newForm();
 } elseif (isset($_POST['new'])) {
     $erlassDb->add($_POST);
 } else {

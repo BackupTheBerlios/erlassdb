@@ -111,11 +111,11 @@ fieldset input[type="submit"] {
     margin-top: 0.5em;
 }
 
-fieldset label[for="nfd"] {
+fieldset label[for="NfD"] {
     display: inline;
 }
 
-fieldset label[for="nfd"]:after {
+fieldset label[for="NfD"]:after {
     content: ":";
 }
 
