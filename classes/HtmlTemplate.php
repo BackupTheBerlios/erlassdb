@@ -39,6 +39,30 @@ class HtmlTemplate extends Template {
     }
 
     /**
+     * Inserts $value as raw string without encoding as HTML.
+     *
+     * Example:
+     * <code>
+     * $t = new HtmlTemplate('<input name="\'foo\'" value="\'html:foo\'"/>');
+     * $t->assign('foo', 'a&b');
+     * echo $t->result();
+     * /// <input name="a&amp;b" value="'html:foo'"/>
+     * $t->assignHtml('foo', 'bar" checked="checked');
+     * echo $t->result();
+     * /// <input name="a&amp;b" value="bar" checked="checked"/>
+     * </code>
+     * 
+     * Warning: this function allows inserting active HTML code, which can be
+     * used for Cross-Site-Scripting.
+     *
+     * @param string $name name of the html variable
+     * @param string $value HTML to interprete by the browser
+     */
+    public function assignHtml($name, $value) {
+        parent::assign('html:' . $name, $value);
+    }
+
+    /**
      * Assigns all values of the given array to the keys of the array.
      * @param array $associativeArray of the form array( 'tag_name' => 'value' )
      */
