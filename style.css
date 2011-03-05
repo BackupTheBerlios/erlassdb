@@ -52,6 +52,10 @@ p {
     visibility: hidden;
 }
 
+.inline {
+    display: inline;
+}
+
 div.box, div.errorbox {
     text-align:left;
     color: #000;

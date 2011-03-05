@@ -1,6 +1,7 @@
 <?php
 
 require_once 'HtmlTemplate.php';
+require_once 'AdminMail.php';
 
 /**
  * Authenticates the user and manages user accounts.
@@ -19,10 +20,10 @@ class User {
             'adresse',
             'mail',
             'passwort',
-            'passwort2'
+            'passwortB'
         );
         $optionalFields = array(
-            'institution',
+            'inst',
             'nutzung',
             'sonstigerZweck',
             'newsletter'
@@ -45,8 +46,10 @@ class User {
 
     private $id = null;
     private $level = -1;
+    private $adminMail;
 
     public function __construct() {
+        $this->adminMail = new AdminMail();
         $this->checkUser();
     }
 
@@ -59,7 +62,7 @@ class User {
         if ($this->level >= 0) {
             $tmpl->addSubtemplate('loggedIn');
         }
-        if ($this->level < 1) {
+        if ($this->level < 1 && $this->adminMail->getAddress()) {
             $tmpl->addSubtemplate('registerLink');
         }
     }
