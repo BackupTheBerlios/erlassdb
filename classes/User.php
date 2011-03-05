@@ -2,60 +2,21 @@
 
 require_once 'HtmlTemplate.php';
 require_once 'AdminMail.php';
+require_once 'Mailer.php';
+require_once 'WEBDIR.php';
 
 /**
  * Authenticates the user and manages user accounts.
  */
 class User {
 
-    /**
-     * Tries to start the registration process.
-     *
-     * @return string name of the first missing but required field in $_POST
-     */
-    public static function registration() {
-        $neededFields = array(
-            'nachname',
-            'vorname',
-            'adresse',
-            'mail',
-            'passwort',
-            'passwortB'
-        );
-        $optionalFields = array(
-            'inst',
-            'nutzung',
-            'sonstigerZweck',
-            'newsletter'
-        );
-        $data = array();
-        foreach ($neededFields as $field) {
-            if (!(isset($_POST[$field]) && $_POST[$field])) {
-                return $field;
-            }
-            $data[$field] = $_POST[$field];
-        }
-        foreach ($optionalFields as $field) {
-            if (isset($_POST[$field])) {
-                $data[$field] = $_POST[$field];
-            } else {
-                $data[$field] = '';
-            }
-        }
-        if (!strstr($data['mail'], '@')) {
-            return 'mail';
-        }
-        if ($data['passwort'] != $data['passwortB']) {
-            return 'passwortB';
-        }
-        $query = 'insert into Kunde (id, Passwort) values ('
-                . '"' . $data['mail'] . '", '
-                . 'sha1("' . $data['passwort'] . '"));';
-        // TODO: check, if id is used
-        mysql_query($query);
-        // TODO: mail
-        
-    }
+    private static $checkboxFields = array(
+        'nutzungStaatlich',
+        'nutzungAnwalt',
+        'nutzungBeratung',
+        'nutzungSonstiges',
+        'newsletter'
+    );
 
     private $id = null;
     private $level = -1;
@@ -91,17 +52,10 @@ class User {
             'passwort',
             'passwortB'
         );
-        $checkboxFields = array(
-            'nutzungStaatlich',
-            'nutzungAnwalt',
-            'nutzungBeratung',
-            'nutzungSonstiges',
-            'newsletter'
-        );
         foreach ($textFields as $field) {
             $tmpl->assign($field, stripslashes($_POST[$field]));
         }
-        foreach ($checkboxFields as $field) {
+        foreach (self::$checkboxFields as $field) {
             $htmlValue = '1';
             if (isset($_POST[$field]) && $_POST[$field]) {
                 $htmlValue .= '" checked="checked';
@@ -126,6 +80,67 @@ class User {
 
     public function newAdminMail($adminMail) {
         $this->adminMail->update($adminMail);
+    }
+
+    /**
+     * Tries to start the registration process.
+     *
+     * @return string name of the first missing but required field in $_POST
+     */
+    public function registration() {
+        $neededFields = array(
+            'nachname',
+            'vorname',
+            'adresse',
+            'mail',
+            'passwort',
+            'passwortB'
+        );
+        $optionalFields = self::$checkboxFields;
+        $optionalFields[] = 'inst';
+        $optionalFields[] = 'sonstigerZweck';
+        $data = array();
+        foreach ($neededFields as $field) {
+            if (!(isset($_POST[$field]) && $_POST[$field])) {
+                return $field;
+            }
+            $data[$field] = $_POST[$field];
+        }
+        foreach ($optionalFields as $field) {
+            if (isset($_POST[$field])) {
+                $data[$field] = $_POST[$field];
+            } else {
+                $data[$field] = '';
+            }
+        }
+        if (!strstr($data['mail'], '@') || !Mailer::isValidAddress($data['mail'])) {
+            return 'mail';
+        }
+        if ($data['passwort'] != $data['passwortB']) {
+            return 'passwortB';
+        }
+        $query = 'insert into Kunde (id, Passwort) values ('
+                . '"' . $data['mail'] . '", '
+                . 'sha1("' . $data['passwort'] . '"));';
+        // TODO: check, if id is used
+        mysql_query($query);
+        $subject = 'Registrierung';
+        $content = "Hallo!\n\n"
+                . "Es hat sich ein neuer Kunde registriert:\n\n"
+                . "E-Mailadresse: " . $data['mail'] . "\n"
+                . "Name: " . $data['vorname'] . ' ' . $data['nachname'] . "\n"
+                . "Institution: " . $data['inst'] . "\n"
+                . "Adresse:\n" . $data['adresse'] . "\n"
+                . "Folgende Optionen wurden angegeben:\n";
+            var_dump($data);
+        foreach (self::$checkboxFields as $field) {
+            if (isset($data[$field]) && $data[$field])
+            $content .= ' - ' . $field . "\n";
+        }
+        $content .= "\n\n"
+        . "Status ändern:\n"
+        . WEBDIR . "admin.php?setLevel=" . urlencode($data['mail']) . "\n";
+        Mailer::mail($this->adminMail->getAddress(), $subject, $content, $data['mail']);
     }
 
     private function checkUser() {
