@@ -98,8 +98,9 @@ class ErlassDB {
         $erlassTmpl = $this->template->addSubtemplate('erlass');
         foreach ($array as $key => $value) {
             $erlassTmpl->assign($key, $value);
-            // TODO: quoting
         }
+        $erlassTmpl->assignText('Dokument', $array['Dokument']);
+
     }
 
     public function admin() {
