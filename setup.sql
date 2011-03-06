@@ -1,18 +1,13 @@
---CREATE TABLE IF NOT EXISTS `anhang` (
---  `erlass` int(10) unsigned NOT NULL,
---  `anhang` int(10) unsigned NOT NULL,
---  PRIMARY KEY  (`erlass`,`anhang`),
---  KEY `anhang` (`anhang`)
---) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `Erlass` (
   `id` int(10) unsigned NOT NULL PRIMARY KEY auto_increment,
-  `Kategorie` varchar(128) NOT NULL default '',
-  `Aktenzeichen` varchar(64) NOT NULL default '',
+  `Bestellnummer` int unsigned NOT NULL,
+  `Kategorie` varchar(128) NOT NULL,
+  `Aktenzeichen` varchar(64) NOT NULL,
   `Datum` date NOT NULL default '0000-00-00',
-  `Herkunft` varchar(128) NOT NULL default '',
-  `Autor` varchar(128) NOT NULL default '',
-  `Betreff` varchar(128) NOT NULL default '',
+  `Herkunft` varchar(128) NOT NULL,
+  `Autor` varchar(128) NOT NULL,
+  `Betreff` varchar(128) NOT NULL,
   `Dokument` text NOT NULL,
   `NfD` tinyint(1) NOT NULL default '0',
   KEY (Kategorie, Aktenzeichen, Datum, Herkunft, Autor),
