@@ -102,8 +102,9 @@ class ErlassDB {
                 . ' where id="' . $id . '" and NfD=0;';
         $result = mysql_query($query);
         if (mysql_num_rows($result) != 1) {
-            // TODO
-            exit;
+            header('HTTP/1.0 404 Not Found');
+            $this->template->addSubtemplate('notFound');
+            return;
         }
         $array = mysql_fetch_array($result);
         $erlassTmpl = $this->template->addSubtemplate('erlass');
