@@ -18,6 +18,10 @@ class ErlassDB {
         $this->user->assignToTemplate($this->template);
     }
 
+    public function userIsAdmin() {
+        return $this->user->isAdmin();
+    }
+
     public function start() {
         if ($this->size > 0) {
             $this->showNewest();
@@ -100,7 +104,6 @@ class ErlassDB {
             $erlassTmpl->assign($key, $value);
         }
         $erlassTmpl->assignText('Dokument', $array['Dokument']);
-
     }
 
     public function admin() {
@@ -108,8 +111,12 @@ class ErlassDB {
         $this->template->addSubtemplate('adminMenu');
     }
 
-    public function saveAdminMail($adminMail) {
-        $this->user->newAdminMail($adminMail);
+    public function saveAdminMail() {
+        if ($_POST['adminPasswort'] != $_POST['adminPasswortB']) {
+            echo 'Passwörter stimmen nicht überein.';
+            return;
+        }
+        $this->user->newAdminMail($_POST['adminMail'], $_POST['adminPasswort']);
     }
 
     public function newForm() {

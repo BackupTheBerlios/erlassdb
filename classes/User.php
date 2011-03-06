@@ -9,7 +9,6 @@ require_once 'WEBDIR.php';
  * Authenticates the user and manages user accounts.
  */
 class User {
-
     const ADMIN_LEVEL = 255;
     private static $checkboxFields = array(
         'nutzungStaatlich',
@@ -27,6 +26,13 @@ class User {
         $this->checkUser();
     }
 
+    public function isAdmin() {
+        if ($this->level == self::ADMIN_LEVEL) {
+            return true;
+        }
+        return false;
+    }
+
     public function assignToTemplate(HtmlTemplate $tmpl) {
         // TODO: farbe für status
         $tmpl->assign('user', $this->id);
@@ -38,6 +44,9 @@ class User {
         }
         if ($this->level < 1 && $this->adminMail->getAddress()) {
             $tmpl->addSubtemplate('registerLink');
+        }
+        if ($this->isAdmin()) {
+            $tmpl->addSubtemplate('adminLink');
         }
     }
 
@@ -78,8 +87,11 @@ class User {
         }
     }
 
-    public function newAdminMail($adminMail) {
+    public function newAdminMail($adminMail, $adminPasswd) {
         $this->adminMail->update($adminMail);
+        $query = 'insert into Kunde (id, Passwort) values ('
+                . '"' . $adminMail . '", sha1("' . $adminPasswd . '"));';
+        mysql_query($query);
     }
 
     /**

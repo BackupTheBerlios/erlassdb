@@ -128,7 +128,7 @@
         </div>
         <!-- end registered -->
         <!-- begin setLevelForm -->
-        <form action="admin.php" method="post">
+        <form action="./?admin=1" method="post">
             <fieldset><legend>Kundenstufe einstellen</legend>
                 <input name="setLevel" value="'mail'" readonly="readonly"/>
                 <input name="stufe" value="'stufe'"/>
@@ -208,7 +208,7 @@
                 Schreibrechte um die E-Mailadresse für die Administration
                 festzulegen.
             </p>
-            <form action="admin.php" method="post">
+            <form action="./?admin=1" method="post">
                 <p>
                     <input type="submit" value="Weiter"/>
                 </p>
@@ -216,17 +216,21 @@
         </div>
         <!-- end adminMailWrite -->
         <!-- begin adminMailForm -->
-        <form action="admin.php" method="post">
-            <fieldset><legend>Admin-Adresse festlegen</legend>
+        <form action="./?admin=1" method="post">
+            <fieldset><legend>Admin-Account anlegen</legend>
                 <label for="aktenzeichen">Admin-Adresse</label>
                 <input type="text" id="adminMail" name="adminMail" value=""/>
+                <label for="adminPasswort">Passwort</label>
+                <input type="password" id="adminPasswort" name="adminPasswort" value=""/>
+                <label for="adminPasswortB">Passwortbestätigung</label>
+                <input type="password" id="adminPasswortB" name="adminPasswortB" value=""/>
                 <input type="submit" value="Festlegen"/>
             </fieldset>
         </form>
         <!-- end adminMailForm -->
         <!-- begin adminMenu -->
         <div class="box"><h2>Neuer Erlass</h2>
-            <p>Füge einen <a href="admin.php?new=1">neuen Erlass</a> hinzu.</p>
+            <p>Füge einen <a href="./?admin=1&new=1">neuen Erlass</a> hinzu.</p>
         </div>
         <!-- end adminMenu -->
         <!-- begin erlassAdded -->
@@ -244,7 +248,7 @@
         </div>
         <!-- end erlassNotAdded -->
         <!-- begin newForm -->
-        <form action="admin.php" method="post">
+        <form action="./?admin=1" method="post">
             <fieldset><legend>Neuer Erlass</legend>
                 <label for="Kategorie">Kategorie</label>
                 <input type="text" id="Kategorie" name="Kategorie" value=""/>
