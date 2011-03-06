@@ -26,6 +26,20 @@ class User {
         $this->checkUser();
     }
 
+    public function isRegistered() {
+        if ($this->level > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public function hasNfd() {
+        if ($this->level > 1) {
+            return true;
+        }
+        return false;
+    }
+
     public function isAdmin() {
         if ($this->level == self::ADMIN_LEVEL) {
             return true;

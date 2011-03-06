@@ -44,6 +44,11 @@ p {
     margin: 1em auto;
 }
 
+p.NfD {
+    text-align: center;
+    color: red;
+}
+
 .nowrap {
     white-space: nowrap;
 }

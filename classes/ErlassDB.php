@@ -3,6 +3,7 @@
 require_once 'MyDatabase.php';
 require_once 'HtmlTemplate.php';
 require_once 'User.php';
+require_once 'Erlass.php';
 
 class ErlassDB {
 
@@ -97,24 +98,30 @@ class ErlassDB {
     }
 
     public function show($id) {
-        $query = 'select id, Bestellnummer, Kategorie, Herkunft, Autor, Datum,'
-                . ' Aktenzeichen, Betreff, NfD, Dokument from Erlass'
-                . ' where id="' . $id . '" and NfD=0;';
-        $result = mysql_query($query);
-        if (mysql_num_rows($result) != 1) {
+        $erlass = Erlass::fromDB($id);
+        if ($erlass == null) {
             header('HTTP/1.0 404 Not Found');
             $this->template->addSubtemplate('notFound');
             return;
         }
-        $array = mysql_fetch_array($result);
-        $erlassTmpl = $this->template->addSubtemplate('erlass');
-        foreach ($array as $key => $value) {
-            $erlassTmpl->assign($key, $value);
+        $this->display($erlass);
+    }
+
+    public function edit($id) {
+        $erlass = Erlass::fromDB($id);
+        if ($erlass == null) {
+            exit;
         }
-        $erlassTmpl->assignText('Dokument', $array['Dokument']);
-        if ($this->user->isAdmin()) {
-            $erlassTmpl->addSubtemplate('erlassAdmin');
-        }
+        $form = $this->template->addSubtemplate('erlassForm');
+        $form->addSubtemplate('legendEdit');
+        $form->addSubtemplate('submitEdit');
+        $erlass->assignToTmpl($form);
+    }
+
+    public function update() {
+        $this->forceAdmin();
+        $erlass = Erlass::fromPost();
+        $this->display($erlass);
     }
 
     public function delete($id) {
@@ -172,6 +179,23 @@ class ErlassDB {
 
     public function showPage() {
         echo $this->template->result();
+    }
+
+    private function display(Erlass $erlass) {
+        if ($erlass->get('NfD') && !$this->user->hasNfd()) {
+            $sub = $this->template->addSubtemplate('noAccessToNfD');
+            if ($this->user->isRegistered()) {
+                $sub->addSubtemplate('pleaseWait');
+            } else {
+                $sub->addSubtemplate('pleaseRegister');
+            }
+            return;
+        }
+        $erlassTmpl = $this->template->addSubtemplate('erlass');
+        $erlass->assignToTmpl($erlassTmpl);
+        if ($this->user->isAdmin()) {
+            $erlassTmpl->addSubtemplate('erlassAdmin');
+        }
     }
 
     private function querySize() {

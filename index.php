@@ -33,6 +33,10 @@ if (isset($_GET['admin'])) {
         $erlassDb->resultsFor($_GET['search']);
     } elseif (isset($_GET['show'])) {
         $erlassDb->show((int) $_GET['show']);
+    } elseif (isset($_GET['edit'])) {
+        $erlassDb->edit((int) $_GET['edit']);
+    } elseif (isset($_POST['edit'])) {
+        $erlassDb->update();
     } elseif (isset($_GET['delete'])) {
         $erlassDb->delete((int) $_GET['delete']);
     } else {
