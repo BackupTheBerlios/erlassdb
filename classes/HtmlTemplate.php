@@ -66,7 +66,19 @@ class HtmlTemplate {
     public function assignHtml($name, $value) {
         $this->template->assign('html:' . $name, $value);
     }
-    
+
+    /**
+     * Encodes given text in HTML an add &alt;br /&gt; tags at newlines.
+     *
+     * @param string $name name of the br variable
+     * @param string $value text with newlines
+     */
+    public function assignText($name, $value) {
+        $encoded = nl2br(self::text2html($value));
+        $this->template->assign('br:' . $name, $encoded);
+
+    }
+
     /**
      * See Template.
      * @param string $name see Template
