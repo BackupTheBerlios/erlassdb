@@ -37,6 +37,8 @@ if (isset($_GET['admin'])) {
         $erlassDb->update();
     } elseif (isset($_GET['delete'])) {
         $erlassDb->delete((int) $_GET['delete']);
+    } elseif (isset($_POST['upload'])) {
+        $erlassDb->upload((int) $_POST['upload']);
     } else {
         $erlassDb->start();
     }

@@ -4,6 +4,7 @@ require_once 'MyDatabase.php';
 require_once 'HtmlTemplate.php';
 require_once 'User.php';
 require_once 'Erlass.php';
+require_once 'Files.php';
 
 class ErlassDB {
 
@@ -122,6 +123,8 @@ class ErlassDB {
         $this->forceAdmin();
         $erlass = Erlass::fromPost();
         $this->display($erlass);
+        $form = $this->template->addSubtemplate('uploadForm');
+        $erlass->assignToTmpl($form);
     }
 
     public function delete($id) {
@@ -129,6 +132,16 @@ class ErlassDB {
         $query = 'delete from Erlass where id="' . $id . '";';
         mysql_query($query);
         $this->template->addSubtemplate('deleted');
+    }
+
+    public function upload($id) {
+        $this->forceAdmin();
+        $files = new Files($id);
+        $files->upload();
+        $erlass = Erlass::fromDB($id);
+        $this->display($erlass);
+        $form = $this->template->addSubtemplate('uploadForm');
+        $erlass->assignToTmpl($form);
     }
 
     public function admin() {
