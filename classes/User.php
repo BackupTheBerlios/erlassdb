@@ -10,6 +10,7 @@ require_once 'WEBDIR.php';
  */
 class User {
 
+    const ADMIN_LEVEL = 255;
     private static $checkboxFields = array(
         'nutzungStaatlich',
         'nutzungAnwalt',
@@ -146,7 +147,7 @@ class User {
             $user = $_SERVER['PHP_AUTH_USER']; // TODO: check input
             $passwd = $_SERVER['PHP_AUTH_PW'];
             $this->id = $user;
-            $this->level = self::levelFor($user, $passwd);
+            $this->level = $this->levelFor($user, $passwd);
             if (self::newAuth($this->level)) {
                 self::authenticate();
             } elseif ($passwd != '' && $this->level < 1) {
@@ -183,13 +184,19 @@ class User {
         }
     }
 
-    private static function levelFor($user, $passwd) {
+    private function levelFor($user, $passwd) {
+        if ($this->adminMail->getAddress() === null) {
+            return self::ADMIN_LEVEL;
+        }
         if ($passwd) {
             $query = 'select Stufe from Kunde where id="' . $user
                     . '" and binary Passwort=sha1("' . $passwd . '");';
             $result = mysql_query($query);
             $row = mysql_fetch_row($result);
             if ($row) {
+                if ($user == $this->adminMail->getAddress()) {
+                    return self::ADMIN_LEVEL;
+                }
                 return $row[0];
             }
         }
@@ -219,6 +226,8 @@ class User {
                 return 'angemeldet (NfD)';
             case 3:
                 return 'angemeldet (NfD, doc)';
+            case self::ADMIN_LEVEL:
+                return 'Administration';
             default:
                 throw new Exception('User has unkown level: ' . $level);
         }
