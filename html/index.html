@@ -268,7 +268,7 @@
         <!-- end adminMailForm -->
         <!-- begin adminMenu -->
         <div class="box"><h2>Neuer Erlass</h2>
-            <p>Füge einen <a href="./?admin=1&new=1">neuen Erlass</a> hinzu.</p>
+            <p>Füge einen <a href="./?new=1">neuen Erlass</a> hinzu.</p>
         </div>
         <!-- end adminMenu -->
         <!-- begin erlassAdded -->
@@ -285,31 +285,6 @@
             </p>
         </div>
         <!-- end erlassNotAdded -->
-        <!-- begin newForm -->
-        <form action="./?admin=1" method="post">
-            <fieldset><legend>Neuer Erlass</legend>
-                <label for="Bestellnummer">Bestellnummer</label>
-                <input type="text" id="Bestellnummer" name="Bestellnummer" value=""/>
-                <label for="Kategorie">Kategorie</label>
-                <input type="text" id="Kategorie" name="Kategorie" value=""/>
-                <label for="Herkunft">Herkunft</label>
-                <input type="text" id="Herkunft" name="Herkunft" value=""/>
-                <label for="Autor">Autor</label>
-                <input type="text" id="Autor" name="Autor" value=""/>
-                <label for="Datum">Datum</label>
-                <input type="text" id="Datum" name="Datum" value=""/>
-                <label for="Aktenzeichen">Aktenzeichen</label>
-                <input type="text" id="Aktenzeichen" name="Aktenzeichen" value=""/>
-                <label for="Betreff">Betreff</label>
-                <input type="text" id="Betreff" name="Betreff" value=""/>
-                <label for="NfD">Nur für den Dienstgebrauch</label>
-                <input type="checkbox" id="NfD" name="NfD" value="1"/>
-                <label for="Dokument">Text</label>
-                <textarea rows="34" cols="70" id="Dokument" name="Dokument"></textarea>
-                <input type="submit" id="new" name="new" value="Eintragen"/>
-            </fieldset>
-        </form>
-        <!-- end newForm -->
         <!-- begin erlassForm -->
         <form action="./" method="post">
             <fieldset>

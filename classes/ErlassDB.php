@@ -148,7 +148,11 @@ class ErlassDB {
 
     public function newForm() {
         $this->forceAdmin();
-        $this->template->addSubtemplate('newForm');
+        $form = $this->template->addSubtemplate('erlassForm');
+        $form->addSubtemplate('legendNew');
+        $form->addSubtemplate('submitNew');
+        $erlass = new Erlass();
+        $erlass->assignToTmpl($form);
         // TODO: Themenfelder
     }
 
@@ -172,6 +176,7 @@ class ErlassDB {
         $result = mysql_query($query);
         if ($result && mysql_affected_rows()) {
             $this->template->addSubtemplate('erlassAdded');
+            $this->admin();
         } else {
             $this->template->addSubtemplate('erlassNotAdded');
         }

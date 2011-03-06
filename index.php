@@ -16,12 +16,6 @@ if (isset($_GET['admin'])) {
 
     if (isset($_GET['setLevel'])) {
         $erlassDb->setLevelForm($_GET['setLevel']);
-    } elseif (isset($_GET['new'])) {
-        $erlassDb->newForm();
-    } elseif (isset($_POST['new'])) {
-        $erlassDb->add($_POST);
-    } elseif (isset($_GET['edit'])) {
-        // TODO edit
     } else {
         $erlassDb->admin();
     }
@@ -33,6 +27,10 @@ if (isset($_GET['admin'])) {
         $erlassDb->resultsFor($_GET['search']);
     } elseif (isset($_GET['show'])) {
         $erlassDb->show((int) $_GET['show']);
+    } elseif (isset($_GET['new'])) {
+        $erlassDb->newForm();
+    } elseif (isset($_POST['new'])) {
+        $erlassDb->add($_POST);
     } elseif (isset($_GET['edit'])) {
         $erlassDb->edit((int) $_GET['edit']);
     } elseif (isset($_POST['edit'])) {

@@ -9,6 +9,10 @@ require_once 'HtmlTemplate.php';
  */
 class Erlass {
 
+    private static $fields = array('id', 'Bestellnummer', 'Kategorie',
+        'Herkunft', 'Autor', 'Datum', 'Aktenzeichen', 'Betreff', 'NfD',
+        'Dokument');
+
     /**
      * Fetches one Erlass from the database.
      *
@@ -59,8 +63,14 @@ class Erlass {
         return $this->data[$field];
     }
 
-    private function __construct($data) {
-        $this->data = $data;
+    public function __construct($data = null) {
+        if ($data) {
+            $this->data = $data;
+        } else {
+            foreach (self::$fields as $f) {
+                $this->data[$f] = '';
+            }
+        }
     }
 
     public function assignToTmpl(HtmlTemplate $tmpl) {
