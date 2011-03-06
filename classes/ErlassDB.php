@@ -6,6 +6,15 @@ require_once 'User.php';
 
 class ErlassDB {
 
+    private static function standardizeDate($date) {
+        if (strstr($date, '.')) {
+            $parts = explode('.', $date);
+            $parts = array_reverse($parts);
+            $date = implode('-', $parts);
+        }
+        return $date;
+    }
+
     private $template;
     private $size = 0;
     private $user;
@@ -16,10 +25,6 @@ class ErlassDB {
         $this->template = HtmlTemplate::fromFile('index.html');
         $this->user = new User();
         $this->user->assignToTemplate($this->template);
-    }
-
-    public function userIsAdmin() {
-        return $this->user->isAdmin();
     }
 
     public function start() {
@@ -54,12 +59,14 @@ class ErlassDB {
     }
 
     public function setLevelForm($mail) {
+        $this->forceAdmin();
         $sub = $this->template->addSubtemplate('setLevelForm');
         $sub->assign('mail', $mail);
         $sub->assign('stufe', User::levelOf($mail));
     }
 
     public function setLevel() {
+        $this->forceAdmin();
         if (isset($_POST['setLevel']) && isset($_POST['stufe'])) {
             $stufe = (int) $_POST['stufe'];
             if ($stufe < 1) {
@@ -90,8 +97,8 @@ class ErlassDB {
     }
 
     public function show($id) {
-        $query = 'select id, Kategorie, Herkunft, Autor, Datum, Aktenzeichen,'
-                . ' Betreff, NfD, Dokument from Erlass'
+        $query = 'select id, Bestellnummer, Kategorie, Herkunft, Autor, Datum,'
+                . ' Aktenzeichen, Betreff, NfD, Dokument from Erlass'
                 . ' where id="' . $id . '" and NfD=0;';
         $result = mysql_query($query);
         if (mysql_num_rows($result) != 1) {
@@ -104,14 +111,26 @@ class ErlassDB {
             $erlassTmpl->assign($key, $value);
         }
         $erlassTmpl->assignText('Dokument', $array['Dokument']);
+        if ($this->user->isAdmin()) {
+            $erlassTmpl->addSubtemplate('erlassAdmin');
+        }
+    }
+
+    public function delete($id) {
+        $this->forceAdmin();
+        $query = 'delete from Erlass where id="' . $id . '";';
+        mysql_query($query);
+        $this->template->addSubtemplate('deleted');
     }
 
     public function admin() {
+        $this->forceAdmin();
         $this->user->assignAdminToTemplate($this->template);
         $this->template->addSubtemplate('adminMenu');
     }
 
     public function saveAdminMail() {
+        $this->forceAdmin();
         if ($_POST['adminPasswort'] != $_POST['adminPasswortB']) {
             echo 'Passwörter stimmen nicht überein.';
             return;
@@ -120,16 +139,19 @@ class ErlassDB {
     }
 
     public function newForm() {
+        $this->forceAdmin();
         $this->template->addSubtemplate('newForm');
         // TODO: Themenfelder
     }
 
     public function add($input) {
-        // TODO: format date
+        $this->forceAdmin();
+        $input['Datum'] = self::standardizeDate($input['Datum']);
         $query = 'insert into Erlass'
-                . ' (Kategorie, Herkunft, Autor, Datum, Aktenzeichen,'
-                . ' Betreff, NfD, Dokument)'
+                . ' (Bestellnummer, Kategorie, Herkunft, Autor, Datum,'
+                . ' Aktenzeichen, Betreff, NfD, Dokument)'
                 . ' values ('
+                . '"' . $input['Bestellnummer'] . '",'
                 . '"' . $input['Kategorie'] . '",'
                 . '"' . $input['Herkunft'] . '",'
                 . '"' . $input['Autor'] . '",'
@@ -156,6 +178,12 @@ class ErlassDB {
         $result = mysql_query($query);
         $row = mysql_fetch_row($result);
         $this->size = $row[0];
+    }
+
+    private function forceAdmin() {
+        if (!$this->user->isAdmin()) {
+            exit;
+        }
     }
 
     private function showNewest() {

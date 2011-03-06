@@ -4,7 +4,7 @@ require_once 'classes/ErlassDB.php';
 
 $erlassDb = new ErlassDB();
 
-if (isset($_GET['admin']) && $erlassDb->userIsAdmin()) {
+if (isset($_GET['admin'])) {
     
     if (isset($_POST['adminMail'])) {
         $erlassDb->saveAdminMail();
@@ -20,6 +20,8 @@ if (isset($_GET['admin']) && $erlassDb->userIsAdmin()) {
         $erlassDb->newForm();
     } elseif (isset($_POST['new'])) {
         $erlassDb->add($_POST);
+    } elseif (isset($_GET['edit'])) {
+        // TODO edit
     } else {
         $erlassDb->admin();
     }
@@ -30,11 +32,9 @@ if (isset($_GET['admin']) && $erlassDb->userIsAdmin()) {
     } elseif (isset($_GET['search'])) {
         $erlassDb->resultsFor($_GET['search']);
     } elseif (isset($_GET['show'])) {
-        $erlassDb->show($_GET['show']);
-    } elseif (isset($_GET['edit'])) {
-        // TODO
-    } elseif (isset($_GET['new'])) {
-        // TODO
+        $erlassDb->show((int) $_GET['show']);
+    } elseif (isset($_GET['delete'])) {
+        $erlassDb->delete((int) $_GET['delete']);
     } else {
         $erlassDb->start();
     }

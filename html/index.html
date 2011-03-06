@@ -190,9 +190,18 @@
         <!-- begin erlass -->
         <div class="box"><h2>'Betreff'</h2>
             <p>'Aktenzeichen', 'Autor', 'Herkunft', 'Datum'</p>
+            <p>Bestellnumer: 'Bestellnummer'</p>
             <p>'br:Dokument'</p>
+            <!-- begin erlassAdmin -->
+            <p><a href="./?delete='id'">löschen</a></p>
+            <!-- end erlassAdmin -->
         </div>
         <!-- end erlass -->
+        <!-- begin deleted -->
+        <div class="box"><h2>Gelöscht</h2>
+            <p>Der Erlass wurde aus der Datenbank entfernt.</p>
+        </div>
+        <!-- end deleted -->
         <!-- begin adminMailInfo -->
         <div class="box"><h2>Administration</h2>
             <p>
@@ -250,6 +259,8 @@
         <!-- begin newForm -->
         <form action="./?admin=1" method="post">
             <fieldset><legend>Neuer Erlass</legend>
+                <label for="Bestellnummer">Bestellnummer</label>
+                <input type="text" id="Bestellnummer" name="Bestellnummer" value=""/>
                 <label for="Kategorie">Kategorie</label>
                 <input type="text" id="Kategorie" name="Kategorie" value=""/>
                 <label for="Herkunft">Herkunft</label>
