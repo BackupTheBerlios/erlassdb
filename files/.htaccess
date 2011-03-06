@@ -1,0 +1,10 @@
+AuthType Basic
+AuthName "Administrationszugang"
+
+# Type the correct absolute path to a htusers file  
+AuthUserFile /var/www/.htusers
+
+# Type the user you want to access to admin scripts
+<Files *>
+  Require user admin
+</Files>
