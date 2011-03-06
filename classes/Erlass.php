@@ -71,7 +71,6 @@ class Erlass {
         $nfd = '1';
         if ($this->data['NfD']) {
             $nfd .= '" checked="checked';
-            $tmpl->addSubtemplate('erlassNfD');
         }
         $tmpl->assignHtml('NfD', $nfd);
     }

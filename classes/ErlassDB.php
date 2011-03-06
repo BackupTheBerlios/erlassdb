@@ -193,6 +193,9 @@ class ErlassDB {
         }
         $erlassTmpl = $this->template->addSubtemplate('erlass');
         $erlass->assignToTmpl($erlassTmpl);
+        if ($erlass->get('NfD')) {
+            $erlassTmpl->addSubtemplate('erlassNfD');
+        }
         if ($this->user->isAdmin()) {
             $erlassTmpl->addSubtemplate('erlassAdmin');
         }
