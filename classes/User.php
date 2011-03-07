@@ -40,6 +40,13 @@ class User {
         return false;
     }
 
+    public function hasFileaccess() {
+        if ($this->level > 2) {
+            return true;
+        }
+        return false;
+    }
+
     public function isAdmin() {
         if ($this->level == self::ADMIN_LEVEL) {
             return true;

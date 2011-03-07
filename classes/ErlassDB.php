@@ -211,8 +211,10 @@ class ErlassDB {
         }
         $erlassTmpl = $this->template->addSubtemplate('erlass');
         $erlass->assignToTmpl($erlassTmpl);
-        $files = new Files($erlass->get('id'));
-        $files->assignToTmpl($erlassTmpl);
+        if ($this->user->hasFileaccess()) {
+            $files = new Files($erlass->get('id'));
+            $files->assignToTmpl($erlassTmpl);
+        }
         if ($erlass->get('NfD')) {
             $erlassTmpl->addSubtemplate('erlassNfD');
         }
