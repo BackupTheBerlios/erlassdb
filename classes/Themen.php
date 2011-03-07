@@ -38,11 +38,19 @@ class Themen {
         mysql_query($query);
     }
 
-    public static function deleteFromGet() {
-        if(!isset($_GET['deleteThema'])) {
+    public static function deleteFromPost() {
+        if(!isset($_POST['themen'])) {
             return;
         }
-        $query = 'delete from Thema where Name="' . $_GET['deleteThema'] . '";';
+        $themen = $_POST['themen'];
+        if (!is_array($themen)) {
+            return;
+        }
+        $queryParts = array();
+        foreach ($themen as $i => $thema) {
+            $queryParts[] = 'Name="' . $thema . '"';
+        }
+        $query = 'delete from Thema where ' . implode(' or ', $queryParts);
         mysql_query($query);
     }
 
@@ -90,6 +98,7 @@ class Themen {
         $childs = &$this->getChildsOf($parent);
         foreach ($childs as $child) {
             $sub = $tmpl->addSubtemplate('thema');
+            $sub->assign('id', 'thema' . $child);
             $sub->assign('Name', $child);
             $sub->assignHtml('childs', $this->getHtml($child));
         }

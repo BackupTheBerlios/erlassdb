@@ -212,7 +212,7 @@ class ErlassDB {
 
     public function themen() {
         $this->forceAdmin();
-        Themen::deleteFromGet();
+        Themen::deleteFromPost();
         Themen::insertFromPost();
         $themen = Themen::fromDatabase();
         $sub = $this->template->addSubtemplate('themen');
