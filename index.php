@@ -41,6 +41,8 @@ if (isset($_GET['admin'])) {
         $erlassDb->upload((int) $_POST['upload']);
     } elseif (isset($_GET['download'])) {
         $erlassDb->download($_GET['download']);
+    } elseif (isset($_GET['setLevel'])) {
+        $erlassDb->setLevelForm($_GET['setLevel']);
     } else {
         $erlassDb->start();
     }

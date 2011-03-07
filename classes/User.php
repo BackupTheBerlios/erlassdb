@@ -171,7 +171,7 @@ class User {
         }
         $content .= "\n\n"
                 . "Status ändern:\n"
-                . WEBDIR . "admin.php?setLevel=" . urlencode($data['mail']) . "\n";
+                . WEBDIR . "?setLevel=" . urlencode($data['mail']) . "\n";
         Mailer::mail($this->adminMail->getAddress(), $subject, $content, $data['mail']);
     }
 
