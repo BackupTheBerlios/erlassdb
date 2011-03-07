@@ -6,12 +6,10 @@
  * @author maikel
  */
 class Files {
-
     const INDEX = 'doc';
     const DIR = 'files/';
-    
-    private static $extensions = array('rtf', 'doc', 'docx', 'pdf');
 
+    private static $extensions = array('rtf', 'doc', 'docx', 'pdf');
     private $id;
 
     public function __construct($id) {
@@ -59,6 +57,22 @@ class Files {
         }
     }
 
+    public function send($ext) {
+        if (!in_array($ext, self::$extensions)) {
+            exit;
+        }
+        $path = $this->pathTo($ext);
+        $mtime = filemtime($realpath);
+        header("Content-type: application/force-download");
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="Erlass_'
+                . basename($path) . '"; modification-date="'
+                . date('r', $mtime) . '";');
+        header('Content-Length: ' . filesize($path));
+        readfile($path);
+        exit;
+    }
+
     private function pathTo($extension) {
         return self::DIR . $this->id . '.' . $extension;
     }
@@ -75,4 +89,5 @@ class Files {
     }
 
 }
+
 ?>

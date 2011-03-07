@@ -108,6 +108,20 @@ class ErlassDB {
         $this->display($erlass);
     }
 
+    public function download($file) {
+        if (!$this->user->hasFileaccess()) {
+            exit;
+        }
+        $idExt = explode('.', $file);
+        if (sizeof($idExt) != 2) {
+            exit;
+        }
+        $id = (int) $idExt[0];
+        $ext = $idExt[1];
+        $files = new Files($id);
+        $files->send($ext);
+    }
+
     public function edit($id) {
         $erlass = Erlass::fromDB($id);
         if ($erlass == null) {
