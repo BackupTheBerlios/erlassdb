@@ -128,10 +128,9 @@ class ErlassDB {
         if ($erlass == null) {
             exit;
         }
-        $form = $this->template->addSubtemplate('erlassForm');
+        $form = $this->erlassForm($erlass);
         $form->addSubtemplate('legendEdit');
         $form->addSubtemplate('submitEdit');
-        $erlass->assignToTmpl($form);
     }
 
     public function update() {
@@ -176,12 +175,9 @@ class ErlassDB {
 
     public function newForm() {
         $this->forceAdmin();
-        $form = $this->template->addSubtemplate('erlassForm');
+        $form = $this->erlassForm();
         $form->addSubtemplate('legendNew');
         $form->addSubtemplate('submitNew');
-        $erlass = new Erlass();
-        $erlass->assignToTmpl($form);
-        // TODO: Themenfelder
     }
 
     public function add($input) {
@@ -221,6 +217,18 @@ class ErlassDB {
 
     public function showPage() {
         echo $this->template->result();
+    }
+
+    private function erlassForm(Erlass $erlass = null) {
+        if ($erlass == null) {
+            $erlass = new Erlass();
+        }
+        $form = $this->template->addSubtemplate('erlassForm');
+        $erlass->assignToTmpl($form);
+        $themen = Themen::fromDatabase();
+        $form->assignHtml('themen', $themen->getHtml());
+         // TODO: Themenfelder
+       return $form;
     }
 
     private function display(Erlass $erlass) {

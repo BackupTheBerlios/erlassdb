@@ -39,7 +39,7 @@ class Themen {
     }
 
     public static function deleteFromPost() {
-        if(!isset($_POST['themen'])) {
+        if (!isset($_POST['themen'])) {
             return;
         }
         $themen = $_POST['themen'];
@@ -92,15 +92,20 @@ class Themen {
         return $tree;
     }
 
-    public function getHtml($parent = self::ROOT_NAME) {
+    public function getHtml($given = array(), $parent = self::ROOT_NAME) {
         $tmpl = HtmlTemplate::fromFile('themen.html');
         $tmpl->assign('parent', $parent);
         $childs = &$this->getChildsOf($parent);
         foreach ($childs as $child) {
             $sub = $tmpl->addSubtemplate('thema');
+            $selected = '';
+            if (in_array($child, $given)) {
+                $selected = '" select="selected';
+            }
             $sub->assign('id', 'thema' . $child);
             $sub->assign('Name', $child);
-            $sub->assignHtml('childs', $this->getHtml($child));
+            $sub->assignHtml('selected', $selected);
+            $sub->assignHtml('childs', $this->getHtml(&$given, $child));
         }
         return $tmpl->result();
     }
