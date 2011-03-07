@@ -38,6 +38,14 @@ class Themen {
         mysql_query($query);
     }
 
+    public static function deleteFromGet() {
+        if(!isset($_GET['deleteThema'])) {
+            return;
+        }
+        $query = 'delete from Thema where Name="' . $_GET['deleteThema'] . '";';
+        mysql_query($query);
+    }
+
     private $themen = array(self::ROOT_NAME => array());
 
     public function add($parent, $child) {
