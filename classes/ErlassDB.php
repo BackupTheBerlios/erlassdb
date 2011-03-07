@@ -5,6 +5,7 @@ require_once 'HtmlTemplate.php';
 require_once 'User.php';
 require_once 'Erlass.php';
 require_once 'Files.php';
+require_once 'Themen.php';
 
 class ErlassDB {
 
@@ -207,6 +208,14 @@ class ErlassDB {
         } else {
             $this->template->addSubtemplate('erlassNotAdded');
         }
+    }
+
+    public function themen() {
+        $this->forceAdmin();
+        Themen::insertFromPost();
+        $themen = Themen::fromDatabase();
+        $sub = $this->template->addSubtemplate('themen');
+        $sub->assignHtml('themen', $themen->getHtml());
     }
 
     public function showPage() {

@@ -97,7 +97,7 @@ form {
     display: inline;
 }
 
-fieldset {
+body > form > fieldset {
     width: 40em;
     margin: 0 auto;
     background-color: #800;

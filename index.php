@@ -43,6 +43,8 @@ if (isset($_GET['admin'])) {
         $erlassDb->download($_GET['download']);
     } elseif (isset($_GET['setLevel'])) {
         $erlassDb->setLevelForm($_GET['setLevel']);
+    } elseif (isset($_GET['themen']) || isset($_POST['thema'])) {
+        $erlassDb->themen();
     } else {
         $erlassDb->start();
     }
