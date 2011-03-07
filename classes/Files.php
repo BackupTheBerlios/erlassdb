@@ -44,7 +44,34 @@ class Files {
         if (!$extension) {
             return;
         }
-        move_uploaded_file($tmp_name, self::DIR . $this->id . '.' . $extension);
+        move_uploaded_file($tmp_name, $this->pathTo($extension));
+    }
+
+    public function assignToTmpl(HtmlTemplate $erlassTmpl) {
+        $avail = $this->availExts();
+        if (sizeof($avail) < 1) {
+            return;
+        }
+        $tmpl = $erlassTmpl->addSubtemplate('downloadMenu');
+        foreach ($avail as $ext) {
+            $item = $tmpl->addSubtemplate('downloadItem');
+            $item->assign('ext', $ext);
+        }
+    }
+
+    private function pathTo($extension) {
+        return self::DIR . $this->id . '.' . $extension;
+    }
+
+    private function availExts() {
+        $avail = array();
+        foreach (self::$extensions as $ext) {
+            $path = $this->pathTo($ext);
+            if (is_readable($path)) {
+                $avail[] = $ext;
+            }
+        }
+        return $avail;
     }
 
 }
