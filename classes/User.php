@@ -163,7 +163,7 @@ class User {
                 . "E-Mailadresse: " . $data['mail'] . "\n"
                 . "Name: " . $data['vorname'] . ' ' . $data['nachname'] . "\n"
                 . "Institution: " . $data['inst'] . "\n"
-                . "Adresse:\n" . $data['adresse'] . "\n"
+                . "Adresse:\n" . $data['adresse'] . "\n\n"
                 . "Folgende Optionen wurden angegeben:\n";
         foreach (self::$checkboxFields as $field) {
             if (isset($data[$field]) && $data[$field])
