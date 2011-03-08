@@ -39,11 +39,8 @@ class Themen {
     }
 
     public static function deleteFromPost() {
-        if (!isset($_POST['themen'])) {
-            return;
-        }
-        $themen = $_POST['themen'];
-        if (!is_array($themen)) {
+        $themen = self::listFromPost();
+        if (sizeof($themen) < 1) {
             return;
         }
         $queryParts = array();
@@ -52,6 +49,43 @@ class Themen {
         }
         $query = 'delete from Thema where ' . implode(' or ', $queryParts);
         mysql_query($query);
+    }
+
+    public static function listOf($erlassId) {
+        $list = array();
+        if ($erlassId > 1) {
+            $query = 'select Thema from betrifft where Erlass="'
+                    . (int) $erlassId . '";';
+            $result = mysql_query($query);
+            while (list($thema) = mysql_fetch_row($result)) {
+                $list[] = $thema;
+            }
+        }
+        return $list;
+    }
+
+    public static function setFromPostFor($erlassId) {
+        $themen = self::listFromPost();
+        $query = 'delete from betrifft where Erlass="' . $erlassId . '";';
+        if (sizeof($themen) < 1) {
+            return;
+        }
+        foreach ($themen as $thema) {
+            $query = 'insert into betrifft (Erlass, Thema) values ('
+                    . '"' . $erlassId . '", "' . $thema . '");';
+            mysql_query($query);
+        }
+    }
+
+    private static function listFromPost() {
+        if (!isset($_POST['themen'])) {
+            return array();
+        }
+        $themen = $_POST['themen'];
+        if (!is_array($themen)) {
+            exit;
+        }
+        return $themen;
     }
 
     private $themen = array(self::ROOT_NAME => array());
@@ -98,13 +132,13 @@ class Themen {
         $childs = &$this->getChildsOf($parent);
         foreach ($childs as $child) {
             $sub = $tmpl->addSubtemplate('thema');
-            $selected = '';
+            $checked = '';
             if (in_array($child, $given)) {
-                $selected = '" select="selected';
+                $checked = '" checked="checked';
             }
             $sub->assign('id', 'thema' . $child);
             $sub->assign('Name', $child);
-            $sub->assignHtml('selected', $selected);
+            $sub->assignHtml('selected', $checked);
             $sub->assignHtml('childs', $this->getHtml(&$given, $child));
         }
         return $tmpl->result();

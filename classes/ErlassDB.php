@@ -9,15 +9,6 @@ require_once 'Themen.php';
 
 class ErlassDB {
 
-    private static function standardizeDate($date) {
-        if (strstr($date, '.')) {
-            $parts = explode('.', $date);
-            $parts = array_reverse($parts);
-            $date = implode('-', $parts);
-        }
-        return $date;
-    }
-
     private $template;
     private $size = 0;
     private $user;
@@ -182,23 +173,8 @@ class ErlassDB {
 
     public function add($input) {
         $this->forceAdmin();
-        $input['Datum'] = self::standardizeDate($input['Datum']);
-        $query = 'insert into Erlass'
-                . ' (Bestellnummer, Kategorie, Herkunft, Autor, Datum,'
-                . ' Aktenzeichen, Betreff, NfD, Dokument)'
-                . ' values ('
-                . '"' . $input['Bestellnummer'] . '",'
-                . '"' . $input['Kategorie'] . '",'
-                . '"' . $input['Herkunft'] . '",'
-                . '"' . $input['Autor'] . '",'
-                . '"' . $input['Datum'] . '",'
-                . '"' . $input['Aktenzeichen'] . '",'
-                . '"' . $input['Betreff'] . '",'
-                . '"' . $input['NfD'] . '",'
-                . '"' . $input['Dokument'] . '")'
-                . ';';
-        $result = mysql_query($query);
-        if ($result && mysql_affected_rows()) {
+        $erlass = Erlass::fromPost();
+        if ($erlass->get('id')) {
             $this->template->addSubtemplate('erlassAdded');
             $this->admin();
         } else {
@@ -223,10 +199,11 @@ class ErlassDB {
         if ($erlass == null) {
             $erlass = new Erlass();
         }
+        $erlassThemen = Themen::listOf($erlass->get('id'));
         $form = $this->template->addSubtemplate('erlassForm');
         $erlass->assignToTmpl($form);
         $themen = Themen::fromDatabase();
-        $form->assignHtml('themen', $themen->getHtml());
+        $form->assignHtml('themen', $themen->getHtml($erlassThemen));
          // TODO: Themenfelder
        return $form;
     }

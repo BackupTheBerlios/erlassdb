@@ -1,6 +1,7 @@
 <?php
 
 require_once 'HtmlTemplate.php';
+require_once 'Themen.php';
 
 /**
  * Manages data of one Erlass.
@@ -12,6 +13,15 @@ class Erlass {
     private static $fields = array('id', 'Bestellnummer', 'Kategorie',
         'Herkunft', 'Autor', 'Datum', 'Aktenzeichen', 'Betreff', 'NfD',
         'Dokument');
+
+    private static function standardizeDate($date) {
+        if (strstr($date, '.')) {
+            $parts = explode('.', $date);
+            $parts = array_reverse($parts);
+            $date = implode('-', $parts);
+        }
+        return $date;
+    }
 
     /**
      * Fetches one Erlass from the database.
@@ -32,7 +42,7 @@ class Erlass {
     }
 
     public static function fromPost() {
-        $fields = array('id', 'Bestellnummer', 'Kategorie', 'Herkunft',
+        $fields = array('Bestellnummer', 'Kategorie', 'Herkunft',
             'Autor', 'Datum', 'Aktenzeichen', 'Betreff', 'NfD', 'Dokument');
         $data = array();
         foreach ($fields as $field) {
@@ -46,15 +56,30 @@ class Erlass {
                 }
             }
         }
-        unset($fields[0]);
-        $setStrings = array();
-        foreach ($fields as $field) {
-            $setStrings[] = $field . '="' . $data[$field] . '"';
+        $data['Datum'] = self::standardizeDate($data['Datum']);
+        if (!isset($_POST['id'])) {
+            return;
         }
-        $query = 'update Erlass set ' . implode(', ', $setStrings)
-                . ' where id="' . $data['id'] . '";';
-        mysql_query($query);
-        return self::fromDB((int) $data['id']);
+        $id = (int) $_POST['id'];
+        if ($id > 0) {
+            $id = (int) $_POST['id'];
+            $setStrings = array();
+            foreach ($fields as $field) {
+                $setStrings[] = $field . '="' . $data[$field] . '"';
+            }
+            $query = 'update Erlass set ' . implode(', ', $setStrings)
+                    . ' where id="' . $id . '";';
+            mysql_query($query);
+        } else {
+            $query = 'insert into Erlass (' . implode(', ', $fields) . ')'
+                    . ' values ("' . implode('", "', $data) . '");';
+            $result = mysql_query($query);
+            if ($result && mysql_affected_rows()) {
+                $id = mysql_insert_id();
+            }
+        }
+        Themen::setFromPostFor($id);
+        return self::fromDB($id);
     }
 
     private $data;
