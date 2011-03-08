@@ -204,8 +204,8 @@ class ErlassDB {
         $erlass->assignToTmpl($form);
         $themen = Themen::fromDatabase();
         $form->assignHtml('themen', $themen->getHtml($erlassThemen));
-         // TODO: Themenfelder
-       return $form;
+        // TODO: Themenfelder
+        return $form;
     }
 
     private function display(Erlass $erlass) {
@@ -226,6 +226,14 @@ class ErlassDB {
         }
         if ($erlass->get('NfD')) {
             $erlassTmpl->addSubtemplate('erlassNfD');
+        }
+        $erlassThemen = Themen::listOf($erlass->get('id'));
+        if (count($erlassThemen) > 0) {
+            $sub = $erlassTmpl->addSubtemplate('betrifft');
+            foreach ($erlassThemen as $thema) {
+                $themaTmpl = $sub->addSubtemplate('thema');
+                $themaTmpl->assign('Name', $thema);
+            }
         }
         if ($this->user->isAdmin()) {
             $erlassTmpl->addSubtemplate('erlassAdmin');
