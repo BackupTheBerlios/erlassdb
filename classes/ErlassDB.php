@@ -31,6 +31,10 @@ class ErlassDB {
         $this->template->addSubtemplate('description');
     }
 
+    public function extendedSearch() {
+        $this->template->addSubtemplate('extendedSearch');;
+    }
+
     public function register() {
         if (isset($_POST['mail'])) {
             $this->registerData();

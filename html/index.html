@@ -153,9 +153,49 @@
             <div class="box" id="search"><h2>Suche</h2>
                 <input type="text" name="search" value="'search'"/>
                 <input type="submit" value="Suchen"/>
+                <a href="./?extended=1">Erweiterte Suche</a>
             </div>
         </form>
         <!-- end search -->
+        <!-- begin extendedSearch -->
+        <form action="./" method="post">
+            <fieldset><legend>Erweiterte Suche</legend>
+                <label for="extended">Suchbegriff</label>
+                <input type="text" id="extended" name="extended" value="'extended'"/>
+                <p class="nowrap">
+                    Kategorie:
+                    <!-- begin categoryCheckbox -->
+                    <br/>
+                    <input type="checkbox'html:selected'" id="'kategorieId'"name="kategorie[]" value="'Kategorie'"/>
+                    <label for="'kategorieId'">'Kategorie'</label>
+                    <!-- end categoryCheckbox -->
+                </p>
+                <p class="nowrap">
+                    Herkunft:
+                    <!-- begin herkunftCheckbox -->
+                    <br/>
+                    <input type="checkbox'html:selected'" id="'herkunftId'"name="herkunft[]" value="'Herkunft'"/>
+                    <label for="'herkunftId'">'Herkunft'</label>
+                    <!-- end herkunftCheckbox -->
+                </p>
+                <p class="nowrap">
+                    Autor:
+                    <!-- begin autorCheckbox -->
+                    <br/>
+                    <input type="checkbox'html:selected'" id="'autorId'"name="autor[]" value="'Autor'"/>
+                    <label for="'autorId'">'Autor'</label>
+                    <!-- end autorCheckbox -->
+                </p>
+                <label for="period">Zeitraum (von - bis)</label>
+                <input type="text" id="periodStart" name="periodStart" value="'periodStart'"/>
+                <input type="text" id="periodEnd" name="periodEnd" value="'periodEnd'"/>
+                <label for="Aktenzeichen">Aktenzeichen</label>
+                <input type="text" id="Aktenzeichen" name="Aktenzeichen" value="'Aktenzeichen'"/>
+                'themen'
+                <input type="submit" value="Suchen"/>
+            </fieldset>
+        </form>
+        <!-- end extendedSearch -->
         <!-- begin description -->
         <div class="box" id="description"><h2>Wo bin ich hier?</h2>
             <p>

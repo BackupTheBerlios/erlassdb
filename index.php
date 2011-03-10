@@ -23,6 +23,8 @@ if (isset($_GET['admin'])) {
 
     if (isset($_GET['register']) || isset($_POST['nachname'])) {
         $erlassDb->register();
+    } elseif (isset($_GET['extended'])) {
+        $erlassDb->extendedSearch();
     } elseif (isset($_GET['search'])) {
         $erlassDb->resultsFor($_GET['search']);
     } elseif (isset($_GET['show'])) {
