@@ -138,10 +138,21 @@ class Themen {
             }
             $sub->assign('id', 'thema' . $child);
             $sub->assign('Name', $child);
-            $sub->assignHtml('selected', $checked);
+            $sub->assignHtml('checked', $checked);
             $sub->assignHtml('childs', $this->getHtml(&$given, $child));
         }
         return $tmpl->result();
+    }
+
+    public function getHtmlWithPost() {
+        if (!isset($_POST['themen']) || !is_array($_POST['themen'])) {
+            return '';
+        }
+        $given = array();
+        foreach ($_POST['themen'] as $thema) {
+            $given[] = stripcslashes($thema);
+        }
+        return $this->getHtml($given);
     }
 
     private function &getChildsOf($parent) {

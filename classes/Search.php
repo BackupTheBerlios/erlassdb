@@ -10,13 +10,30 @@ require_once 'FieldList.php';
  */
 class Search {
 
-    private $fields = array('search', 'extended', 'periodStart', 'periodEnd',
-        'Aktenzeichen'
+    private static $fields = array('search', 'extended', 'periodStart',
+        'periodEnd', 'Aktenzeichen'
     );
+    private static $listNames = array('Kategorie', 'Herkunft', 'Autor');
+    
+    private $data = array();
+    private $lists = array();
+
+    public function __construct() {
+        foreach (self::$fields as $field) {
+            if (isset($_POST[$field])) {
+                $this->data[$field] = $_POST[$field];
+            } else {
+                $this->data[$field] = '';
+            }
+        }
+        foreach (self::$listNames as $name) {
+            $this->lists[] = new FieldList($name);
+        }
+    }
 
     public function assignToTemplate(HtmlTemplate $tmpl) {
-        foreach ($this->fields as $field) {
-            $tmpl->assign($field);
+        foreach ($this->data as $field => $value) {
+            $tmpl->assign($field, $value);
         }
         $kategorien = new FieldList('Kategorie');
         $kategorien->assignToTemplate($tmpl);
@@ -25,7 +42,7 @@ class Search {
         $autoren = new FieldList('Autor');
         $autoren->assignToTemplate($tmpl);
         $themen = Themen::fromDatabase();
-        $tmpl->assignHtml('themen', $themen->getHtml());
+        $tmpl->assignHtml('themen', $themen->getHtmlWithPost());
     }
 
 }
