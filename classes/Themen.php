@@ -145,12 +145,11 @@ class Themen {
     }
 
     public function getHtmlWithPost() {
-        if (!isset($_POST['themen']) || !is_array($_POST['themen'])) {
-            return '';
-        }
         $given = array();
-        foreach ($_POST['themen'] as $thema) {
-            $given[] = stripcslashes($thema);
+        if (isset($_POST['themen']) && is_array($_POST['themen'])) {
+            foreach ($_POST['themen'] as $thema) {
+                $given[] = stripslashes($thema);
+            }
         }
         return $this->getHtml($given);
     }
