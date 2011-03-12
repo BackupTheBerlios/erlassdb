@@ -6,6 +6,7 @@ require_once 'User.php';
 require_once 'Erlass.php';
 require_once 'Files.php';
 require_once 'Themen.php';
+require_once 'Search.php';
 
 class ErlassDB {
 
@@ -32,7 +33,9 @@ class ErlassDB {
     }
 
     public function extendedSearch() {
-        $this->template->addSubtemplate('extendedSearch');;
+        $form = $this->template->addSubtemplate('extendedSearch');
+        $search = new Search();
+        $search->assignToTemplate($form);
     }
 
     public function register() {
