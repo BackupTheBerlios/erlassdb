@@ -25,6 +25,9 @@ if (isset($_GET['admin'])) {
         $erlassDb->register();
     } elseif (isset($_GET['extended']) || isset($_POST['extended'])) {
         $erlassDb->extendedSearch();
+    } elseif (isset($_POST['filter'])) {
+        $erlassDb->sendFilter();
+        exit;
     } elseif (isset($_GET['search'])) {
         $erlassDb->resultsFor($_GET['search']);
     } elseif (isset($_GET['show'])) {

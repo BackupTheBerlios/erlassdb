@@ -38,6 +38,10 @@ class ErlassDB {
         $search->assignToTemplate($form);
     }
 
+    public function sendFilter() {
+        echo Search::filterFromPost();
+    }
+
     public function register() {
         if (isset($_POST['mail'])) {
             $this->registerData();
