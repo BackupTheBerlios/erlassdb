@@ -10,7 +10,6 @@ require_once 'HtmlTemplate.php';
 class FieldList {
 
     private $name;
-    private $result;
     private $checked = array();
 
     /**
@@ -24,13 +23,13 @@ class FieldList {
                 $this->checked[] = stripslashes($checkedValue);
             }
         }
-        $query = 'select distinct `' . $fieldName . '` from Erlass order by `'
-                . $fieldName . '`;';
-        $this->result = mysql_query($query);
     }
 
     public function assignToTemplate(HtmlTemplate $tmpl) {
-        while (list($value) = mysql_fetch_row($this->result)) {
+        $query = 'select distinct `' . $this->name . '` from Erlass order by `'
+                . $this->name . '`;';
+        $result = mysql_query($query);
+        while (list($value) = mysql_fetch_row($result)) {
             $li = $tmpl->addSubtemplate($this->name . 'Checkbox');
             if (in_array($value, $this->checked)) {
                 $li->assignHtml('checked', '" checked="checked');
@@ -40,6 +39,23 @@ class FieldList {
             $li->assign($this->name, $value);
             $li->assign($this->name . 'Id', $this->name . $value);
         }
+    }
+
+    public function filteredArrayOf($field) {
+        $array = array();
+        $query = 'select distinct `' . $field . '` from Erlass';
+        if (sizeof($this->checked) > 0) {
+            $conditions = array();
+            foreach ($this->checked as $checkedValue) {
+                $conditions[] = '`' . $this->name . '`="' . $checkedValue . '"';
+            }
+            $query .= ' where ' . implode(' or ', $conditions);
+        }
+        $result = mysql_query($query);
+        while (list($value) = mysql_fetch_row($result)) {
+            $array[] = $field . $value;
+        }
+        return $array;
     }
 
 }

@@ -9,42 +9,28 @@ require_once 'FieldList.php';
  * @author maikel
  */
 class Search {
-    const FILTER_MODE_ADD = 'add';
-    const FILTER_MODE_REMOVE = 'remove';
 
     private static $fields = array('search', 'extended', 'periodStart',
         'periodEnd', 'Aktenzeichen');
     private static $listNames = array('Kategorie', 'Herkunft', 'Autor');
 
     public static function filterFromPost() {
-        if (!isset($_POST['filter']) || !isset($_POST['mode'])) {
+        if (!isset($_POST['filter'])) {
             return '';
         }
         $name = $_POST['filter'];
-        $mode = $_POST['mode'];
-        if (isset($_POST['checked']) && is_array($_POST['checked'])) {
-            $checked = $_POST['checked'];
-        } else {
-            $checked = array();
+        if (!in_array($name, self::$listNames)) {
+            return '';
         }
-        if ($mode == self::FILTER_MODE_ADD) {
-            $list = '';
-            $query = 'select distinct Herkunft from Erlass;';
-            $result = mysql_query($query);
-            while (list($herkunft) = mysql_fetch_row($result)) {
-                $list .= 'Herkunft' . $herkunft . "\n";
+        $list = new FieldList($name);
+        $listArrays = array();
+        foreach (self::$listNames as $listName) {
+            if ($listName == $name) {
+                continue;
             }
-            return $list;
-        } else {
-            $list = '';
-            $query = 'select distinct Herkunft from Erlass'
-                    . ' where Kategorie="Kategorie";';
-            $result = mysql_query($query);
-            while (list($herkunft) = mysql_fetch_row($result)) {
-                $list .= 'Herkunft' . $herkunft . "\n";
-            }
-            return $list;
+            $listArrays[] = $list->filteredArrayOf($listName);
         }
+        return implode("\n", array_merge($listArrays[0], $listArrays[1]));
     }
 
     private $data = array();
