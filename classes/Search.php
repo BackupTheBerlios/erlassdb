@@ -53,12 +53,10 @@ class Search {
         foreach ($this->data as $field => $value) {
             $tmpl->assign($field, $value);
         }
-        $kategorien = new FieldList('Kategorie');
-        $kategorien->assignToTemplate($tmpl);
-        $herkunften = new FieldList('Herkunft');
-        $herkunften->assignToTemplate($tmpl);
-        $autoren = new FieldList('Autor');
-        $autoren->assignToTemplate($tmpl);
+        foreach (self::$listNames as $listName) {
+            $list = new FieldList($listName);
+            $list->assignToTemplate($tmpl->addSubtemplate('CheckboxList'));
+        }
         $themen = Themen::fromDatabase();
         $tmpl->assignHtml('themen', $themen->getHtmlWithPost());
     }

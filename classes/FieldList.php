@@ -30,15 +30,16 @@ class FieldList {
                 . $this->name . '`;';
         $result = mysql_query($query);
         while (list($value) = mysql_fetch_row($result)) {
-            $li = $tmpl->addSubtemplate($this->name . 'Checkbox');
+            $li = $tmpl->addSubtemplate('CheckboxItem');
             if (in_array($value, $this->checked)) {
                 $li->assignHtml('checked', '" checked="checked');
             } else {
                 $li->assignHtml('checked', '');
             }
-            $li->assign($this->name, $value);
-            $li->assign($this->name . 'Id', $this->name . $value);
+            $li->assign('value', $value);
+            $li->assign('id', $this->name . $value);
         }
+        $tmpl->assign('name', $this->name);
     }
 
     public function filteredArrayOf($field) {

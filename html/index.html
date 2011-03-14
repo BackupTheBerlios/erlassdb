@@ -163,30 +163,20 @@
             <fieldset><legend>Erweiterte Suche</legend>
                 <label for="extended">Suchbegriff</label>
                 <input type="text" id="extended" name="extended" value="'extended'"/>
-                <p class="nowrap">
-                    Kategorie:
-                    <!-- begin KategorieCheckbox -->
-                    <br/>
-                    <input type="checkbox'html:checked'" id="'KategorieId'"name="Kategorie[]" value="'Kategorie'" onchange="filterCheckboxes(this);"/>
-                    <label for="'KategorieId'">'Kategorie'</label>
-                    <!-- end KategorieCheckbox -->
-                </p>
-                <p class="nowrap">
-                    Herkunft:
-                    <!-- begin HerkunftCheckbox -->
-                    <br/>
-                    <input type="checkbox'html:checked'" id="'HerkunftId'"name="Herkunft[]" value="'Herkunft'"/>
-                    <label for="'HerkunftId'">'Herkunft'</label>
-                    <!-- end HerkunftCheckbox -->
-                </p>
-                <p class="nowrap">
-                    Autor:
-                    <!-- begin AutorCheckbox -->
-                    <br/>
-                    <input type="checkbox'html:checked'" id="'AutorId'"name="Autor[]" value="'Autor'"/>
-                    <label for="'AutorId'">'Autor'</label>
-                    <!-- end AutorCheckbox -->
-                </p>
+                <!-- begin CheckboxList -->
+                <div class="text">
+                <h4>'name'</h4>
+                <ul style="list-style-type: none; text-align: left;">
+                    <!-- begin CheckboxItem -->
+                    <li>
+                        <input type="checkbox'html:checked'" id="'id'"name="'name'[]"
+                               value="'value'" onchange="filterCheckboxes(this);"/>
+                        <label for="'id'">'value'</label>
+                    </li>
+                    <!-- end CheckboxItem -->
+                </ul>
+                </div>
+                <!-- end CheckboxList -->
                 <label for="period">Zeitraum (von - bis)</label>
                 <input type="text" id="periodStart" name="periodStart" value="'periodStart'"/>
                 <input type="text" id="periodEnd" name="periodEnd" value="'periodEnd'"/>

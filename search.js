@@ -57,6 +57,10 @@ function filterCheckboxes(checkbox) {
                         disabled = true;
                     }
                     item.disabled = disabled;
+                    /* Possible hiding. Could irritate user
+                    if (disabled) item.parentNode.style.display = 'none';
+                    else item.parentNode.style.display = 'block';
+                    */
                 }
             }
         }
