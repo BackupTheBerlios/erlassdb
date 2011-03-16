@@ -57,7 +57,7 @@ function filterCheckboxes(checkbox) {
                         disabled = true;
                     }
                     item.disabled = disabled;
-                    /* Possible hiding. Could irritate user
+                /* Possible hiding. Could irritate user
                     if (disabled) item.parentNode.style.display = 'none';
                     else item.parentNode.style.display = 'block';
                     */
@@ -66,5 +66,21 @@ function filterCheckboxes(checkbox) {
         }
     };
     http.send(query);
+}
+
+function filterAllCheckboxes() {
+    var inputs = document.getElementsByTagName('input');
+    for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        if (input.type != 'checkbox') {
+            continue;
+        }
+        if (!input.onchange) {
+            continue;
+        }
+        if (input.checked) {
+            filterCheckboxes(input);
+        }
+    }
 }
 
