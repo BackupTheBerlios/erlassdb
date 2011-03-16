@@ -33,9 +33,11 @@ class ErlassDB {
     }
 
     public function extendedSearch() {
-        $form = $this->template->addSubtemplate('extendedSearch');
         $search = new Search();
-        $search->assignToTemplate($form);
+        $form = $this->template->addSubtemplate('extendedSearch');
+        $search->assignExtendedToForm($form);
+        $result = $search->search();
+        $this->showSearchResult($result);
     }
 
     public function sendFilter() {
@@ -93,6 +95,10 @@ class ErlassDB {
                 . ' against ("' . $search . '" in boolean mode)'
                 . ' order by Datum;';
         $result = mysql_query($query);
+        $this->showSearchResult($result);
+    }
+
+    private function showSearchResult($result) {
         if (mysql_num_rows($result) == 0) {
             $this->template->addSubtemplate('noResults');
             return;

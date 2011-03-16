@@ -35,11 +35,13 @@ class Search {
 
     private $data = array();
     private $lists = array();
+    private $dataGiven = false;
 
     public function __construct() {
         foreach (self::$fields as $field) {
             if (isset($_POST[$field])) {
                 $this->data[$field] = $_POST[$field];
+                $this->dataGiven = true;
             } else {
                 $this->data[$field] = '';
             }
@@ -49,16 +51,24 @@ class Search {
         }
     }
 
-    public function assignToTemplate(HtmlTemplate $tmpl) {
+    public function assignExtendedToForm($form) {
         foreach ($this->data as $field => $value) {
-            $tmpl->assign($field, $value);
+            $form->assign($field, $value);
         }
         foreach (self::$listNames as $listName) {
             $list = new FieldList($listName);
-            $list->assignToTemplate($tmpl->addSubtemplate('CheckboxList'));
+            $list->assignToTemplate($form->addSubtemplate('CheckboxList'));
         }
         $themen = Themen::fromDatabase();
-        $tmpl->assignHtml('themen', $themen->getHtmlWithPost());
+        $form->assignHtml('themen', $themen->getHtmlWithPost());
+    }
+
+    public function search() {
+        $query = 'select id, Betreff from Erlass'
+                . ' where match(Betreff, Dokument)'
+                . ' against ("' . $this->data['extended'] . '" in boolean mode)'
+                . ' order by Datum';
+        return mysql_query($query);
     }
 
 }
