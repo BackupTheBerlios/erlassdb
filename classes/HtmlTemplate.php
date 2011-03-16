@@ -76,7 +76,6 @@ class HtmlTemplate {
     public function assignText($name, $value) {
         $encoded = nl2br(self::text2html($value));
         $this->template->assign('br:' . $name, $encoded);
-
     }
 
     /**

@@ -223,7 +223,7 @@ class User {
         }
         if ($passwd) {
             $query = 'select Stufe from Kunde where id="' . $user
-                    . '" and binary Passwort=sha1("' . $passwd . '");';
+                    . '" and Passwort=sha1("' . $passwd . '");';
             $result = mysql_query($query);
             $row = mysql_fetch_row($result);
             if ($row) {
