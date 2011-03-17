@@ -64,9 +64,20 @@ class Search {
     }
 
     public function search() {
+        $conditions = array();
+        if ($this->data['extended']) {
+            $conditions[] = 'match(Betreff, Dokument) against ("'
+                    . $this->data['extended'] . '" in boolean mode)';
+        }
+        foreach (self::$listNames as $listName) {
+            $list = new FieldList($listName);
+            $list->putConditionsInto($conditions);
+        }
+        if (sizeof($conditions) < 1) {
+            return null;
+        }
         $query = 'select id, Betreff from Erlass'
-                . ' where match(Betreff, Dokument)'
-                . ' against ("' . $this->data['extended'] . '" in boolean mode)'
+                . ' where ' . implode(' and ', $conditions)
                 . ' order by Datum';
         return mysql_query($query);
     }

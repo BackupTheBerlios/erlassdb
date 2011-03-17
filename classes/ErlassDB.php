@@ -37,7 +37,9 @@ class ErlassDB {
         $form = $this->template->addSubtemplate('extendedSearch');
         $search->assignExtendedToForm($form);
         $result = $search->search();
-        $this->showSearchResult($result);
+        if ($result) {
+            $this->showSearchResult($result);
+        }
     }
 
     public function sendFilter() {

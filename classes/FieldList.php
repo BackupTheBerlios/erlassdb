@@ -46,17 +46,27 @@ class FieldList {
         $array = array();
         $query = 'select distinct `' . $field . '` from Erlass';
         if (sizeof($this->checked) > 0) {
-            $conditions = array();
-            foreach ($this->checked as $checkedValue) {
-                $conditions[] = '`' . $this->name . '`="' . $checkedValue . '"';
-            }
-            $query .= ' where ' . implode(' or ', $conditions);
+            $query .= ' where ' . $this->condition();
         }
         $result = mysql_query($query);
         while (list($value) = mysql_fetch_row($result)) {
             $array[] = $field . $value;
         }
         return $array;
+    }
+
+    public function putConditionsInto(&$conditions) {
+        if (sizeof($this->checked) > 0) {
+            $conditions[] = $this->condition();
+        }
+    }
+
+    private function condition() {
+        $conditions = array();
+        foreach ($this->checked as $checkedValue) {
+            $conditions[] = '`' . $this->name . '`="' . $checkedValue . '"';
+        }
+        return implode(' or ', $conditions);
     }
 
 }
