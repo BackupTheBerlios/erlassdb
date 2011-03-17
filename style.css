@@ -112,6 +112,10 @@ fieldset input[type="text"], fieldset input[type="password"] {
     width: 100%;
 }
 
+fieldset input[type="text"].date {
+    width: 11ex;
+}
+
 fieldset input[type="submit"] {
     margin-top: 0.5em;
 }
