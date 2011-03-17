@@ -35,6 +35,7 @@ class Search {
 
     private $data = array();
     private $lists = array();
+    private $themen = array();
     private $dataGiven = false;
 
     public function __construct() {
@@ -48,6 +49,9 @@ class Search {
         }
         foreach (self::$listNames as $name) {
             $this->lists[] = new FieldList($name);
+        }
+        if (isset($_POST['themen']) && is_array($_POST['themen'])) {
+            $this->themen = $_POST['themen'];
         }
     }
 
@@ -66,19 +70,39 @@ class Search {
     public function search() {
         $conditions = array();
         if ($this->data['extended']) {
-            $conditions[] = 'match(Betreff, Dokument) against ("'
+            $conditions[] = 'match(Erlass.Betreff, Erlass.Dokument) against ("'
                     . $this->data['extended'] . '" in boolean mode)';
         }
         foreach (self::$listNames as $listName) {
             $list = new FieldList($listName);
             $list->putConditionsInto($conditions);
         }
+        if ($this->data['periodStart']) {
+            $conditions[] =
+                    'Erlass.Datum>="' . $this->data['periodStart'] . '"';
+        }
+        if ($this->data['periodEnd']) {
+            $conditions[] = 'Erlass.Datum<="' . $this->data['periodEnd'] . '"';
+        }
+        if ($this->data['Aktenzeichen']) {
+            $conditions[] =
+                    'Erlass.Aktenzeichen="' . $this->data['Aktenzeichen'] . '"';
+        }
+        if (sizeof($this->themen) > 0) {
+            $themaConditions = array();
+            foreach ($this->themen as $thema) {
+                $themaConditions[] = 'betrifft.Thema="' . $thema . '"';
+            }
+            $conditions[] = '(' . implode(' or ', $themaConditions) . ')';
+        }
         if (sizeof($conditions) < 1) {
             return null;
         }
-        $query = 'select id, Betreff from Erlass'
+        $query = 'select Erlass.id id, Erlass.Betreff Betreff from Erlass'
+                . ' left join betrifft on Erlass.id=betrifft.Erlass'
                 . ' where ' . implode(' and ', $conditions)
-                . ' order by Datum';
+                . ' group by id'
+                . ' order by Datum;';
         return mysql_query($query);
     }
 

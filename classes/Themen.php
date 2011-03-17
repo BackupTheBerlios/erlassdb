@@ -53,7 +53,7 @@ class Themen {
 
     public static function listOf($erlassId) {
         $list = array();
-        if ($erlassId > 1) {
+        if ($erlassId > 0) {
             $query = 'select Thema from betrifft where Erlass="'
                     . (int) $erlassId . '";';
             $result = mysql_query($query);

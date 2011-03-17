@@ -64,9 +64,9 @@ class FieldList {
     private function condition() {
         $conditions = array();
         foreach ($this->checked as $checkedValue) {
-            $conditions[] = '`' . $this->name . '`="' . $checkedValue . '"';
+            $conditions[] = 'Erlass.`' . $this->name . '`="' . $checkedValue . '"';
         }
-        return implode(' or ', $conditions);
+        return '(' . implode(' or ', $conditions) . ')';
     }
 
 }
