@@ -14,7 +14,7 @@ class Erlass {
         'Herkunft', 'Autor', 'Datum', 'Aktenzeichen', 'Betreff', 'NfD',
         'Dokument');
 
-    private static function standardizeDate($date) {
+    public static function standardizeDate($date) {
         if (strstr($date, '.')) {
             $parts = explode('.', $date);
             $parts = array_reverse($parts);

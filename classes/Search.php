@@ -78,11 +78,12 @@ class Search {
             $list->putConditionsInto($conditions);
         }
         if ($this->data['periodStart']) {
-            $conditions[] =
-                    'Erlass.Datum>="' . $this->data['periodStart'] . '"';
+            $start = Erlass::standardizeDate($this->data['periodStart']);
+            $conditions[] = 'Erlass.Datum>="' . $start . '"';
         }
         if ($this->data['periodEnd']) {
-            $conditions[] = 'Erlass.Datum<="' . $this->data['periodEnd'] . '"';
+            $end = Erlass::standardizeDate($this->data['periodEnd']);
+            $conditions[] = 'Erlass.Datum<="' . $end . '"';
         }
         if ($this->data['Aktenzeichen']) {
             $conditions[] =
