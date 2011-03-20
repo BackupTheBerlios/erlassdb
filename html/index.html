@@ -24,8 +24,9 @@
                     </div>
                 </form>
                 <!-- begin registerLink -->
-                <a href="./?register">registrieren</a>
+                <a href="./?register">registrieren</a>,
                 <!-- end registerLink -->
+                <a href="./?newPassword">neues Passwort</a>
             </div>
             <!-- begin adminLink -->
             <div id="adminMenu"><a href="./?admin=1">Administration</a></div>
@@ -111,13 +112,54 @@
                 <label for="mail">E-Mailadresse</label>
                 <input type="text" id="mail" name="mail"value="'mail'"/>
                 <label for="passwort">Passwort</label>
-                <input type="password" id="passwort" name="passwort"value="'passwort'"/>
+                <input type="password" id="passwort" name="passwort" value="'passwort'"/>
                 <label for="passwortB">Passwort bestätigen</label>
-                <input type="password" id="passwortB" name="passwortB"value="'passwortB'"/>
+                <input type="password" id="passwortB" name="passwortB" value="'passwortB'"/>
                 <input type="submit" value="Registrieren" />
             </fieldset>
         </form>
         <!-- end registerForm -->
+        <!-- begin passwordRequestSent -->
+        <div class="box"><h2>Versendet</h2>
+            An Ihre E-Mailadresse wurde ein Link versendet, über den Sie Ihr
+            Passwort ändern können.
+        </div>
+        <!-- end passwordRequestSent -->
+        <!-- begin newPasswordSet -->
+        <div class="box"><h2>Passwort gesetzt</h2>
+            Das neue Passwort wurde gespeichert.
+        </div>
+        <!-- end newPasswordSet -->
+        <!-- begin newPasswordNotSet -->
+        <div class="box"><h2>Passwort nicht gesetzt</h2>
+            Das neue Passwort konnte nicht gespeichert werden. Vielleicht war
+            der Validierungslink in der E-Mail zu alt. Versuchen Sie erneut
+            ein neues Passwort zu beantragen.
+        </div>
+        <!-- end newPasswordNotSet -->
+        <!-- begin requestNewPasswordForm -->
+        <form action="./" method="post">
+            <fieldset><legend>Neues Passwort beantragen</legend>
+                <label for="user">E-Mailadresse</label>
+                <input type="text" id="user" name="user" value="'user'"/>
+                <input type="submit" name="newPassword" value="Beantragen" />
+            </fieldset>
+        </form>
+        <!-- end requestNewPasswordForm -->
+        <!-- begin newPasswordForm -->
+        <form action="./" method="post">
+            <fieldset><legend>Neues Passwort setzen</legend>
+                <address>'user'</address>
+                <input type="hidden" name="user" value="'user'"/>
+                <input type="hidden" name="challenge" value="'challenge'"/>
+                <label for="Passwort">Passwort</label>
+                <input type="password" id="Passwort" name="Passwort" value=""/>
+                <label for="PasswortB">Passwort bestätigen</label>
+                <input type="password" id="PasswortB" name="PasswortB" value=""/>
+                <input type="submit" value="Festlegen" />
+            </fieldset>
+        </form>
+        <!-- end newPasswordForm -->
         <!-- begin registered -->
         <div class="box" id="registered"><h2>Registrierung erfolgreich</h2>
             <p>

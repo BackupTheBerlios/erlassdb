@@ -33,3 +33,9 @@ CREATE TABLE IF NOT EXISTS `Kunde` (
   `Stufe` tinyint(1) NOT NULL default '1'
 ) ENGINE=MyISAM;
 
+CREATE TABLE IF NOT EXISTS `challenge` (
+  `Kunde` varchar(128) NOT NULL PRIMARY KEY,
+  `challenge` binary(32) NOT NULL,
+  `created` timestamp NOT NULL default CURRENT_TIMESTAMP
+) ENGINE=MyISAM;
+

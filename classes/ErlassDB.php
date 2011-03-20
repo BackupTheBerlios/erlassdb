@@ -67,6 +67,32 @@ class ErlassDB {
         }
     }
 
+    public function newPassword() {
+        if (isset($_GET['newPassword'])) {
+            $this->template->addSubtemplate('requestNewPasswordForm');
+        }
+        if (isset($_POST['newPassword'])) {
+            $this->user->requestNewPassword();
+            $this->template->addSubtemplate('passwordRequestSent');
+            $this->start();
+        }
+        if (isset($_GET['user']) && isset($_GET['challenge'])) {
+            $form = $this->template->addSubtemplate('newPasswordForm');
+            $form->assign('user', stripslashes($_GET['user']));
+            $form->assign('challenge', $_GET['challenge']);
+        }
+        if (isset($_POST['challenge'])) {
+            $successful = $this->user->setNewPassword();
+            if ($successful) {
+                $this->template->addSubtemplate('newPasswordSet');
+                $this->start();
+            } else {
+                $this->template->addSubtemplate('newPasswordNotSet');
+                $this->template->addSubtemplate('requestNewPasswordForm');
+            }
+        }
+    }
+
     public function setLevelForm($mail) {
         $this->forceAdmin();
         $sub = $this->template->addSubtemplate('setLevelForm');

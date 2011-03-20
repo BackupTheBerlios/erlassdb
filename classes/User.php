@@ -175,6 +175,60 @@ class User {
         Mailer::mail($this->adminMail->getAddress(), $subject, $content, $data['mail']);
     }
 
+    public function requestNewPassword() {
+        $id = $_POST['user'];
+        if (self::levelOf($id) < 1) {
+            return;
+        }
+        self::cleanChallenges();
+        $query = 'insert into challenge (Kunde, challenge) values'
+                . ' ("' . $id . '", md5(rand()));';
+        mysql_query($query);
+        $query = 'select Kunde, challenge from challenge where'
+                . ' Kunde="' . $id . '";';
+        $result = mysql_query($query);
+        if (mysql_num_rows($result) != 1) {
+            return;
+        }
+        list($id, $challenge) = mysql_fetch_row($result);
+        $subject = 'Neues Passwort';
+        $content = "Hallo!\n\n"
+                . 'Für Ihre E-Mailadresse wurde bei der Erlassdatenbank ein'
+                . "neues Passwort beantragt.\n"
+                . "Mit dem folgenden Link kann es neu gesetzt werden:\n"
+                . WEBDIR . '?user=' . urlencode($id) . "&challenge=$challenge\n\n"
+                . 'Diese Nachricht wurde automatisch versandt.';
+        Mailer::mail($id, $subject, $content);
+    }
+
+    public function setNewPassword() {
+        if (!isset($_POST['user']) || !isset($_POST['challenge'])
+                || !isset($_POST['Passwort']) || !isset($_POST['PasswortB'])) {
+            return false;
+        }
+        $user = $_POST['user'];
+        $challenge = $_POST['challenge'];
+        $passwort = $_POST['Passwort'];
+        $passwortB = $_POST['PasswortB'];
+        if ($passwort != $passwortB) {
+            return false;
+        }
+        self::cleanChallenges();
+        $query = 'delete from challenge where'
+                . ' Kunde ="' . $user . '" and challenge="' . $challenge . '";';
+        mysql_query($query);
+        if (mysql_affected_rows () != 1) {
+            return false;
+        }
+        $query = 'update Kunde set Passwort="' . sha1($passwort) . '"'
+                . ' where id="' . $user . '";';
+        mysql_query($query);
+        if (mysql_affected_rows () == 1) {
+            return true;
+        }
+        return false;
+    }
+
     private function checkUser() {
         if (self::userPresent()) {
             $user = $_SERVER['PHP_AUTH_USER']; // TODO: check input
@@ -215,6 +269,12 @@ class User {
         } else {
             return false;
         }
+    }
+
+    private static function cleanChallenges() {
+        $query = 'delete from challenge where'
+                . ' timestampadd(day, 10, created) < now()';
+        mysql_query($query);
     }
 
     private function levelFor($user, $passwd) {
