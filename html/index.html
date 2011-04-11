@@ -283,8 +283,15 @@
         </div>
         <!-- end noAccessToNfD -->
         <!-- begin erlass -->
-        <div class="box"><h2>'Betreff'</h2>
-            <p>'Aktenzeichen', 'Autor', 'Herkunft', 'Datum'</p>
+        <div class="box">
+            <div class="Datum">'Datum'</div>
+            <h2>'Betreff'
+                <!-- begin erlassStatus --> ('Status')<!-- end erlassStatus -->
+            </h2>
+            <p>Aktenzeichen: 'Aktenzeichen'</p>
+            <p>Bestellnummer: 'Bestellnummer'</p>
+            <p>'Autor', 'Herkunft'</p>
+            
             <!-- begin erlassNfD -->
             <p class="NfD">Nur für den Dienstgebrauch.</p>
             <!-- end erlassNfD -->
@@ -295,7 +302,6 @@
                 <!-- end downloadItem -->
             </p>
             <!-- end downloadMenu -->
-            <p>Bestellnummer: 'Bestellnummer'</p>
             <!-- begin betrifft -->
             <p>Betrifft:<!--begin thema--> 'Name'.<!--end thema--></p>
             <!-- end betrifft -->
@@ -397,6 +403,8 @@
                 <input type="text" id="Aktenzeichen" name="Aktenzeichen" value="'Aktenzeichen'"/>
                 <label for="Betreff">Betreff</label>
                 <input type="text" id="Betreff" name="Betreff" value="'Betreff'"/>
+                <label for="Status">Status</label>
+                <input type="text" id="Status" name="Status" value="'Status'"/>
                 <label for="NfD">Nur für den Dienstgebrauch</label>
                 <input type="checkbox" id="NfD" name="NfD" value="'html:NfD'"/>
                 <label for="Dokument">Text</label>
