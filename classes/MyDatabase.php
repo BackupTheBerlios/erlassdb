@@ -62,6 +62,9 @@ class MyDatabase {
      * Opens a connection to the database.
      */
     public static function connect() {
+        if (!self::isConfigured()) {
+            return;
+        }
         include self::CONFIG;
         self::$connection = @mysql_connect($server, $username, $password);
         if (!self::$connection)

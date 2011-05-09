@@ -284,8 +284,8 @@ class User {
         if ($passwd) {
             $query = 'select Stufe from Kunde where id="' . $user
                     . '" and Passwort=sha1("' . $passwd . '");';
-            $result = mysql_query($query);
-            $row = mysql_fetch_row($result);
+            $result = @mysql_query($query);
+            $row = @mysql_fetch_row($result);
             if ($row) {
                 if ($user == $this->adminMail->getAddress()) {
                     return self::ADMIN_LEVEL;

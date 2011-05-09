@@ -15,8 +15,10 @@ class ErlassDB {
     private $user;
 
     public function __construct() {
-        MyDatabase::connect();
-        $this->querySize();
+        if (MyDatabase::isConfigured()) {
+            MyDatabase::connect();
+            $this->querySize();
+        }
         $this->template = HtmlTemplate::fromFile('index.html');
         $this->user = new User();
         $this->user->assignToTemplate($this->template);
