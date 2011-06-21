@@ -32,7 +32,7 @@
             <div id="adminMenu"><a href="./?admin=1">Administration</a></div>
             <!-- end adminLink -->
         </div>
-        <h1><a href="./">ErlassDB<span> NRW</span></a></h1>
+        <h1><a href="./?start" title="Erlassdatenbank Nordrheinwestfahlen">ErlassDB NRW</a></h1>
         <!-- begin registerForm -->
         <div class="box"><h2>Namentlich registrieren</h2>
             Durch die Registrierung kann geprüft werden, ob Ihnen mehr Dokumente
@@ -181,6 +181,38 @@
         <!-- begin levelSet -->
         <div class="box"><h2>Stufe gesetzt.</h2></div>
         <!-- end levelSet -->
+        <!-- begin welcome -->
+        <div class="box" id="newest"><h2>Willkommen!</h2>
+            <p>
+                Dies ist eine Erlassdatenbank für ausländerrechtlich relevante
+                Erlasse des Landes NRW. Dabei sollen alle Erlasse erfasst werden,
+                die das Innenministerium NRW an das die Ausländerbehörden des
+                Landes über die Bezirksregierungen weiterleiten läßt. Eine
+                Einstellung der Erlasse erfolgt möglichst bald nach dem Versand
+                der Erlasse an die Ausländerbehörden. Diese Datenbank bietet
+                zahlreiche Suchfunktionen.
+            </p><p>
+                Dabei handelt es sich um einen Service des AK Asyl e.V. Leider
+                stehen dem AK Asyl e.V. nur sehr begrenzte Mittel zu Verfügung
+                und die Erstellung und Pflege dieser Seite kann nur getragen
+                werden, wenn dieses über Spenden finanziert wird. Für die Pflege
+                fallen Kosten in Höhe von 1.000 € pro Jahr an.
+            </p><p>
+                Helfen Sie mit, diese Seite zu finanzieren und Spenden Sie jetzt:
+            </p><p>
+                Kontoinhaber: AK Asyl e.V.
+                Kontonummer: 44 198
+                Bank: Sparkasse Bielefeld
+                BLZ: 480 501 61
+                Stichwort: Internet
+            </p><p>
+                Der Verein ist gemeinnützig, so dass die Spenden steuerlich
+                absetzbar sind.
+            </p><p>
+                Hier kommen Sie nun zu den <a href="?start">Erlassen</a>.
+            </p>
+        </div>
+        <!-- end welcome -->
         <!-- begin newest -->
         <div class="box" id="newest"><h2>Die neuesten Erlasse</h2>
             <ol>
@@ -207,16 +239,16 @@
                 <input type="text" id="extended" name="extended" value="'extended'"/>
                 <!-- begin CheckboxList -->
                 <div class="text">
-                <h4>'name'</h4>
-                <ul style="list-style-type: none; text-align: left;">
-                    <!-- begin CheckboxItem -->
-                    <li>
-                        <input type="checkbox'html:checked'" id="'id'"name="'name'[]"
-                               value="'value'" onchange="filterCheckboxes(this);"/>
-                        <label for="'id'">'value'</label>
-                    </li>
-                    <!-- end CheckboxItem -->
-                </ul>
+                    <h4>'name'</h4>
+                    <ul style="list-style-type: none; text-align: left;">
+                        <!-- begin CheckboxItem -->
+                        <li>
+                            <input type="checkbox'html:checked'" id="'id'"name="'name'[]"
+                                   value="'value'" onchange="filterCheckboxes(this);"/>
+                            <label for="'id'">'value'</label>
+                        </li>
+                        <!-- end CheckboxItem -->
+                    </ul>
                 </div>
                 <!-- end CheckboxList -->
                 <script type="text/javascript">filterAllCheckboxes();</script>
@@ -291,7 +323,7 @@
             <p>Aktenzeichen: 'Aktenzeichen'</p>
             <p>Bestellnummer: 'Bestellnummer'</p>
             <p>'Autor', 'Herkunft'</p>
-            
+
             <!-- begin erlassNfD -->
             <p class="NfD">Nur für den Dienstgebrauch.</p>
             <!-- end erlassNfD -->

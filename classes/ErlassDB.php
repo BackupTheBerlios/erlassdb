@@ -22,6 +22,10 @@ class ErlassDB {
         $this->user->assignToTemplate($this->template);
     }
 
+    public function welcome() {
+        $this->template->addSubtemplate('welcome');
+    }
+
     public function start() {
         if ($this->size > 0) {
             $this->showNewest();

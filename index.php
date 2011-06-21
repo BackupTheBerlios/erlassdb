@@ -52,8 +52,10 @@ if (isset($_GET['admin'])) {
         $erlassDb->setLevelForm($_GET['setLevel']);
     } elseif (isset($_REQUEST['themen']) || isset($_POST['thema'])) {
         $erlassDb->themen();
-    } else {
+    } elseif (isset($_GET['start'])) {
         $erlassDb->start();
+    } else {
+        $erlassDb->welcome();
     }
 }
 
