@@ -1,7 +1,7 @@
 body {
     text-align:center;
     background-color: #ddf;
-    color: #fff;
+    color: black;
     margin: 0em;
 }
 
@@ -67,7 +67,6 @@ div.Datum {
 
 div.box, div.errorbox {
     text-align:left;
-    color: #000;
     background-color: #fff;
     border: .2em solid black;
     padding: .5em;
@@ -104,7 +103,7 @@ form {
 body > form > fieldset {
     width: 40em;
     margin: 0 auto;
-    background-color: #800;
+    background-color: #dddddd;
 }
 
 fieldset > label {
@@ -151,7 +150,6 @@ div.volatile {
     width: 100%;
     display: none;
     background-color: white;
-    color: black;
     padding: 1em;
     border: 1ex solid black;
     border-style: outset;
