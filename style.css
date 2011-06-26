@@ -1,6 +1,6 @@
 body {
     text-align:center;
-    background-color: #600;
+    background-color: #ddf;
     color: #fff;
     margin: 0em;
 }
@@ -34,8 +34,8 @@ div.menu {
 }
 
 h1 a {
-	color: #fff;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 p, .text {
