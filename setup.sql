@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS `Erlass` (
   `Autor` varchar(128) NOT NULL,
   `Betreff` varchar(128) NOT NULL,
   `Dokument` text NOT NULL,
-  `NfD` tinyint(1) NOT NULL default '0',
+  `NfD` tinyint(1) unsigned NOT NULL,
+  `Status` tinyint(1) unsigned NOT NULL,
   KEY (Kategorie, Aktenzeichen, Datum, Herkunft, Autor),
   FULLTEXT (Betreff, Dokument)
 ) ENGINE=MyISAM;

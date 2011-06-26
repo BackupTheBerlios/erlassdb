@@ -49,6 +49,10 @@ p.NfD {
     color: red;
 }
 
+div.Datum {
+    float: right;
+}
+
 .nowrap {
     white-space: nowrap;
 }

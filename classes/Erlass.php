@@ -12,7 +12,7 @@ class Erlass {
 
     private static $fields = array('id', 'Bestellnummer', 'Kategorie',
         'Herkunft', 'Autor', 'Datum', 'Aktenzeichen', 'Betreff', 'NfD',
-        'Dokument');
+        'Status', 'Dokument');
 
     public static function standardizeDate($date) {
         if (strstr($date, '.')) {
@@ -30,8 +30,7 @@ class Erlass {
      * @return Erlass object build from database or null
      */
     public static function fromDB($id) {
-        $query = 'select id, Bestellnummer, Kategorie, Herkunft, Autor, Datum,'
-                . ' Aktenzeichen, Betreff, NfD, Dokument from Erlass'
+        $query = 'select ' . implode(', ', self::$fields) . ' from Erlass'
                 . ' where id="' . $id . '";';
         $result = mysql_query($query);
         if (mysql_num_rows($result) != 1) {
@@ -42,8 +41,8 @@ class Erlass {
     }
 
     public static function fromPost() {
-        $fields = array('Bestellnummer', 'Kategorie', 'Herkunft',
-            'Autor', 'Datum', 'Aktenzeichen', 'Betreff', 'NfD', 'Dokument');
+        $fields = self::$fields;
+        unset($fields[0]); // delete 'id' field
         $data = array();
         foreach ($fields as $field) {
             if (isset($_POST[$field])) {
@@ -51,7 +50,7 @@ class Erlass {
             } else {
                 if ($field == 'NfD') {
                     $data['NfD'] = 0;
-                } else {
+                } else {echo '#';
                     return null;
                 }
             }
@@ -62,7 +61,6 @@ class Erlass {
         }
         $id = (int) $_POST['id'];
         if ($id > 0) {
-            $id = (int) $_POST['id'];
             $setStrings = array();
             foreach ($fields as $field) {
                 $setStrings[] = $field . '="' . $data[$field] . '"';

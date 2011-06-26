@@ -24,6 +24,10 @@ class ErlassDB {
         $this->user->assignToTemplate($this->template);
     }
 
+    public function welcome() {
+        $this->template->addSubtemplate('welcome');
+    }
+
     public function start() {
         if ($this->size > 0) {
             $this->showNewest();
@@ -162,6 +166,7 @@ class ErlassDB {
     }
 
     public function edit($id) {
+        $this->forceAdmin();
         $erlass = Erlass::fromDB($id);
         if ($erlass == null) {
             exit;
@@ -270,6 +275,9 @@ class ErlassDB {
         if ($this->user->hasFileaccess()) {
             $files = new Files($erlass->get('id'));
             $files->assignToTmpl($erlassTmpl);
+        }
+        if ($this->user->hasFileaccess()) {
+            $erlassTmpl->addSubtemplate('erlassStatus');
         }
         if ($erlass->get('NfD')) {
             $erlassTmpl->addSubtemplate('erlassNfD');
