@@ -267,15 +267,6 @@ class ErlassDB {
     }
 
     private function display(Erlass $erlass) {
-        if ($erlass->get('NfD') && !$this->user->hasNfd()) {
-            $sub = $this->template->addSubtemplate('noAccessToNfD');
-            if ($this->user->isRegistered()) {
-                $sub->addSubtemplate('pleaseWait');
-            } else {
-                $sub->addSubtemplate('pleaseRegister');
-            }
-            return;
-        }
         $erlassTmpl = $this->template->addSubtemplate('erlass');
         $erlass->assignToTmpl($erlassTmpl);
         if ($this->user->hasFileaccess()) {
@@ -298,6 +289,15 @@ class ErlassDB {
         }
         if ($this->user->isAdmin()) {
             $erlassTmpl->addSubtemplate('erlassAdmin');
+        }
+        if ($erlass->get('NfD') && !$this->user->hasNfd()) {
+            $sub = $erlassTmpl->addSubtemplate('noAccessToNfD');
+            if ($this->user->isRegistered()) {
+                $sub->addSubtemplate('pleaseWait');
+            } else {
+                $sub->addSubtemplate('pleaseRegister');
+            }
+            $erlassTmpl->assignText('Dokument', '');
         }
     }
 
