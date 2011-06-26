@@ -136,4 +136,31 @@ fieldset textarea {
     width: 100%;
 }
 
+div.menu_bottom {
+    background-color: white;
+    border-top: 0.3em solid #000;
+    padding-top: .5ex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 
+div.volatile {
+    position: fixed;
+    bottom: 1em;
+    width: 100%;
+    display: none;
+    background-color: white;
+    color: black;
+    padding: 1em;
+    border: 1ex solid black;
+    border-style: outset;
+}
+
+div.volatile_link {
+    display: inline;
+}
+
+div.volatile_link:hover div.volatile {
+    display: block;
+}
