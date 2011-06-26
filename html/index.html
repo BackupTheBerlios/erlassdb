@@ -13,6 +13,7 @@
         <title>ErlassDB NRW</title>
     </head>
     <body>
+        <!-- begin userInfo -->
         <div id="topbar">
             <div id="userbox">Status 'status'
                 <!--begin loggedIn-->für Benutzer 'user'<!--end loggedIn-->
@@ -32,6 +33,7 @@
             <div id="adminMenu"><a href="./?admin=1">Administration</a></div>
             <!-- end adminLink -->
         </div>
+        <!-- end userInfo -->
         <h1><a href="./?start" title="Erlassdatenbank Nordrheinwestfahlen">ErlassDB NRW</a></h1>
         <!-- begin registerForm -->
         <div class="box"><h2>Namentlich registrieren</h2>
@@ -76,6 +78,13 @@
             Passwortfeld.
         </div>
         <!-- end missing_passwortB -->
+        <!-- begin missing_insert -->
+        <div class="errorbox"><h2>E-Mail vorhanden!</h2>
+            Ihre E-Mailadresse ist bereits registriert. Falls Sie ihr Passwort
+            vergessen haben, können Sie ein <a href="./?newPassword">neues
+            Passwort</a> beantragen.
+        </div>
+        <!-- end missing_insert -->
         <form action="./" method="post">
             <fieldset><legend>Registrierung</legend>
                 <label for="nachname">Nachname</label>
@@ -209,7 +218,14 @@
                 Der Verein ist gemeinnützig, so dass die Spenden steuerlich
                 absetzbar sind.
             </p><p>
-                Hier kommen Sie nun zu den <a href="?start">Erlassen</a>.
+                Wenn Sie die Datenbank nutzen, sollten Sie sich namentlich
+                <a href="./?register">registrieren</a>. Dadurch erhalten Sie die
+                passenden Zugriffsrechte für Ihren Aufgabenbereich. Solange Sie
+                noch nicht registriert sind, geben Sie ihren Namen ohne ein
+                Passwort ein. Die Basisfunktionen stehen Ihnen auch dann zur
+                Verfügung.
+            </p><p>
+                Hier kommen Sie nun zu den <a href="./?start">Erlassen</a>.
             </p>
         </div>
         <!-- end welcome -->

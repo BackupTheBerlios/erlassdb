@@ -23,7 +23,10 @@ class User {
 
     public function __construct() {
         $this->adminMail = new AdminMail();
-        $this->checkUser();
+    }
+    
+    public function getId() {
+        return $this->id;
     }
 
     public function isRegistered() {
@@ -156,7 +159,10 @@ class User {
                 . '"' . $data['mail'] . '", '
                 . 'sha1("' . $data['passwort'] . '"));';
         // TODO: check, if id is used
-        mysql_query($query);
+        $result = mysql_query($query);
+        if (!$result) {
+            return 'insert';
+        }
         $subject = 'Registrierung';
         $content = "Hallo!\n\n"
                 . "Es hat sich ein neuer Kunde registriert:\n\n"
@@ -194,7 +200,7 @@ class User {
         $subject = 'Neues Passwort';
         $content = "Hallo!\n\n"
                 . 'Für Ihre E-Mailadresse wurde bei der Erlassdatenbank ein'
-                . "neues Passwort beantragt.\n"
+                . " neues Passwort beantragt.\n"
                 . "Mit dem folgenden Link kann es neu gesetzt werden:\n"
                 . WEBDIR . '?user=' . urlencode($id) . "&challenge=$challenge\n\n"
                 . 'Diese Nachricht wurde automatisch versandt.';
@@ -229,7 +235,7 @@ class User {
         return false;
     }
 
-    private function checkUser() {
+    public function checkUser() {
         if (self::userPresent()) {
             $user = $_SERVER['PHP_AUTH_USER']; // TODO: check input
             $passwd = $_SERVER['PHP_AUTH_PW'];

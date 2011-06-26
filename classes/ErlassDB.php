@@ -21,7 +21,13 @@ class ErlassDB {
         }
         $this->template = HtmlTemplate::fromFile('index.html');
         $this->user = new User();
-        $this->user->assignToTemplate($this->template);
+        $this->template->assign('user');
+    }
+    
+    public function authenticateUser() {
+        $this->user->checkUser();
+        $this->user->assignToTemplate($this->template->addSubtemplate("userInfo"));
+        $this->template->assign('user', $this->user->getId());
     }
 
     public function welcome() {
