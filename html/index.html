@@ -273,8 +273,11 @@
                 <!-- end CheckboxList -->
                 <script type="text/javascript">filterAllCheckboxes();</script>
                 <div class="text">
-                    <h4>Themenfelder</h4>
-                    'html:themen'
+                    <h4><label for="themen">Thema</label></h4>
+                    <select name="themen[]" size="1" id="themen">
+                        <option></option>
+                        'html:themen'
+                    </select>
                 </div>
                 <label for="Aktenzeichen">Aktenzeichen</label>
                 <input type="text" id="Aktenzeichen" name="Aktenzeichen" value="'Aktenzeichen'"/>

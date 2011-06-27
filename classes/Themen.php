@@ -126,20 +126,24 @@ class Themen {
         return $tree;
     }
 
-    public function getHtml($given = array(), $parent = self::ROOT_NAME) {
-        $tmpl = HtmlTemplate::fromFile('themen.html');
+    public function getHtml($tmplFile, $given = array(), $parent = self::ROOT_NAME, $indent = ' ') {
+        $tmpl = HtmlTemplate::fromFile($tmplFile);
         $tmpl->assign('parent', $parent);
         $childs = &$this->getChildsOf($parent);
         foreach ($childs as $child) {
             $sub = $tmpl->addSubtemplate('thema');
             $checked = '';
+            $selected = '';
             if (in_array($child, $given)) {
                 $checked = '" checked="checked';
+                $selected = '" selected="selected';
             }
             $sub->assign('id', 'thema' . $child);
             $sub->assign('Name', $child);
+            $sub->assign('indent', $indent);
             $sub->assignHtml('checked', $checked);
-            $sub->assignHtml('childs', $this->getHtml(&$given, $child));
+            $sub->assignHtml('selected', $selected);
+            $sub->assignHtml('childs', $this->getHtml($tmplFile, &$given, $child,  '-' . $indent));
         }
         return $tmpl->result();
     }
@@ -151,7 +155,7 @@ class Themen {
                 $given[] = stripslashes($thema);
             }
         }
-        return $this->getHtml($given);
+        return $this->getHtml('themenlist.html', $given);
     }
 
     private function &getChildsOf($parent) {

@@ -245,7 +245,7 @@ class ErlassDB {
         Themen::insertFromPost();
         $themen = Themen::fromDatabase();
         $sub = $this->template->addSubtemplate('themen');
-        $sub->assignHtml('themen', $themen->getHtml());
+        $sub->assignHtml('themen', $themen->getHtml('themen.html'));
     }
 
     public function showPage() {
@@ -260,7 +260,7 @@ class ErlassDB {
         $form = $this->template->addSubtemplate('erlassForm');
         $erlass->assignToTmpl($form);
         $themen = Themen::fromDatabase();
-        $form->assignHtml('themen', $themen->getHtml($erlassThemen));
+        $form->assignHtml('themen', $themen->getHtml('themen.html', $erlassThemen));
         // TODO: Themenfelder
         return $form;
     }
