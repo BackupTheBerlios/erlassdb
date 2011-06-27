@@ -3,6 +3,7 @@ body {
     background-color: #ddf;
     color: black;
     margin: 0em;
+    margin-bottom: 2em; /* menu_bottom */
 }
 
 div#topbar {
