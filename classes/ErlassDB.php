@@ -41,7 +41,6 @@ class ErlassDB {
         } else {
             $this->template->addSubtemplate('empty');
         }
-        $this->template->addSubtemplate('description');
     }
 
     public function extendedSearch() {
