@@ -254,6 +254,9 @@
             <fieldset><legend>Erweiterte Suche</legend>
                 <label for="extended">Suchbegriff</label>
                 <input type="text" id="extended" name="extended" value="'extended'"/>
+                <label for="period">Zeitraum (von - bis)</label>
+                <input type="text" id="periodStart" name="periodStart" value="'periodStart'" class="date"/>
+                <input type="text" id="periodEnd" name="periodEnd" value="'periodEnd'" class="date"/>
                 <!-- begin CheckboxList -->
                 <div class="text">
                     <h4>'name'</h4>
@@ -269,15 +272,12 @@
                 </div>
                 <!-- end CheckboxList -->
                 <script type="text/javascript">filterAllCheckboxes();</script>
-                <label for="period">Zeitraum (von - bis)</label>
-                <input type="text" id="periodStart" name="periodStart" value="'periodStart'" class="date"/>
-                <input type="text" id="periodEnd" name="periodEnd" value="'periodEnd'" class="date"/>
-                <label for="Aktenzeichen">Aktenzeichen</label>
-                <input type="text" id="Aktenzeichen" name="Aktenzeichen" value="'Aktenzeichen'"/>
                 <div class="text">
                     <h4>Themenfelder</h4>
                     'html:themen'
                 </div>
+                <label for="Aktenzeichen">Aktenzeichen</label>
+                <input type="text" id="Aktenzeichen" name="Aktenzeichen" value="'Aktenzeichen'"/>
                 <input type="submit" value="Suchen"/>
             </fieldset>
         </form>
