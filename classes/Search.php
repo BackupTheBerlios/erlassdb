@@ -99,7 +99,8 @@ class Search {
         if (sizeof($conditions) < 1) {
             return null;
         }
-        $query = 'select Erlass.id id, Erlass.Betreff Betreff from Erlass'
+        $query = 'select Erlass.id id, Erlass.Datum Datum,'
+                . ' Erlass.Betreff Betreff, Erlass.Status Status from Erlass'
                 . ' left join betrifft on Erlass.id=betrifft.Erlass'
                 . ' where ' . implode(' and ', $conditions)
                 . ' group by id'

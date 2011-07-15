@@ -23,7 +23,7 @@ class ErlassDB {
         $this->user = new User();
         $this->template->assign('user');
     }
-    
+
     public function authenticateUser() {
         $this->user->checkUser();
         $this->user->assignToTemplate($this->template->addSubtemplate("userInfo"));
@@ -121,7 +121,7 @@ class ErlassDB {
             $query = 'update Kunde set Stufe="' . $stufe . '"'
                     . ' where id="' . $_POST['setLevel'] . '";';
             mysql_query($query);
-            if (mysql_affected_rows ()) {
+            if (mysql_affected_rows()) {
                 $this->template->addSubtemplate('levelSet');
             }
         }
@@ -325,8 +325,11 @@ class ErlassDB {
     private function fillItemsInto(HtmlTemplate $tmpl, $result) {
         while ($erlassArray = mysql_fetch_array($result)) {
             $item = $tmpl->addSubtemplate('erlassItem');
-            $item->assign('id', $erlassArray['id']);
-            $item->assign('Betreff', $erlassArray['Betreff']);
+            $erlass = new Erlass($erlassArray);
+            $erlass->assignToTmpl($item);
+            if ($this->user->hasFileaccess()) {
+                $item->addSubtemplate('erlassStatus');
+            }
         }
     }
 

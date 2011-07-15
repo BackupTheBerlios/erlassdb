@@ -275,7 +275,6 @@
                 <div class="text">
                     <h4><label for="themen">Thema</label></h4>
                     <select name="themen[]" size="1" id="themen">
-                        <option></option>
                         'html:themen'
                     </select>
                 </div>
@@ -303,7 +302,11 @@
         <div class="box"><h2>Suchergebnisse</h2>
             <ul>
                 <!-- begin erlassItem -->
-                <li><a href="?show='id'">'Betreff'</a></li>
+                <li>
+                    'Datum'
+                    <a href="?show='id'">'Betreff'</a>
+                    <!-- begin erlassStatus -->('Status')<!-- end erlassStatus -->
+                </li>
                 <!-- end erlassItem -->
             </ul>
         </div>
