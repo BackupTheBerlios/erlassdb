@@ -73,6 +73,8 @@ div.box, div.errorbox {
     padding: .5em;
     width: 35em;
     margin: 1em auto;
+    display: inline-block;
+    vertical-align: top;
 }
 
 div.errorbox {
@@ -89,13 +91,19 @@ div#newest {
 }
 
 form {
-    display: inline;
+    display: inline-block;
 }
 
 body > form > fieldset {
+    display: block;
     width: 40em;
     margin: 0 auto;
     background-color: #dddddd;
+}
+
+fieldset#extendedSearch {
+    background-color: #dddddd;
+    margin: 0 1em;
 }
 
 fieldset > label {
