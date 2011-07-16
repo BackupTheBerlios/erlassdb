@@ -24,6 +24,12 @@ function filterCheckboxes(checkbox) {
             + '=' + encodeURIComponent(item.value);
         }
     }
+    if (checkbox instanceof HTMLSelectElement) {
+        if (item.value) {
+            query += '&' + encodeURIComponent(checkbox.name)
+            + '=' + encodeURIComponent(item.value);
+        }
+    }
     var http = createXMLHttpRequest();
     http.open('POST', './', true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

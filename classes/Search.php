@@ -59,10 +59,13 @@ class Search {
         foreach ($this->data as $field => $value) {
             $form->assign($field, $value);
         }
-        foreach (self::$listNames as $listName) {
-            $list = new FieldList($listName);
-            $list->assignToTemplate($form->addSubtemplate('CheckboxList'));
-        }
+        $listNames = array('Kategorie', 'Herkunft', 'Autor');
+        $kategorieList = new FieldList('Kategorie');
+        $kategorieList->assignToTemplate($form->addSubtemplate('CheckboxList'));
+        $kategorieList = new FieldList('Herkunft');
+        $kategorieList->assignToTemplate($form->addSubtemplate('CheckboxList'));
+        $kategorieList = new FieldList('Autor');
+        $kategorieList->assignToTemplate($form->addSubtemplate('DropdownList'));
         $themen = Themen::fromDatabase();
         $form->assignHtml('themen', $themen->getHtmlWithPost());
     }

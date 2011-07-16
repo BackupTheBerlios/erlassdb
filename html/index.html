@@ -267,7 +267,7 @@
                     <ul style="list-style-type: none; text-align: left;">
                         <!-- begin CheckboxItem -->
                         <li>
-                            <input type="checkbox'html:checked'" id="'id'"name="'name'[]"
+                            <input type="checkbox'html:checked'" id="'id'" name="'name'[]"
                                    value="'value'" onchange="filterCheckboxes(this);"/>
                             <label for="'id'">'value'</label>
                         </li>
@@ -275,13 +275,23 @@
                     </ul>
                 </div>
                 <!-- end CheckboxList -->
-                <script type="text/javascript">filterAllCheckboxes();</script>
                 <div class="text">
                     <h4><label for="themen">Thema</label></h4>
                     <select name="themen[]" size="1" id="themen">
                         'html:themen'
                     </select>
                 </div>
+                <!-- begin DropdownList -->
+                <div class="text">
+                    <h4>'name'</h4>
+                    <select name="'name'[]" size="1" onchange="filterCheckboxes(this);">
+                        <!-- begin CheckboxItem -->
+                        <option id="'id'">'value'</option>
+                        <!-- end CheckboxItem -->
+                    </select>
+                </div>
+                <!-- end DropdownList -->
+                <script type="text/javascript">filterAllCheckboxes();</script>
                 <label for="Aktenzeichen">Aktenzeichen</label>
                 <input type="text" id="Aktenzeichen" name="Aktenzeichen" value="'Aktenzeichen'"/>
                 <input type="submit" value="Suchen"/>
