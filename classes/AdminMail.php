@@ -8,7 +8,7 @@
 class AdminMail {
 
     const FILE = 'adminMail.txt';
-    private $mail;
+    private $mail = null;
 
     public function __construct() {
         $this->read();
