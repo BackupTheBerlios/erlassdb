@@ -1,5 +1,5 @@
 <?php
-function quote($var) {
+function quote(&$var) {
     if (is_array($var)) {
         $var = array_map('quote',$var);
     }
@@ -9,7 +9,7 @@ function quote($var) {
     return $var;
 }
 if (!ini_get('magic_quotes_gpc')) {
-    quote(&$_GET);
-    quote(&$_POST);
+    quote($_GET);
+    quote($_POST);
 }
 ?>
