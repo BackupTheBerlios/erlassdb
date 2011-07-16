@@ -126,7 +126,7 @@ class Themen {
         return $tree;
     }
 
-    public function getHtml($tmplFile, $given = array(), $parent = self::ROOT_NAME, $indent = ' ') {
+    public function getHtml($tmplFile, &$given = array(), $parent = self::ROOT_NAME, $indent = ' ') {
         $tmpl = HtmlTemplate::fromFile($tmplFile);
         $tmpl->assign('parent', $parent);
         $childs = &$this->getChildsOf($parent);
@@ -143,7 +143,7 @@ class Themen {
             $sub->assign('indent', $indent);
             $sub->assignHtml('checked', $checked);
             $sub->assignHtml('selected', $selected);
-            $sub->assignHtml('childs', $this->getHtml($tmplFile, &$given, $child,  '-' . $indent));
+            $sub->assignHtml('childs', $this->getHtml($tmplFile, $given, $child,  '-' . $indent));
         }
         return $tmpl->result();
     }
