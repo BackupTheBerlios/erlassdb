@@ -24,9 +24,16 @@ class User {
     public function __construct() {
         $this->adminMail = new AdminMail();
     }
-    
+
     public function getId() {
         return $this->id;
+    }
+
+    public function isLoggedin() {
+        if ($this->level >= 0) {
+            return true;
+        }
+        return false;
     }
 
     public function isRegistered() {
@@ -223,13 +230,13 @@ class User {
         $query = 'delete from challenge where'
                 . ' Kunde ="' . $user . '" and challenge="' . $challenge . '";';
         mysql_query($query);
-        if (mysql_affected_rows () != 1) {
+        if (mysql_affected_rows() != 1) {
             return false;
         }
         $query = 'update Kunde set Passwort="' . sha1($passwort) . '"'
                 . ' where id="' . $user . '";';
         mysql_query($query);
-        if (mysql_affected_rows () == 1) {
+        if (mysql_affected_rows() == 1) {
             return true;
         }
         return false;
@@ -248,6 +255,33 @@ class User {
             }
         } else {
             self::authenticate();
+        }
+    }
+
+    public function checkUserSession() {
+        session_start();
+            if (isset($_POST['oldUser'])) {
+                session_destroy();
+                return;
+            }
+        if (isset($_SESSION['user']) && isset($_SESSION['passwd'])) {
+            $user = $_SESSION['user'];
+            $passwd = $_SESSION['passwd'];
+            $this->id = $user;
+            $this->level = $this->levelFor($user, $passwd);
+        } else {
+            if (isset($_POST['user']) && isset($_POST['passwd'])) {
+                $user = $_POST['user'];
+                $passwd = $_POST['passwd'];
+                $this->id = $user;
+                $this->level = $this->levelFor($user, $passwd);
+                if ($this->isRegistered()) {
+                $_SESSION['user'] = $user;
+                $_SESSION['passwd'] = $passwd;
+                }
+            } else {
+                session_destroy();
+            }
         }
     }
 

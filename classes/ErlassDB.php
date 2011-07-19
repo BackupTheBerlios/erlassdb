@@ -25,9 +25,14 @@ class ErlassDB {
     }
 
     public function authenticateUser() {
-        $this->user->checkUser();
+        $this->user->checkUserSession();
         $this->user->assignToTemplate($this->template->addSubtemplate("userInfo"));
         $this->template->assign('user', $this->user->getId());
+        if (!$this->user->isLoggedin()) {
+            $this->template->addSubtemplate('loginForm');
+            $this->showPage();
+            exit;
+        }
     }
 
     public function welcome() {

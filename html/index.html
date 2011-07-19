@@ -35,6 +35,17 @@
         </div>
         <!-- end userInfo -->
         <h1><a href="./?start" title="Erlassdatenbank Nordrheinwestfahlen">ErlassDB NRW</a></h1>
+        <!-- begin loginForm -->
+        <form action="./?start" method="post">
+            <fieldset><legend>Anmeldung</legend>
+                <label for="user">E-Mailadresse</label>
+                <input type="text" id="user" name="user" value="'user'"/>
+                <label for="passwd">Passwort</label>
+                <input type="password" id="passwd" name="passwd"/>
+                <input type="submit" value="Anmelden" />
+            </fieldset>
+        </form>
+        <!-- end loginForm -->
         <!-- begin registerForm -->
         <div class="box"><h2>Namentlich registrieren</h2>
             Durch die Registrierung kann geprüft werden, ob Ihnen mehr Dokumente
