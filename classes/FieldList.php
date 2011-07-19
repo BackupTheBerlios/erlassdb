@@ -22,6 +22,10 @@ class FieldList {
             foreach ($_POST[$fieldName] as $checkedValue) {
                 $this->checked[] = stripslashes($checkedValue);
             }
+        } else {
+            if ($fieldName == 'Herkunft' && !isset($_POST['extended'])) {
+                $this->checked[] = 'Innenministerium des Landes Nordrhein-Westfalen';
+            }
         }
     }
 
@@ -33,8 +37,10 @@ class FieldList {
             $li = $tmpl->addSubtemplate('CheckboxItem');
             if (in_array($value, $this->checked)) {
                 $li->assignHtml('checked', '" checked="checked');
+                $li->assignHtml('selected', '" selected="selected');
             } else {
                 $li->assignHtml('checked', '');
+                $li->assignHtml('selected', '');
             }
             $li->assign('value', $value);
             $li->assign('id', $this->name . $value);
@@ -56,6 +62,11 @@ class FieldList {
     }
 
     public function putConditionsInto(&$conditions) {
+        if (sizeof($this->checked) == 1) {
+            if ($this->checked[0] == '') {
+                return;
+            }
+        }
         if (sizeof($this->checked) > 0) {
             $conditions[] = $this->condition();
         }

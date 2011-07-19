@@ -95,9 +95,14 @@ class Search {
         if (sizeof($this->themen) > 0) {
             $themaConditions = array();
             foreach ($this->themen as $thema) {
+                if ($thema == '') {
+                    continue;
+                }
                 $themaConditions[] = 'betrifft.Thema="' . $thema . '"';
             }
-            $conditions[] = '(' . implode(' or ', $themaConditions) . ')';
+            if (sizeof($themaConditions) > 0) {
+                $conditions[] = '(' . implode(' or ', $themaConditions) . ')';
+            }
         }
         if (sizeof($conditions) < 1) {
             return null;

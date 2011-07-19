@@ -278,6 +278,7 @@
                 <div class="text">
                     <h4><label for="themen">Thema</label></h4>
                     <select name="themen[]" size="1" id="themen">
+                        <option></option>
                         'html:themen'
                     </select>
                 </div>
@@ -285,8 +286,9 @@
                 <div class="text">
                     <h4>'name'</h4>
                     <select name="'name'[]" size="1" onchange="filterCheckboxes(this);">
+                        <option></option>
                         <!-- begin CheckboxItem -->
-                        <option id="'id'">'value'</option>
+                        <option id="'id''html:selected'">'value'</option>
                         <!-- end CheckboxItem -->
                     </select>
                 </div>
