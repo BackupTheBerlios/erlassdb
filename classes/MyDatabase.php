@@ -28,6 +28,7 @@ class MyDatabase {
     }
 
     public static function writeConfig($server, $username, $password, $database) {
+        // TODO: use or delete
         if (!is_writable('./'))
             return 'not writeable';
         $fp = fopen('mysql.php', 'w');
@@ -44,6 +45,7 @@ class MyDatabase {
     }
 
     public static function createTables() {
+        // TODO: use or delete
         if (!self::$connection)
             self::connect();
         $fileArray = file(self::SETUP);
