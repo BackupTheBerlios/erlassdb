@@ -338,54 +338,6 @@
             </ul>
         </div>
         <!-- end results -->
-        <!-- begin erlass -->
-        <div class="box">
-            <div class="Datum">'Datum'</div>
-            <h2>'Betreff'
-                <!-- begin erlassStatus --> ('Status')<!-- end erlassStatus -->
-            </h2>
-            <p>Aktenzeichen: 'Aktenzeichen'</p>
-            <p>Bestellnummer: 'Bestellnummer'</p>
-            <p>'Autor', 'Herkunft'</p>
-
-            <!-- begin downloadMenu -->
-            <p>Download:
-                <!-- begin downloadItem -->
-                <a href="./?download='id'.'ext'">'ext'</a>
-                <!-- end downloadItem -->
-            </p>
-            <!-- end downloadMenu -->
-            <!-- begin betrifft -->
-            <p>Betrifft:<!--begin thema--> 'Name'.<!--end thema--></p>
-            <!-- end betrifft -->
-            <!-- begin erlassNfD -->
-            <p class="NfD">Nur für den Dienstgebrauch.</p>
-            <!-- end erlassNfD -->
-            <p>'br:Dokument'</p>
-            <!-- begin erlassAdmin -->
-            <p>
-                <a href="./?edit='id'">editieren</a>,
-                <a href="./?delete='id'">löschen</a>
-            </p>
-            <!-- end erlassAdmin -->
-            <!-- begin noAccessToNfD -->
-            <p>Dieser Erlass ist nur für den Dienstgebrauch zugänglich.</p>
-            <!-- begin pleaseRegister -->
-            <p>
-                Falls Sie diesen Erlass dienstlich benötigen, können Sie sich
-                oben registrieren. Nach Prüfung Ihrer Angaben erhalten Sie
-                Zugang zu allen Erlassen.
-            </p>
-            <!-- end pleaseRegister -->
-            <!-- begin pleaseWait -->
-            <p>
-                Durch Ihren Registrierungsstatus ist es Ihnen (noch) nicht
-                erlaubt auf diesen Erlass zuzugreifen.
-            </p>
-            <!-- end pleaseWait -->
-            <!-- end noAccessToNfD -->
-        </div>
-        <!-- end erlass -->
         <!-- begin deleted -->
         <div class="box"><h2>Gelöscht</h2>
             <p>Der Erlass wurde aus der Datenbank entfernt.</p>
@@ -494,6 +446,54 @@
             </fieldset>
         </form>
         <!-- end erlassForm -->
+        <!-- begin erlass -->
+        <div class="box">
+            <div class="Datum">'Datum'</div>
+            <h2>'Betreff'
+                <!-- begin erlassStatus --> ('Status')<!-- end erlassStatus -->
+            </h2>
+            <p>Aktenzeichen: 'Aktenzeichen'</p>
+            <p>Bestellnummer: 'Bestellnummer'</p>
+            <p>'Autor', 'Herkunft'</p>
+
+            <!-- begin downloadMenu -->
+            <p>Download:
+                <!-- begin downloadItem -->
+                <a href="./?download='id'.'ext'">'ext'</a>
+                <!-- end downloadItem -->
+            </p>
+            <!-- end downloadMenu -->
+            <!-- begin betrifft -->
+            <p>Betrifft:<!--begin thema--> 'Name'.<!--end thema--></p>
+            <!-- end betrifft -->
+            <!-- begin erlassNfD -->
+            <p class="NfD">Nur für den Dienstgebrauch.</p>
+            <!-- end erlassNfD -->
+            <p>'br:Dokument'</p>
+            <!-- begin erlassAdmin -->
+            <p>
+                <a href="./?edit='id'">editieren</a>,
+                <a href="./?delete='id'">löschen</a>
+            </p>
+            <!-- end erlassAdmin -->
+            <!-- begin noAccessToNfD -->
+            <p>Dieser Erlass ist nur für den Dienstgebrauch zugänglich.</p>
+            <!-- begin pleaseRegister -->
+            <p>
+                Falls Sie diesen Erlass dienstlich benötigen, können Sie sich
+                oben registrieren. Nach Prüfung Ihrer Angaben erhalten Sie
+                Zugang zu allen Erlassen.
+            </p>
+            <!-- end pleaseRegister -->
+            <!-- begin pleaseWait -->
+            <p>
+                Durch Ihren Registrierungsstatus ist es Ihnen (noch) nicht
+                erlaubt auf diesen Erlass zuzugreifen.
+            </p>
+            <!-- end pleaseWait -->
+            <!-- end noAccessToNfD -->
+        </div>
+        <!-- end erlass -->
         <!-- begin uploadForm -->
         <form action="./" method="post" enctype="multipart/form-data">
             <fieldset><legend>Datei hochladen</legend>

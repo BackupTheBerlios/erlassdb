@@ -239,6 +239,9 @@ class ErlassDB {
         if ($erlass->get('id')) {
             $this->template->addSubtemplate('erlassAdded');
             $this->admin();
+            $this->display($erlass);
+            $form = $this->template->addSubtemplate('uploadForm');
+            $erlass->assignToTmpl($form);
         } else {
             $this->template->addSubtemplate('erlassNotAdded');
         }
