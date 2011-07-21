@@ -12,8 +12,18 @@ class Themen {
         $themen = new Themen();
         $query = 'select parent, Name from Thema order by parent, Name;';
         $result = mysql_query($query);
+        $allChilds = array();
         while (list($parent, $child) = mysql_fetch_row($result)) {
             $themen->add($parent, $child);
+            $allChilds[] = $child;
+        }
+        foreach ($themen->themen as $parent => $childs) {
+            if ($parent == Themen::ROOT_NAME) {
+                continue;
+            }
+            if (array_search($parent, $allChilds) === false) {
+                $themen->add(Themen::ROOT_NAME, $parent);
+            }
         }
         return $themen;
     }
@@ -91,39 +101,8 @@ class Themen {
     private $themen = array(self::ROOT_NAME => array());
 
     public function add($parent, $child) {
-        if (!$this->contains($parent)) {
-            $this->themen[self::ROOT_NAME][] = $parent;
-        }
         $childs = &$this->getChildsOf($parent);
         $childs[] = $child;
-    }
-
-    /**
-     * Builds a tree containing all Thema entries.
-     *
-     * <code>
-     * $themen = new Themen();
-     * echo sizeof($themen->getTree()); /// 0
-     * $themen->add('', 'Topic A');
-     * $themen->add('', 'Topic B');
-     * $themen->add('Topic A', 'Topic C');
-     * $tree = $themen->getTree();
-     * echo sizeof($tree); /// 2
-     * echo sizeof($tree['Topic A']); /// 1
-     * echo sizeof($tree['Topic B']); /// 0
-     * </code>
-     *
-     * @param string $parent name of the parent
-     * @return array deep associative array
-     */
-    private function &getTree($parent = self::ROOT_NAME) {
-        // TODO: remove if not used
-        $tree = array();
-        $childs = &$this->getChildsOf($parent);
-        foreach ($childs as $child) {
-            $tree[$child] = &$this->getTree($child);
-        }
-        return $tree;
     }
 
     public function getHtml($tmplFile, &$given = array(), $parent = self::ROOT_NAME, $indent = ' ') {
@@ -143,7 +122,7 @@ class Themen {
             $sub->assign('indent', $indent);
             $sub->assignHtml('checked', $checked);
             $sub->assignHtml('selected', $selected);
-            $sub->assignHtml('childs', $this->getHtml($tmplFile, $given, $child,  '-' . $indent));
+            $sub->assignHtml('childs', $this->getHtml($tmplFile, $given, $child, '-' . $indent));
         }
         return $tmpl->result();
     }
@@ -158,7 +137,7 @@ class Themen {
         return $this->getHtml('themenlist.html', $given);
     }
 
-    private function &getChildsOf($parent) {
+    public function &getChildsOf($parent) {
         if (!isset($this->themen[$parent])) {
             $this->themen[$parent] = array();
         }
