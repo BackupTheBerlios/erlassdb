@@ -9,7 +9,15 @@ require_once 'WEBDIR.php';
  * Authenticates the user and manages user accounts.
  */
 class User {
-    const ADMIN_LEVEL = 255;
+    const ADMIN_LEVEL = 127;
+    private static $labels = array(
+        -1 => 'unangemeldet',
+        0 => 'anonym',
+        1 => 'angemeldet',
+        2 => 'angemeldet (NfD)',
+        3 => 'angemeldet (NfD, doc)',
+        self::ADMIN_LEVEL => 'Administration'
+    );
     private static $checkboxFields = array(
         'nutzungStaatlich',
         'nutzungAnwalt',
@@ -115,6 +123,16 @@ class User {
         } else {
             $sub = $tmpl->addSubtemplate('adminMailWrite');
             $sub->assign('pwd', getcwd());
+        }
+    }
+
+    public function assignToLevelForm(HtmlTemplate $tmpl, $mail) {
+        $tmpl->assign('mail', $mail);
+        $tmpl->assign('stufe', self::levelOf($mail));
+        foreach (self::$labels as $level => $label) {
+            $entry = $tmpl->addSubtemplate('levelEntry');
+            $entry->assign('level', $level);
+            $entry->assign('label', $label);
         }
     }
 
@@ -260,10 +278,10 @@ class User {
 
     public function checkUserSession() {
         session_start();
-            if (isset($_POST['oldUser'])) {
-                session_destroy();
-                return;
-            }
+        if (isset($_POST['oldUser'])) {
+            session_destroy();
+            return;
+        }
         if (isset($_SESSION['user']) && isset($_SESSION['passwd'])) {
             $user = $_SESSION['user'];
             $passwd = $_SESSION['passwd'];
@@ -276,8 +294,8 @@ class User {
                 $this->id = $user;
                 $this->level = $this->levelFor($user, $passwd);
                 if ($this->isRegistered()) {
-                $_SESSION['user'] = $user;
-                $_SESSION['passwd'] = $passwd;
+                    $_SESSION['user'] = $user;
+                    $_SESSION['passwd'] = $passwd;
                 }
             } else {
                 session_destroy();
@@ -348,22 +366,10 @@ class User {
     }
 
     private static function labelOfLevel($level) {
-        switch ($level) {
-            case -1:
-                return 'unangemeldet';
-            case 0:
-                return 'anonym';
-            case 1:
-                return 'angemeldet';
-            case 2:
-                return 'angemeldet (NfD)';
-            case 3:
-                return 'angemeldet (NfD, doc)';
-            case self::ADMIN_LEVEL:
-                return 'Administration';
-            default:
-                throw new Exception('User has unkown level: ' . $level);
+        if (!isset(self::$labels[$level])) {
+            return 'Fehler';
         }
+        return self::$labels[$level];
     }
 
 }

@@ -112,8 +112,7 @@ class ErlassDB {
     public function setLevelForm($mail) {
         $this->forceAdmin();
         $sub = $this->template->addSubtemplate('setLevelForm');
-        $sub->assign('mail', $mail);
-        $sub->assign('stufe', User::levelOf($mail));
+        $this->user->assignToLevelForm($sub, $mail);
     }
 
     public function setLevel() {
