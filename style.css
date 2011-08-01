@@ -135,6 +135,10 @@ fieldset textarea {
     width: 100%;
 }
 
+fieldset h4 {
+    display: inline;
+}
+
 div.menu_bottom {
     background-color: white;
     border-top: 0.3em solid #000;
