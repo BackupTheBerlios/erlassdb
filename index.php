@@ -68,6 +68,8 @@ if (isset($_GET['admin'])) {
         $erlassDb->themen();
     } elseif (isset($_GET['start'])) {
         $erlassDb->start();
+    } elseif (isset($_GET['about'])) {
+        $erlassDb->about();
     } else {
         $erlassDb->welcome();
     }

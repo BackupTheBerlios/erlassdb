@@ -28,6 +28,12 @@ div#adminMenu {
     float: right;
 }
 
+div#about {
+    text-align: right;
+    margin-bottom: -2em;
+    margin-right: 0.5em;
+}
+
 div.menu {
     position: absolute;
     top: 1em;
@@ -137,32 +143,4 @@ fieldset textarea {
 
 fieldset h4 {
     display: inline;
-}
-
-div.menu_bottom {
-    background-color: white;
-    border-top: 0.3em solid #000;
-    padding-top: .5ex;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-div.volatile {
-    position: fixed;
-    bottom: 1em;
-    width: 100%;
-    display: none;
-    background-color: white;
-    padding: 1em;
-    border: 1ex solid black;
-    border-style: outset;
-}
-
-div.volatile_link {
-    display: inline;
-}
-
-div.volatile_link:hover div.volatile {
-    display: block;
 }

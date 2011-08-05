@@ -48,6 +48,10 @@ class ErlassDB {
         }
     }
 
+    public function about() {
+        $this->template->addSubtemplate('about');
+    }
+
     public function extendedSearch() {
         $search = new Search();
         $form = $this->template->addSubtemplate('extendedSearch');
