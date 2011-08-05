@@ -4,7 +4,6 @@ require_once 'classes/ErlassDB.php';
 // TODO: delete user
 // Suchformular weiter zusammen: drop-down neben Überschrift
 // kleiner suchbutton
-// logout statt wechseln
 // links in der unteren zeile ohne hover
 // Text für Themenbaum
 // datum deutsch formatieren
