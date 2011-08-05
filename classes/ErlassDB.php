@@ -325,7 +325,7 @@ class ErlassDB {
     }
 
     private function showNewest() {
-        $query = 'select id, Betreff, Datum, Status from Erlass order by Datum desc;'; // TODO: nfd?
+        $query = 'select id, Betreff, Datum, Status from Erlass order by Datum desc limit 7;';
         $result = mysql_query($query);
         if (mysql_num_rows($result) == 0)
             return;
