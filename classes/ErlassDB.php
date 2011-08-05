@@ -137,7 +137,7 @@ class ErlassDB {
 
     public function resultsFor($search) {
         $this->searchForm($search);
-        $query = 'select id, Betreff from Erlass'
+        $query = 'select id, Datum, Betreff, Status from Erlass'
                 . ' where match(Betreff, Dokument)'
                 . ' against ("' . $search . '" in boolean mode)'
                 . ' order by Datum;';
