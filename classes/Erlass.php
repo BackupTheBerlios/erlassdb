@@ -111,6 +111,9 @@ class Erlass {
             $nfd .= '" checked="checked';
         }
         $tmpl->assignHtml('NfD', $nfd);
+        if (!$this->data['Betreff']) {
+            $tmpl->assign('Betreff', 'ohne Betreff');
+        }
     }
 
 }
