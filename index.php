@@ -2,9 +2,6 @@
 
 require_once 'classes/ErlassDB.php';
 // TODO: delete user
-// Suchformular weiter zusammen: drop-down neben Überschrift
-// kleiner suchbutton
-// links in der unteren zeile ohne hover
 // Text für Themenbaum
 $erlassDb = new ErlassDB();
 

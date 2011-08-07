@@ -129,6 +129,22 @@ fieldset input[type="submit"] {
     margin-top: 0.5em;
 }
 
+fieldset input#extended {
+    width: 80%;
+}
+
+fieldset input#extended+input[type="submit"] {
+    width: auto;
+}
+
+fieldset input#Aktenzeichen {
+    width: 80%;
+}
+
+fieldset input#Aktenzeichen+input[type="submit"] {
+    width: auto;
+}
+
 fieldset label[for="NfD"] {
     display: inline;
 }
@@ -143,4 +159,8 @@ fieldset textarea {
 
 fieldset h4 {
     display: inline;
+}
+
+fieldset h4:after {
+    content: ":";
 }
