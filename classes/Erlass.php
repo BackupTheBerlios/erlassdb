@@ -23,6 +23,10 @@ class Erlass {
         return $date;
     }
 
+    public static function localizeDate($date) {
+        return implode('.', array_reverse(explode('-', $date)));
+    }
+
     /**
      * Fetches one Erlass from the database.
      *
@@ -94,6 +98,7 @@ class Erlass {
                 $this->data[$f] = '';
             }
         }
+        $this->data['DatumD'] = self::localizeDate($this->data['Datum']);
     }
 
     public function assignToTmpl(HtmlTemplate $tmpl) {
