@@ -6,7 +6,6 @@ require_once 'classes/ErlassDB.php';
 // kleiner suchbutton
 // links in der unteren zeile ohne hover
 // Text für Themenbaum
-// datum deutsch formatieren
 $erlassDb = new ErlassDB();
 
 if (sizeof($_GET) > 0 || sizeof($_POST) > 0) {
