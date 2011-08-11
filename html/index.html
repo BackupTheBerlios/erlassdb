@@ -105,12 +105,17 @@
         <form action="./?start" method="post">
             <fieldset><legend>Anmeldung</legend>
                 <label for="user">E-Mailadresse</label>
-                <input type="text" id="user" name="user" value="'user'"/>
+                <input type="text" id="user" name="user" value="'user'" onload="this.focus(); this.select();"/>
                 <label for="passwd">Passwort</label>
                 <input type="password" id="passwd" name="passwd"/>
                 <input type="submit" value="Anmelden" />
             </fieldset>
         </form>
+        <script type="text/javascript">
+            document.getElementById("user").focus();
+            document.getElementById("user").select();
+        </script>
+
         <!-- end loginForm -->
         <!-- begin registerForm -->
         <div class="box"><h2>Namentlich registrieren</h2>
@@ -382,7 +387,7 @@
         <!-- begin empty -->
         <div class="box" id="empty"><h2>Im Aufbau</h2>
             <p>
-		Zur Zeit wurden noch keine Erlasse eingetragen. Die Datenbank befindet sich noch im Aufbau.
+                Zur Zeit wurden noch keine Erlasse eingetragen. Die Datenbank befindet sich noch im Aufbau.
             </p>
         </div>
         <!-- end empty -->
