@@ -135,6 +135,25 @@ class ErlassDB {
         }
     }
 
+    public function deleteKundeForm() {
+        $this->forceAdmin();
+        $sub = $this->template->addSubtemplate('deleteKundeForm');
+        $mail = $_POST['setLevel'];
+        $stufe = $_POST['stufe'];
+        $sub->assign('mail', $mail);
+        $sub->assign('stufe', $stufe);
+    }
+
+    public function deleteKunde() {
+        $this->forceAdmin();
+        $query = 'delete from Kunde'
+                . ' where id="' . $_POST['setLevel'] . '";';
+        mysql_query($query);
+        if (mysql_affected_rows()) {
+            $this->template->addSubtemplate('kundeDeleted');
+        }
+    }
+
     public function resultsFor($search) {
         $this->searchForm($search);
         $query = 'select id, Datum, Betreff, Status from Erlass'
@@ -218,6 +237,8 @@ class ErlassDB {
         $this->forceAdmin();
         $this->user->assignAdminToTemplate($this->template);
         $this->template->addSubtemplate('adminMenu');
+        $sub = $this->template->addSubtemplate('kunden');
+        $this->kundenToTemplate($sub);
     }
 
     public function saveAdminMail() {
@@ -347,6 +368,16 @@ class ErlassDB {
     private function searchForm($search = '') {
         $form = $this->template->addSubtemplate('search');
         $form->assign('search', stripslashes($search));
+    }
+
+    private function kundenToTemplate(HtmlTemplate $tmpl) {
+        $query = 'select id, Stufe from Kunde order by id;';
+        $result = mysql_query($query);
+        while ($kunde = mysql_fetch_array($result)) {
+            $sub = $tmpl->addSubtemplate('kunde');
+            $sub->assign('mail', $kunde['id']);
+            $sub->assign('Stufe', $kunde['Stufe']);
+        }
     }
 
 }

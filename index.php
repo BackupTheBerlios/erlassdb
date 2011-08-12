@@ -15,17 +15,23 @@ if (sizeof($_GET) > 0 || sizeof($_POST) > 0) {
 }
 
 if (isset($_GET['admin'])) {
-    
+
     if (isset($_POST['adminMail'])) {
         $erlassDb->saveAdminMail();
     }
 
-    if (isset($_POST['stufe'])) {
+    if (isset($_POST['stufe']) && !isset($_POST['delete'])) {
         $erlassDb->setLevel();
+    }
+
+    if (isset($_POST['deleteConfirmed'])) {
+        $erlassDb->deleteKunde();
     }
 
     if (isset($_GET['setLevel'])) {
         $erlassDb->setLevelForm($_GET['setLevel']);
+    } elseif (isset($_POST['delete'])) {
+        $erlassDb->deleteKundeForm();
     } else {
         $erlassDb->admin();
     }
