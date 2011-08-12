@@ -54,7 +54,8 @@ class Erlass {
             } else {
                 if ($field == 'NfD') {
                     $data['NfD'] = 0;
-                } else {echo '#';
+                } else {
+                    echo '#';
                     return null;
                 }
             }
@@ -105,12 +106,16 @@ class Erlass {
         foreach ($this->data as $key => $value) {
             $tmpl->assign($key, $value);
         }
-        $tmpl->assignText('Dokument', $this->data['Dokument']);
-        $nfd = '1';
-        if ($this->data['NfD']) {
-            $nfd .= '" checked="checked';
+        if (isset($this->data['Dokument'])) {
+            $tmpl->assignText('Dokument', $this->data['Dokument']);
         }
-        $tmpl->assignHtml('NfD', $nfd);
+        if (isset($this->data['NfD'])) {
+            $nfd = '1';
+            if ($this->data['NfD']) {
+                $nfd .= '" checked="checked';
+            }
+            $tmpl->assignHtml('NfD', $nfd);
+        }
         if (!$this->data['Betreff']) {
             $tmpl->assign('Betreff', 'ohne Betreff');
         }
