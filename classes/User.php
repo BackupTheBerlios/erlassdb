@@ -101,7 +101,11 @@ class User {
             'passwortB'
         );
         foreach ($textFields as $field) {
-            $tmpl->assign($field, stripslashes($_POST[$field]));
+            if (isset($_POST[$field])) {
+                $tmpl->assign($field, stripslashes($_POST[$field]));
+            } else {
+                $tmpl->assign($field);
+            }
         }
         foreach (self::$checkboxFields as $field) {
             $htmlValue = '1';
@@ -311,7 +315,7 @@ class User {
 
     private static function userPresent() {
         return isset($_SERVER['PHP_AUTH_USER'])
-        && isset($_SERVER['PHP_AUTH_PW']);
+                && isset($_SERVER['PHP_AUTH_PW']);
     }
 
     private static function userRequest() {
