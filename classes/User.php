@@ -297,10 +297,8 @@ class User {
                 $passwd = $_POST['passwd'];
                 $this->id = $user;
                 $this->level = $this->levelFor($user, $passwd);
-                if ($this->isRegistered()) {
-                    $_SESSION['user'] = $user;
-                    $_SESSION['passwd'] = $passwd;
-                }
+                $_SESSION['user'] = $user;
+                $_SESSION['passwd'] = $passwd;
             } else {
                 session_destroy();
             }
