@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `Erlass` (
   `Herkunft` varchar(128) NOT NULL,
   `Autor` varchar(128) NOT NULL,
   `Betreff` varchar(256) NOT NULL,
-  `Dokument` text NOT NULL,
+  `Dokument` mediumtext NOT NULL,
   `NfD` tinyint(1) unsigned NOT NULL,
   `Status` varchar(128) NOT NULL,
   KEY (Kategorie, Aktenzeichen, Datum, Herkunft, Autor),
