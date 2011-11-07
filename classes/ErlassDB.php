@@ -159,7 +159,7 @@ class ErlassDB {
         $query = 'select id, Datum, Betreff, Status from Erlass'
                 . ' where match(Betreff, Dokument)'
                 . ' against ("' . $search . '" in boolean mode)'
-                . ' order by Datum;';
+                . ' order by Datum desc;';
         $result = mysql_query($query);
         $this->showSearchResult($result);
     }

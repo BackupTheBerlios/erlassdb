@@ -112,7 +112,7 @@ class Search {
                 . ' left join betrifft on Erlass.id=betrifft.Erlass'
                 . ' where ' . implode(' and ', $conditions)
                 . ' group by id'
-                . ' order by Datum;';
+                . ' order by Datum desc;';
         return mysql_query($query);
     }
 
