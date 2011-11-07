@@ -28,6 +28,11 @@ div#adminMenu {
     float: right;
 }
 
+div#home {
+    float: left;
+    margin-left: 0.5em;
+}
+
 div#about {
     text-align: right;
     margin-bottom: -2em;
