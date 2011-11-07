@@ -301,10 +301,6 @@ class ErlassDB {
         $erlassTmpl = $this->template->addSubtemplate('erlass');
         $erlass->assignToTmpl($erlassTmpl);
         if ($this->user->hasFileaccess()) {
-            $files = new Files($erlass->get('id'));
-            $files->assignToTmpl($erlassTmpl);
-        }
-        if ($this->user->hasFileaccess()) {
             $erlassTmpl->addSubtemplate('erlassStatus');
         }
         if ($erlass->get('NfD')) {
@@ -329,6 +325,13 @@ class ErlassDB {
                 $sub->addSubtemplate('pleaseRegister');
             }
             $erlassTmpl->assignText('Dokument', '');
+        } else {
+            $files = new Files($erlass->get('id'));
+            if ($this->user->hasFileaccess()) {
+                $files->assignToTmpl($erlassTmpl);
+            } else {
+                $files->assignPDFToTmpl($erlassTmpl);
+            }
         }
     }
 

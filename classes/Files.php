@@ -57,6 +57,16 @@ class Files {
         }
     }
 
+    public function assignPDFToTmpl(HtmlTemplate $erlassTmpl) {
+        $avail = $this->availExts();
+        if (!in_array('pdf', $avail)) {
+            return;
+        }
+        $tmpl = $erlassTmpl->addSubtemplate('downloadMenu');
+        $item = $tmpl->addSubtemplate('downloadItem');
+        $item->assign('ext', 'pdf');
+    }
+
     public function send($ext) {
         if (!in_array($ext, self::$extensions)) {
             exit;

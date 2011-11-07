@@ -1,8 +1,7 @@
 <?php
 
 require_once 'classes/ErlassDB.php';
-// TODO: delete user
-// Text für Themenbaum
+
 $erlassDb = new ErlassDB();
 
 if (sizeof($_GET) > 0 || sizeof($_POST) > 0) {
