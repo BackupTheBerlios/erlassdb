@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `Erlass` (
   `Datum` date NOT NULL default '0000-00-00',
   `Herkunft` varchar(128) NOT NULL,
   `Autor` varchar(128) NOT NULL,
-  `Betreff` varchar(128) NOT NULL,
+  `Betreff` varchar(256) NOT NULL,
   `Dokument` text NOT NULL,
   `NfD` tinyint(1) unsigned NOT NULL,
   `Status` varchar(128) NOT NULL,
