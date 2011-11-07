@@ -330,7 +330,9 @@ class ErlassDB {
             if ($this->user->hasFileaccess()) {
                 $files->assignToTmpl($erlassTmpl);
             } else {
-                $files->assignPDFToTmpl($erlassTmpl);
+                if ($this->user->isRegistered()) {
+                    $files->assignPDFToTmpl($erlassTmpl);
+                }
             }
         }
     }
