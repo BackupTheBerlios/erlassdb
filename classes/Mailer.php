@@ -32,17 +32,14 @@ class Mailer {
      * <code>
      * $result = Mailer::isValidAddress('maikel@localhost');
      * var_dump($result); /// bool(true)
-     * </code>
      * 
-     * <code>
      * $result = Mailer::isValidAddress("maikel\t@localhost");
      * var_dump($result); /// bool(false)
-     * </code>
      *
-     * <code>
      * $result = Mailer::isValidAddress('"maikel "@localhost');
      * var_dump($result); /// bool(true)
      * </code>
+     *
      * @param $mailAddress address to check
      * @return boolean seems to be valid or not
      */
