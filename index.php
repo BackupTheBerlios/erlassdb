@@ -8,6 +8,7 @@ if (sizeof($_GET) > 0 || sizeof($_POST) > 0) {
     if (!isset($_GET['register'])
             && !isset($_GET['about'])
             && !isset($_POST['nachname'])
+            && !isset($_REQUEST['challenge'])
             && !isset($_GET['newPassword'])) {
         $erlassDb->authenticateUser();
     }
