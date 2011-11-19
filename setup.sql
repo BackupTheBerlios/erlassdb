@@ -1,7 +1,7 @@
 
 CREATE TABLE IF NOT EXISTS `Erlass` (
   `id` int(10) unsigned NOT NULL PRIMARY KEY auto_increment,
-  `Bestellnummer` int unsigned NOT NULL,
+  `Bestellnummer` varchar(64) NOT NULL,
   `Kategorie` varchar(128) NOT NULL,
   `Aktenzeichen` varchar(64) NOT NULL,
   `Datum` date NOT NULL default '0000-00-00',

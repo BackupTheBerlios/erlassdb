@@ -14,6 +14,9 @@ $query = false;
 //$query = 'alter table Erlass modify `Betreff` varchar(256) NOT NULL;';
 //$query = 'alter table Erlass modify `Dokument` mediumtext NOT NULL;';
 
+// 2011-11-19 Erlass.Bestellnummer with beginning zeros
+//$query = 'alter table Erlass modify `Bestellnummer` varchar(64) NOT NULL;';
+
 if ($query) {
     echo 'Executing: ' . $query . " <br />\n";
     echo mysql_query($query) ? 'Success.' : 'Failed!';
