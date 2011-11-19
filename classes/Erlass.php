@@ -55,7 +55,6 @@ class Erlass {
                 if ($field == 'NfD') {
                     $data['NfD'] = 0;
                 } else {
-                    echo '#';
                     return null;
                 }
             }
