@@ -23,7 +23,9 @@ class User {
         'nutzungAnwalt',
         'nutzungBeratung',
         'nutzungSonstiges',
-        'newsletter'
+        'newsletter',
+        'doppelabfrage',
+        'agb'
     );
     private $id = null;
     private $level = -1;

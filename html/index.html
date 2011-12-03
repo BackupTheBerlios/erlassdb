@@ -12,26 +12,26 @@
         <meta name="format-detection" content="telephone=no"/>
         <link rel="stylesheet" type="text/css" href="style.css" />
 
-<!--[if lte IE 6]>
-<style type="text/css">
-.erlasse-nrw {
-width:321px;height:58px;
-}
+        <!--[if lte IE 6]>
+        <style type="text/css">
+        .erlasse-nrw {
+        width:321px;height:58px;
+        }
+        
+        .erlassdatenbank {
+        margin-left:50px;width:275px;height:31px;
+        }
+        </style>
+        <![endif]-->
 
-.erlassdatenbank {
-margin-left:50px;width:275px;height:31px;
-}
-</style>
-<![endif]-->
-        
-        
+
         <title>ErlassDB NRW</title>
     </head>
     <body>
         <div id="header">
             <p><a href="./?start" title="Erlassdatenbank Nordrhein-Westfalen"><img alt="Erlassdatenbank Nordrhein-Westfalen" src="http://www.erlasse-nrw.de/test/html/bilder/erlasse-nrw_2.jpg" class="erlasse-nrw"/></a></p>
-           <hr />
-           <p><a href="./?start" title="Erlassdatenbank Nordrhein-Westfalen"><img alt="Ausländerrechtliche Erlasse in NRW" src="http://www.erlasse-nrw.de/test/html/bilder/erlasse-nrw_untertitel_2.jpg" class="erlassdatenbank" /></a></p>
+            <hr />
+            <p><a href="./?start" title="Erlassdatenbank Nordrhein-Westfalen"><img alt="Ausländerrechtliche Erlasse in NRW" src="http://www.erlasse-nrw.de/test/html/bilder/erlasse-nrw_untertitel_2.jpg" class="erlassdatenbank" /></a></p>
         </div>
         <!-- begin userInfo -->
         <div id="topbar">
@@ -45,10 +45,10 @@ margin-left:50px;width:275px;height:31px;
                     </div>
                 </form>
                 <div id="passwort">
-                <!-- begin registerLink -->
-                <a href="./?register">Registrieren</a><br />
-                <!-- end registerLink -->
-                <a href="./?newPassword">Neues Passwort</a>
+                    <!-- begin registerLink -->
+                    <a href="./?register">Registrieren</a><br />
+                    <!-- end registerLink -->
+                    <a href="./?newPassword">Neues Passwort</a>
                 </div>
             </div>
             <!-- begin adminLink -->
@@ -61,21 +61,21 @@ margin-left:50px;width:275px;height:31px;
         </div>
         <!-- begin about -->
         <div class="box">
-  
+
             <h2>Impressum</h2>
-           <p><b>Herausgeber:</b></p>
-<p>AK Asyl e.V.<br />
-Kavalleriestr. 26 <br />
-33602 Bielefeld <br /><br />
-Tel.: 0521-78715240 <br />
-Fax: 0521-78715293 <br /><br />
-info@ak-asyl.info<br />
-www.ak-asyl.info<br />
-Amtsgericht Bielefeld, Vereinsregister: 3888<br /><br />
-<b>Vorstand:</b><br />
-Isabella Gianfreda, Brandenburgerstr. 27, 33602 Bielefeld  <br />
-Julia Rollheiser, Schmiedestr. 1, 33613 Bielefeld <br />
-Joachim Poggenklaß, Hallerstr. 230, 33334 Gütersloh </p>
+            <p><b>Herausgeber:</b></p>
+            <p>AK Asyl e.V.<br />
+                Kavalleriestr. 26 <br />
+                33602 Bielefeld <br /><br />
+                Tel.: 0521-78715240 <br />
+                Fax: 0521-78715293 <br /><br />
+                info@ak-asyl.info<br />
+                www.ak-asyl.info<br />
+                Amtsgericht Bielefeld, Vereinsregister: 3888<br /><br />
+                <b>Vorstand:</b><br />
+                Isabella Gianfreda, Brandenburgerstr. 27, 33602 Bielefeld  <br />
+                Julia Rollheiser, Schmiedestr. 1, 33613 Bielefeld <br />
+                Joachim Poggenklaß, Hallerstr. 230, 33334 Gütersloh </p>
 
             <p><b>Verantwortlich für den Inhalt:</b></p>
             <p>Frank Gockel, P&ouml;ppinghauser Str. 20, 32756 Detmold<br />Tel.: 0700-22997711<br />
@@ -237,12 +237,12 @@ Joachim Poggenklaß, Hallerstr. 230, 33334 Gütersloh </p>
                 <input type="password" id="passwort" name="passwort" value="'passwort'"/>
                 <label for="passwortB">Passwort bestätigen</label>
                 <input type="password" id="passwortB" name="passwortB" value="'passwortB'"/>
-                                <p>
-                    <input type="checkbox" id="doppelabfrage" name="doppelabfrage" value=""/>
+                <p>
+                    <input type="checkbox" id="doppelabfrage" name="doppelabfrage" value="'html:doppelabfrage'"/>
                     <label for="newsletter">Ich besitze noch keinen NRW-Erlassdatenbank-Account, auch keinen unter falschen Namen und/oder mit falschen Angaben. </label>
                 </p>
                 <p>
-                    <input type="checkbox" id="agb" name="agb" value=""/>
+                    <input type="checkbox" id="agb" name="agb" value="'html:agb'"/>
                     <label for="newsletter">Ich habe die <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a> gelesen.</label>
                 </p>
                 <input type="submit" value="Registrieren" />
@@ -374,7 +374,7 @@ Joachim Poggenklaß, Hallerstr. 230, 33334 Gütersloh </p>
             </p>
         </div>
         <!-- end welcome -->
-        
+
         <!-- begin search -->
         <form action="./" method="get">
             <div class="box"><h2>Suche</h2>
@@ -384,7 +384,7 @@ Joachim Poggenklaß, Hallerstr. 230, 33334 Gütersloh </p>
             </div>
         </form>
         <!-- end search -->
-        
+
         <!-- begin newest -->
         <div class="box" id="newest"><h2>Die neuesten Erlasse</h2>
             <dl>
