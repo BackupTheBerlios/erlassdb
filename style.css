@@ -1,48 +1,89 @@
-body {
-    text-align:center;
-    background-color: #ddf;
-    color: black;
-    margin: 0em;
-    margin-bottom: 2em; /* menu_bottom */
+* {
+    margin:0px;
+    padding:0px;
 }
+
+html {
+    background-color: #fff;
+    color: black;
+    margin: 0;
+    font-family:verdana, arial;
+    padding: 12px 30px;
+}
+
+body {
+    text-align:left;
+    margin: 0 auto;
+    padding: 0;
+	  width: 85%;
+    max-width: 800px;
+    font-family:verdana, arial;
+}
+
+div#header p {
+    text-align:left;
+    width:100% !important;
+    margin:0px;
+}
+
+div#header img {
+    text-align:left;
+    border:0px;
+}
+div#header .erlasse-nrw {
+width:100%;max-width:540px;max-height:58px;
+}
+
+div#header .erlassdatenbank {
+margin-left:6%;width:100%;max-width:434px;max-height:31px;
+}
+
+div#header hr {
+    margin:0px;
+    padding:0px;
+    border: 0px; /* Für Firefox und Opera */
+    border-top: solid 1px #CC0000;
+    border-bottom: solid 1px #CC0000; /* Für I.Explorer (Seiten-Hintergrundfarbe!) */
+    letter-spacing:5pt;
+ }
+
 
 div#topbar {
     width: 100%;
-    color: #000;
-    background-color: #fff;
-    border-bottom: 0.3em solid #000;
     margin-bottom: 1em;
     overflow: hidden;
 }
 
 div#userbox {
-    float: left;
+    text-align: right;
     overflow: hidden;
+    font-size:x-small;
 }
 
 div#userbox input {
-    margin-left: 1em;
+    margin-left: 0em;
 }
 
 div#adminMenu {
     float: right;
 }
 
-div#home {
-    float: left;
-    margin-left: 0.5em;
+div#menu {
+    margin: 1em 0.5em;
+    width:90%;
+    display:block;
 }
 
-div#about {
-    text-align: right;
-    margin-bottom: -2em;
-    margin-right: 0.5em;
-}
 
-div.menu {
-    position: absolute;
-    top: 1em;
-    right: 1em;
+div#passwort {
+   float:right;
+   text-align:left;
+   margin-left:8px;
+   width:auto;
+   line-height:12px;
+   padding-top:4px;
+   vertical-align:bottom;
+   font-size:10px;
 }
 
 h1 a {
@@ -50,17 +91,49 @@ h1 a {
     text-decoration: none;
 }
 
+h2 {
+
+    margin-top:1em;
+    font-size:1.2em;
+}
+
 p, .text {
     text-align:left;
-    width: 35em;
-    margin: 1em auto;
-}
+    margin:6px 0px;
+    padding:0px
+    }
 
 p.NfD {
     text-align: center;
     color: red;
 }
 
+p.erlass {
+    font-weight:bold;
+}
+
+a {
+   color:#CC0000;
+   text-decoration:none;
+    }
+
+a:focus, a:hover, a:active {
+   text-decoration:underline;
+   }
+dl {
+
+    }
+dt {
+   margin-bottom:0.5em;
+   float:left;
+   clear:left;
+    }
+
+dd {
+   margin-bottom:0.5em;
+   margin-left:100px;
+    }
+   
 div.Datum {
     float: right;
 }
@@ -79,11 +152,8 @@ div.Datum {
 
 div.box, div.errorbox {
     text-align:left;
-    background-color: #fff;
-    border: .2em solid black;
-    padding: .5em;
-    width: 35em;
-    margin: 1em auto;
+    padding: 0px;
+    margin: 0em 0.5em;
     display: inline-block;
     vertical-align: top;
 }
@@ -103,36 +173,83 @@ div#newest {
 
 form {
     display: inline-block;
+    margin:0em;
+    padding:0em;
+    margin-top:0.5em;
+}
+
+legend {
+    font-weight:bold;
+    color:black;
+    padding:0em;
 }
 
 body > form > fieldset {
     display: block;
-    width: 40em;
-    margin: 0 auto;
-    background-color: #dddddd;
+    width:100%;
+    max-width: 400px;
+    border:0px;
+    margin:0em;
+    padding:0em 0.5em;   
 }
 
 fieldset#extendedSearch {
-    background-color: #dddddd;
+    background-color: #ededed;
     margin: 0 1em;
 }
 
 fieldset > label {
     display: block;
-    margin-top: .5em;
+    margin-top: 0.5em;
+    border:0px;
 }
 
 fieldset input[type="text"], fieldset input[type="password"] {
     width: 100%;
+    padding: 1px 5px;
+    background-color: #ededed;
+    border: 1px solid #8c8c8c;
+    -moz-border-radius: 9px; 
+    -webkit-border-radius: 9px; 
+    border-radius: 9px;
 }
 
 fieldset input[type="text"].date {
     width: 11ex;
 }
 
-fieldset input[type="submit"] {
+input[type="submit"] {
     margin-top: 0.5em;
+    padding: 1px 5px;
+    background-color: #ededed;
+    border: 1px solid #8c8c8c;
+    -moz-border-radius: 9px; 
+    -webkit-border-radius: 9px; 
+    border-radius: 9px;
 }
+
+input {
+    padding: 1px 5px;
+    background-color: #ededed;
+    border: 1px solid #8c8c8c;
+    -moz-border-radius: 9px; 
+    -webkit-border-radius: 9px; 
+    border-radius: 9px;
+}
+
+input[type="checkbox"] {
+    padding: 0px;
+}
+
+input[type="text"] {
+    
+    background-color: #ededed;
+    border: 1px solid #8c8c8c;
+    -moz-border-radius: 9px; 
+    -webkit-border-radius: 9px; 
+    border-radius: 9px;
+}
+
 
 fieldset input#extended {
     width: 80%;
@@ -160,6 +277,12 @@ fieldset label[for="NfD"]:after {
 
 fieldset textarea {
     width: 100%;
+    padding: 1px 5px;
+    background-color: #ededed;
+    border: 1px solid #8c8c8c;
+    -moz-border-radius: 9px; 
+    -webkit-border-radius: 9px; 
+    border-radius: 9px;
 }
 
 fieldset h4 {
