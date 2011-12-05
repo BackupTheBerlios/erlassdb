@@ -52,6 +52,10 @@ class ErlassDB {
         $this->template->addSubtemplate('about');
     }
 
+    public function usageterms() {
+        $this->template->addSubtemplate('nutzungsbedingungen');
+    }
+
     public function extendedSearch() {
         $search = new Search();
         $form = $this->template->addSubtemplate('extendedSearch');

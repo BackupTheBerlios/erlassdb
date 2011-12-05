@@ -7,6 +7,7 @@ $erlassDb = new ErlassDB();
 if (sizeof($_GET) > 0 || sizeof($_POST) > 0) {
     if (!isset($_GET['register'])
             && !isset($_GET['about'])
+            && !isset($_GET['nutzungsbedingungen'])
             && !isset($_POST['nachname'])
             && !isset($_REQUEST['challenge'])
             && !isset($_REQUEST['newPassword'])) {
@@ -72,6 +73,8 @@ if (isset($_GET['admin'])) {
         $erlassDb->start();
     } elseif (isset($_GET['about'])) {
         $erlassDb->about();
+    } elseif (isset($_GET['nutzungsbedingungen'])) {
+        $erlassDb->usageterms();
     } else {
         $erlassDb->welcome();
     }
