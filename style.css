@@ -15,7 +15,7 @@ body {
     text-align:left;
     margin: 0 auto;
     padding: 0;
-	  width: 85%;
+    width: 85%;
     max-width: 800px;
     font-family:verdana, arial;
 }
@@ -31,21 +31,21 @@ div#header img {
     border:0px;
 }
 div#header .erlasse-nrw {
-width:100%;max-width:540px;max-height:58px;
+    width:100%;max-width:540px;max-height:58px;
 }
 
 div#header .erlassdatenbank {
-margin-left:6%;width:100%;max-width:434px;max-height:31px;
+    margin-left:6%;width:100%;max-width:434px;max-height:31px;
 }
 
 div#header hr {
     margin:0px;
     padding:0px;
-    border: 0px; /* Für Firefox und Opera */
+    border: 0px; /* Fï¿½r Firefox und Opera */
     border-top: solid 1px #CC0000;
-    border-bottom: solid 1px #CC0000; /* Für I.Explorer (Seiten-Hintergrundfarbe!) */
+    border-bottom: solid 1px #CC0000; /* Fï¿½r I.Explorer (Seiten-Hintergrundfarbe!) */
     letter-spacing:5pt;
- }
+}
 
 
 div#topbar {
@@ -66,6 +66,7 @@ div#userbox input {
 
 div#adminMenu {
     float: right;
+    font-size:10px;
 }
 
 div#menu {
@@ -75,15 +76,15 @@ div#menu {
 }
 
 
-div#passwort {
-   float:right;
-   text-align:left;
-   margin-left:8px;
-   width:auto;
-   line-height:12px;
-   padding-top:4px;
-   vertical-align:bottom;
-   font-size:10px;
+div.passwort {
+    float:right;
+    text-align:left;
+    margin-left:8px;
+    width:auto;
+    line-height:12px;
+    padding-top:8px;
+    vertical-align:bottom;
+    font-size:10px;
 }
 
 h1 a {
@@ -93,49 +94,101 @@ h1 a {
 
 h2 {
 
-    margin-top:1em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
     font-size:1.2em;
+}
+
+h4 {
+
 }
 
 p, .text {
     text-align:left;
     margin:6px 0px;
     padding:0px
-    }
+}
 
 p.NfD {
     text-align: center;
     color: red;
 }
 
-p.erlass {
+a {
+    color:#CC0000;
+    text-decoration:none;
+}
+
+a:focus, a:hover, a:active {
+    text-decoration:underline;
+}
+dl {
+    padding-left:0.5em;
+}
+dt {
+    margin-bottom:0.5em;
+    float:left;
+    clear:left;
+}
+
+dd {
+    margin-bottom:0.5em;
+    margin-left:105px;
+}
+
+div#themenfelder dd {
+    margin-left:36px;
+}    
+
+div.Datum {
+    margin-top:0em;
+    margin-bottom:0.5em;
+    font-size:1.2em;
     font-weight:bold;
 }
 
-a {
-   color:#CC0000;
-   text-decoration:none;
-    }
+div.infobox {
+    font-size: 0.8em;
+    padding: 0.5em 0.8em;
+    margin-bottom:1em;
+    background-color: #ededed;
+    border: 1px solid #8c8c8c;
+    -moz-border-radius: 9px; 
+    -webkit-border-radius: 9px; 
+    border-radius: 9px;    
+}
 
-a:focus, a:hover, a:active {
-   text-decoration:underline;
-   }
-dl {
+div.infobox p {
+    padding: 0px;
+    margin:0px;
+}
+div.infobox hr {
+    margin:0 0 6px 0;
+    padding:0px;
+    border: 0px; /* Fï¿½r Firefox und Opera */
+    border-top: solid 0px #8c8c8c;
+    border-bottom: solid 1px #8c8c8c; /* Fï¿½r I.Explorer (Seiten-Hintergrundfarbe!) */
+    letter-spacing:5pt;
+}
 
-    }
-dt {
-   margin-bottom:0.5em;
-   float:left;
-   clear:left;
-    }
+p.erlass {
+    font-weight:bold;
+    margin:0.5em 0  !important;
+    font-size:1.2em;
+}
 
-dd {
-   margin-bottom:0.5em;
-   margin-left:100px;
-    }
-   
-div.Datum {
-    float: right;
+.rtf {
+    background-image:url(html/bilder/icon_rtf.gif);
+    background-repeat:no-repeat;
+    padding-left:20px  !important;
+    margin-left:10px;
+}
+
+.pdf {
+    background-image:url(html/bilder/icon_pdf.png);
+    background-repeat:no-repeat;
+    padding-left:20px  !important;
+    margin-left:10px;
 }
 
 .nowrap {
@@ -159,8 +212,15 @@ div.box, div.errorbox {
 }
 
 div.errorbox {
-    border-color: #f00;
+    border:solid 1px #CC0000;
+    color: #CC0000;
     background-color: #fee;
+    padding:0.5em;
+    margin-top:1em;
+}
+
+div.errorbox h2 {
+    margin:0px;
 }
 
 div#registered {
@@ -172,23 +232,29 @@ div#newest {
 }
 
 form {
+    display: block;
+    margin:0.5em 0 1em 0;
+    padding:0em;
+
+}
+
+div#userbox form {
     display: inline-block;
-    margin:0em;
+    margin:0;
     padding:0em;
     margin-top:0.5em;
 }
-
 legend {
     font-weight:bold;
     color:black;
     padding:0em;
 }
 
-body > form > fieldset {
+fieldset {
     display: block;
     width:100%;
-    max-width: 400px;
-    border:0px;
+    max-width: 600px;
+    border:none;
     margin:0em;
     padding:0em 0.5em;   
 }
@@ -201,11 +267,13 @@ fieldset#extendedSearch {
 fieldset > label {
     display: block;
     margin-top: 0.5em;
+    margin-bottom: 0.5em;
     border:0px;
 }
 
 fieldset input[type="text"], fieldset input[type="password"] {
-    width: 100%;
+    width:100%;
+    max-width: 300px;
     padding: 1px 5px;
     background-color: #ededed;
     border: 1px solid #8c8c8c;
@@ -221,6 +289,7 @@ fieldset input[type="text"].date {
 input[type="submit"] {
     margin-top: 0.5em;
     padding: 1px 5px;
+    display:block;
     background-color: #ededed;
     border: 1px solid #8c8c8c;
     -moz-border-radius: 9px; 
@@ -237,12 +306,18 @@ input {
     border-radius: 9px;
 }
 
+input#search input.search {
+    display:inline;
+}
+
 input[type="checkbox"] {
     padding: 0px;
+    margin:6px 0;
 }
 
 input[type="text"] {
-    
+    width:100%;
+    max-width: 300px;    
     background-color: #ededed;
     border: 1px solid #8c8c8c;
     -moz-border-radius: 9px; 
@@ -255,15 +330,21 @@ fieldset input#extended {
     width: 80%;
 }
 
+fieldset input#sonstigerZweck {
+    width: 80%;
+    max-width: 280px;
+
+}
+
 fieldset input#extended+input[type="submit"] {
     width: auto;
 }
 
-fieldset input#Aktenzeichen {
+fieldset input#Aktenzeichen, input[name="Aktenzeichen"] {
     width: 80%;
 }
 
-fieldset input#Aktenzeichen+input[type="submit"] {
+fieldset input[name="Aktenzeichen"]+input[type="submit"] {
     width: auto;
 }
 
@@ -277,6 +358,23 @@ fieldset label[for="NfD"]:after {
 
 fieldset textarea {
     width: 100%;
+    max-width: 300px; 
+    padding: 1px 5px;
+    background-color: #ededed;
+    border: 1px solid #8c8c8c;
+    -moz-border-radius: 9px; 
+    -webkit-border-radius: 9px; 
+    border-radius: 9px;
+    display:block;
+}
+
+fieldset textarea#Dokument {
+    width: 100%;
+    max-width: 500px; 
+}
+fieldset select {
+    width: 100%;
+    max-width: 300px; 
     padding: 1px 5px;
     background-color: #ededed;
     border: 1px solid #8c8c8c;
@@ -286,7 +384,8 @@ fieldset textarea {
 }
 
 fieldset h4 {
-    display: inline;
+    display: block;
+    padding-bottom:0.3em;
 }
 
 fieldset h4:after {

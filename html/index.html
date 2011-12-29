@@ -1,6 +1,6 @@
 <!DOCTYPE
-    html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+    html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -44,17 +44,19 @@
                         <input type="submit" value="Abmelden"/>
                     </div>
                 </form>
-                <div id="passwort">
+                <div class="passwort">
                     <!-- begin registerLink -->
                     <a href="./?register">Registrieren</a><br />
                     <!-- end registerLink -->
                     <a href="./?newPassword">Neues Passwort</a>
+                    <!-- begin adminLink -->
+                    <br /><a href="./?admin=1">Administration</a>
+                    <!-- end adminLink -->
                 </div>
             </div>
-            <!-- begin adminLink -->
-            <div id="adminMenu"><a href="./?admin=1">Administration</a></div>
-            <!-- end adminLink -->
+
         </div>
+
         <!-- end userInfo -->
         <div id="menu">
             <a href="./?start">Startseite</a>&nbsp;&nbsp;&nbsp;<a href="./?register">Registrieren</a>&nbsp;&nbsp;&nbsp;<a href="./?about">Kontakt/Impressum</a>
@@ -201,11 +203,11 @@
         <form action="./" method="post">
             <fieldset><legend>Registrierung</legend>
                 <label for="nachname">Nachname</label>
-                <input type="text" id="nachname" name="nachname"value="'nachname'"/>
+                <input type="text" id="nachname" name="nachname" value="'nachname'"/>
                 <label for="vorname">Vorname</label>
-                <input type="text" id="vorname" name="vorname"value="'vorname'"/>
+                <input type="text" id="vorname" name="vorname" value="'vorname'"/>
                 <label for="inst">Institution</label>
-                <input type="text" id="inst" name="inst"value="'inst'"/>
+                <input type="text" id="inst" name="inst" value="'inst'"/>
                 <label for="adresse">Adresse</label>
                 <textarea rows="3" cols="70" id="adresse" name="adresse">'adresse'</textarea>
                 <p class="nowrap">
@@ -225,14 +227,14 @@
                     <label for="sonstigerZweck">Zwecke:</label>
                     <br/>
                     <input type="checkbox" class="hidden"/>
-                    <input type="text" id="sonstigerZweck" name="sonstigerZweck"value="'sonstigerZweck'"/>
+                    <input type="text" id="sonstigerZweck" name="sonstigerZweck" value="'sonstigerZweck'"/>
                 </p>
                 <p>
                     <input type="checkbox" id="newsletter" name="newsletter" value="'html:newsletter'"/>
                     <label for="newsletter">Über Neuigkeiten informiert werden</label>
                 </p>
                 <label for="mail">E-Mailadresse</label>
-                <input type="text" id="mail" name="mail"value="'mail'"/>
+                <input type="text" id="mail" name="mail" value="'mail'"/>
                 <label for="passwort">Passwort</label>
                 <input type="password" id="passwort" name="passwort" value="'passwort'"/>
                 <label for="passwortB">Passwort bestätigen</label>
@@ -243,15 +245,54 @@
                 </p>
                 <p>
                     <input type="checkbox" id="agb" name="agb" value="'html:agb'"/>
-                    <label for="newsletter">Ich habe die <a href="./?nutzungsbedingungen">Nutzungsbedingungen</a> gelesen.</label>
+                    <label for="newsletter">Ich habe die <a href="./?nutzungsbedingungen" target="_blank">Nutzungsbedingungen</a> gelesen.</label>
                 </p>
                 <input type="submit" value="Registrieren" />
             </fieldset>
         </form>
         <!-- end registerForm -->
         <!-- begin nutzungsbedingungen -->
-        Nutzungsbedingungen.
+        <div class="box">
+            <h2>Nutzungsbedingungen</h2>
+
+            <h3>1. Einleitung</h3>
+            <p>Der AK Asyl e.V., Kavalleriestr. 26, 33602 Bielefeld betreibt im Internet unter der Domain www.erlasse-nrw.de eine Onlinedatenbank f&uuml;r ausl&auml;nderrechtliche Erlasse der NRW-Ministerien (nachfolgend "NRW-Erlassdatenbank"). </p>
+            <h3>2. Gegenstand der Nutzung </h3>
+            <p>Dies ist ein Vertrag zwischen Ihnen und dem AK Asyl e.V. Wir bezeichnen uns in diesem Vertrag entweder als "AK Asyl", "wir" oder "uns". Sie sind eine Einzelperson, im Folgenden "Mitglied" oder "Nutzer". Die Angaben, die sie machen, m&uuml;ssen vollst&auml;ndig sein und der Wahrheit entsprechen.<br/>
+                Als Mitglied k&ouml;nnen Sie auf der NRW-Erlassdatenbank die vom AK Asyl zur Verf&uuml;gung gestellten Datenbank nutzen. <br/>
+                Die Datenbank wird regelm&auml;&szlig;ig mit den uns vorliegenden Erlassen zu ausl&auml;nderrechtlichen und asylrechtlichen Themen aus den Ministerien in NRW erg&auml;nzt. Eine Garantie f&uuml;r eine vollst&auml;ndige Erfassung aller Erlasse kann nicht gegeben werden.</p>
+            <h3>3. Geltungsbereich</h3>
+            <p>2.1. Der AK Asyl erm&ouml;glicht den Zugang zur NRW-Erlassdatenbank und dessen Nutzung ausschlie&szlig;lich auf der Grundlage dieses Vertrages; dieser regelt das Verh&auml;ltnis zwischen dem AK Asyl als der Betreiber der NRW-Erlassdatenbank und den Nutzern der NRW-Erlassdatenbank.</p>
+            <p>2.2. Die Nutzungsbedingungen gelten f&uuml;r s&auml;mtliche Inhalte, Funktionen, Tools und sonstigen Diensten (nachfolgend zusammen "Dienste" genannt), welche der AK Asyl auf der NRW-Erlassdatenbank zur Verf&uuml;gung stellt. Der Dienst wird den Nutzern unter der Voraussetzung der Annahme dieser Bedingungen und der hierin enthaltenen Hinweise ohne &Auml;nderung durch die Nutzer angeboten. Indem die Nutzer diese Nutzungsbedingungen im Registrierungsprozess akzeptieren, f&uuml;gen die Nutzer Ihre elektronische Signatur diesem Vertrag hinzu und akzeptieren ihn.   </p>
+            <p>2.3. Der Nutzer ist berechtigt mit der Nutzung des Dienstes zu beginnen, sobald er den Anmeldevorgang abgeschlossen hat. Es gilt kein Widerrufsrecht und keine Testphase f&uuml;r den Dienst, es sei denn dies ist trotz des Verzichts gesetzlich vorgeschrieben.</p>
+            <h3>4. Anmeldung, Mitgliedschaft und K&uuml;ndigung </h3>
+            <p>4.1. Die Anmeldung bei der NRW-Erlassdatenbank sowie die gesamte Mitgliedschaft sind kostenlos. Auf laufende Internetkosten hat AK Asyl keinen Einfluss.</p>
+            <p>4.2. Um die NRW-Erlassdatenbank im vollen Umfang nutzen zu k&ouml;nnen, muss sich ein Nutzer registrieren und w&auml;hrend des Registrierungsprozesses insbesondere diesen Nutzungsbedingungen zustimmen. F&uuml;r die Registrierung ben&ouml;tigt der AK Asyl eine g&uuml;ltige EMail-Adresse, den Namen der Person, die die Daten nutzen will, die Institution, f&uuml;r welche die Person die Daten nutzt und eine g&uuml;ltige Anschrift.</p>
+            <p>4.3. Im Rahmen der Registrierung sind die abgefragten Pflichtdaten (insbesondere EMail-Adresse, Nachname, Vorname, Institution, Adresse, Nutzungsgrund der Datenbank) wahrheitsgem&auml;&szlig; anzugeben. Dar&uuml;ber hinaus muss der Nutzer versichern, dass er noch keinen NRW-Erlassdatenbank-Account besitzt und keine Accounts auf der NRW-Erlassdatenbank unter falschem Namen oder sonstigen falschen Angaben unterh&auml;lt (Fake-Profil). Pro Person/IP ist nur eine Mitgliedschaft erlaubt.  </p>
+            <p>4.4. Bei der Anmeldung hat der Nutzer ein sicheres Passwort (mindestens 6 Zeichen) zu w&auml;hlen. Er ist verpflichtet sein Passwort geheim zu halten und dieses nicht an Dritte weiterzugeben.  </p>
+            <p>4.5. Die Registrierung wird &uuml;ber die Eingabe der Nutzerdaten abgeschlossen. Der Nutzungsvertrag kommt mit der Aktivierung der Registrierung zustande. </p>
+            <p>4.6. Nach erfolgreichem Abschluss der Registrierung hat das Mitglied die M&ouml;glichkeit, die NRW-Erlassdatenbank &uuml;ber die Anmeldefunktion zu nutzen; hierzu sind die hinterlegte Email-Adresse und das vom Mitglied gew&auml;hlte Passwort einzugeben.  </p>
+
+            <p>4.7. Wird die Registrierung nicht vollst&auml;ndig durchgef&uuml;hrt, beh&auml;lt sich AK Asyl vor, den unvollst&auml;ndig registrierten Account, inklusive aller bis dahin gemachten Daten zu l&ouml;schen. </p>
+            <p>4.8. Anspruch auf Registrierung und Abschluss eines Nutzungsvertrages besteht nicht. Der AK Asyl kann eine Registrierung ohne Angabe von Gr&uuml;nden ablehnen.</p>
+            <p>4.9. Der Nutzer kann jederzeit ohne Einhaltung einer Frist seine Mitgliedschaft durch E-Mail an Gockel@ak-asyl.info beenden und sein Mitgliedsaccount vom AK Asyl l&ouml;schen lassen.  </p>
+            <br/>
+            <h3>5. Sanktionsm&ouml;glichkeiten des AK Asyl bei Verst&ouml;&szlig;en durch Mitglieder </h3>
+            <p>Falsche Angaben und/oder mehrere Mitgliedschaften derselben Person erm&auml;chtigen AK Asyl zur sofortigen K&uuml;ndigung und den damit verbundenen Account-Verlust des Mitglieds zu vollstrecken sowie eine Vertragsstrafe bis zu 1000,- Euro zu verh&auml;ngen.<br/>
+                Der AK Asyl beh&auml;lt sich vor, zur &Uuml;berpr&uuml;fung der Angaben, entsprechende Nachweise hinsichtlich Identit&auml;t anzufordern. Sollten die entsprechenden Nachweise nicht innerhalb des hierf&uuml;r vom AK Asyl gesetzten Frist oder falsch erbracht werden, kann der AK Asyl die Mitgliedschaft sofort k&uuml;ndigen.</p>
+            <h3>6. Haftungsausschluss</h3>
+            <p>Die Redaktion &uuml;bernimmt keinerlei Gew&auml;hr f&uuml;r die Aktualit&auml;t, Korrektheit, Vollst&auml;ndigkeit oder Qualit&auml;t. F&uuml;r Sch&auml;den, welche durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollst&auml;ndiger Informationen verursacht wurden, kann keine Haftung &uuml;bernommen werden.<br/>
+                Sofern mit "Links" auf andere Seiten direkt oder indirekt verwiesen wird, kann die Redaktion f&uuml;r deren Inhalte und Gestaltung keine Haftung &uuml;bernehmen, da darauf kein Einfluss besteht. Soweit solche "gelinkten" Seiten rechtswidrige Inhalte haben oder die Rechte Dritter verletzen, distanziert sich die Redaktion ausdr&uuml;cklich von diesen Seiten.</p>
+            <h3>7. Datenschutz</h3>
+            <p>Inhalte und Adressen von Zusendungen (dazu geh&ouml;ren e-mails und Eingaben in die "Bestellliste") werden unbeteiligten Dritten nicht zug&auml;nglich gemacht und zu keinem anderen Zweck verwendet. </p>
+            <p>Es besteht keinerlei Anspruch auf eine Ver&ouml;ffentlichung eines eingegebenen Beitrages in die NRW-Erlassdatenbank.</p>
+            <p>Jeder Zugriff auf dieses Internetangebot wird in einer Protokolldatei gespeichert. Die gespeicherten Daten werden nur zur Optimierung des Internetangebotes ausgewertet. Eine Weitergabe an Dritte, zu kommerziellen noch zu nichtkommerziellen Zwecken, findet nicht statt.</p>
+
+
+        </div>
         <!-- end nutzungsbedingungen -->
+
+
         <!-- begin passwordRequestSent -->
         <div class="box"><h2>Versendet</h2>
             An Ihre E-Mailadresse wurde ein Link versendet, über den Sie Ihr
@@ -381,8 +422,8 @@
         <!-- begin search -->
         <form action="./" method="get">
             <div class="box"><h2>Suche</h2>
-                <input type="text" name="search" value="'search'"/>
-                <input type="submit" value="Suchen"/>
+                <input type="text" name="search" id="search" value="'search'"/>
+                <input type="submit" class="search" value="Suchen"/>
                 <a href="./?extended=1">Erweiterte Suche</a>
             </div>
         </form>
@@ -416,22 +457,12 @@
                 <label for="extended">Suchbegriff</label>
                 <input type="text" id="extended" name="extended" value="'extended'"/>
                 <input type="submit" value="Suchen"/>
-                <label for="period">Zeitraum (von - bis)</label>
-                <input type="text" id="periodStart" name="periodStart" value="'periodStart'" class="date"/>
+                <label for="period">Zeitraum</label>
+                von: <input type="text" id="periodStart" name="periodStart" value="'periodStart'" class="date"/> bis:
                 <input type="text" id="periodEnd" name="periodEnd" value="'periodEnd'" class="date"/>
                 <!-- begin CheckboxList -->
-                <div class="text">
-                    <h4>'name'</h4>
-                    <ul style="list-style-type: none; text-align: left;">
-                        <!-- begin CheckboxItem -->
-                        <li>
-                            <input type="checkbox'html:checked'" id="'id'" name="'name'[]"
-                                   value="'value'" onchange="filterCheckboxes(this);"/>
-                            <label for="'id'">'value'</label>
-                        </li>
-                        <!-- end CheckboxItem -->
-                    </ul>
-                </div>
+                <!-- begin CheckboxItem -->
+                <!-- end CheckboxItem -->
                 <!-- end CheckboxList -->
                 <div class="text">
                     <h4><label for="themen">Thema</label></h4>
@@ -453,7 +484,7 @@
                 <!-- end DropdownList -->
                 <script type="text/javascript">filterAllCheckboxes();</script>
                 <label for="Aktenzeichen">Aktenzeichen</label>
-                <input type="text" id="Aktenzeichen" name="Aktenzeichen" value="'Aktenzeichen'"/>
+                <input type="text" name="Aktenzeichen" value="'Aktenzeichen'"/>
                 <input type="submit" value="Suchen"/>
             </fieldset>
         </form>
@@ -575,7 +606,7 @@
                 <input type="text" id="Betreff" name="Betreff" value="'Betreff'"/>
                 <label for="Status">Status</label>
                 <input type="text" id="Status" name="Status" value="'Status'"/>
-                <label for="NfD">Nur für den Dienstgebrauch</label>
+                <label for="NfD">VS - Nur für den Dienstgebrauch</label>
                 <input type="checkbox" id="NfD" name="NfD" value="'html:NfD'"/>
                 <label for="Dokument">Text</label>
                 <textarea rows="34" cols="70" id="Dokument" name="Dokument">'Dokument'</textarea>
@@ -585,8 +616,8 @@
                 <!-- begin submitEdit -->
                 <input type="submit" name="edit" value="Ändern"/>
                 <!-- end submitEdit -->
-                <div class="text">
-                    <h4>Themenfelder</h4>
+                <div class="text" id="themenfelder">
+                    <h2>Themenfelder</h2>
                     'html:themen'
                 </div>
             </fieldset>
@@ -594,26 +625,33 @@
         <!-- end erlassForm -->
         <!-- begin erlass -->
         <div class="box">
-            <div class="Datum">'DatumD'</div>
+
             <h2>'Betreff'
                 <!-- begin erlassStatus --> ('Status')<!-- end erlassStatus -->
-            </h2>
-            <p><b>Aktenzeichen:</b> 'Aktenzeichen'</p>
-            <p><b>Bestellnummer:</b> 'Bestellnummer'</p>
-            <p class="erlass">'Autor', 'Herkunft'</p>
+            </h2> 
 
-            <!-- begin downloadMenu -->
-            <p class="erlass">Download:
-                <!-- begin downloadItem -->
-                <a href="./?download='id'.'ext'">'ext'</a>
-                <!-- end downloadItem -->
-            </p>
-            <!-- end downloadMenu -->
-            <!-- begin betrifft -->
-            <p class="erlass">Betrifft:<!--begin thema--> 'Name'.<!--end thema--></p>
+            <div class="infobox">
+                <div class="Datum">Erlass vom 'DatumD'</div>
+                <!-- begin downloadMenu -->
+                <p class="erlass">Download:
+                    <!-- begin downloadItem -->
+                    <a href="./?download='id'.'ext'" target="_blank" class="'ext'">'ext'</a>
+                    <!-- end downloadItem -->
+                </p>
+                <!-- end downloadMenu -->
+                <hr/>
+                <p><b>Aktenzeichen:</b> 'Aktenzeichen'</p>
+                <p><b>Bestellnummer:</b> 'Bestellnummer'</p>
+                <p><b>Autor/Herkunft:</b> 'Autor', 'Herkunft'</p>
+            </div>
+
+
+            <!--  begin betrifft -->
+            <!--begin thema--><!--end thema-->
             <!-- end betrifft -->
+
             <!-- begin erlassNfD -->
-            <p class="NfD">Nur für den Dienstgebrauch.</p>
+            <p class="NfD">VS - Nur für den Dienstgebrauch</p>
             <!-- end erlassNfD -->
             <p>'br:Dokument'</p>
             <!-- begin erlassAdmin -->
