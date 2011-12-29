@@ -23,9 +23,9 @@ class FieldList {
                 $this->checked[] = stripslashes($checkedValue);
             }
         } else {
-            if ($fieldName == 'Herkunft' && !isset($_POST['extended'])) {
-                $this->checked[] = 'Innenministerium des Landes Nordrhein-Westfalen';
-            }
+//            if ($fieldName == 'Herkunft' && !isset($_POST['extended'])) {
+//                $this->checked[] = 'Innenministerium des Landes Nordrhein-Westfalen';
+//            }
         }
     }
 
