@@ -206,6 +206,9 @@ class User {
             if (isset($data[$field]) && $data[$field])
                 $content .= ' - ' . $field . "\n";
         }
+        if ($data['sonstigerZweck'] != '') {
+            $content .= 'Sonstiger Zweck: ' . $data['sonstigerZweck'] . "\n";
+        }
         $content .= "\n\n"
                 . "Status ändern:\n"
                 . WEBDIR . "?setLevel=" . urlencode($data['mail']) . "\n";
